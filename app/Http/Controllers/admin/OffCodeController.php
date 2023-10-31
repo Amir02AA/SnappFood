@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\OffCodes;
 use Illuminate\Http\Request;
 
-class OffController extends Controller
+class OffCodeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,8 +31,12 @@ class OffController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([]);
+        $validated = $request->validate([
+            'percent' => ['bail', 'required', 'numeric', 'min:10', 'max:80']
+        ]);
+        $validated['code'] = uniqid();
         OffCodes::create($validated);
+
         return redirect()->route('admin.off.index');
     }
 

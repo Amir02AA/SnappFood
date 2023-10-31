@@ -31,7 +31,9 @@ class RestaurantTierController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([]);
+        $validated = $request->validate([
+            'name' => ['bail','required','string','between:4,20','unique:restaurant_tiers']
+        ]);
         RestaurantTier::create($validated);
         return redirect()->route('admin.restaurant.index');
     }
@@ -57,7 +59,9 @@ class RestaurantTierController extends Controller
      */
     public function update(Request $request, RestaurantTier $restaurantTier)
     {
-        $validated = $request->validate([]);
+        $validated = $request->validate([
+            'name' => ['bail','required','string','between:4,20','unique:restaurant_tiers']
+        ]);
         $restaurantTier->update($validated);
         return redirect()->route('admin.restaurant.edit')->with($restaurantTier);
     }

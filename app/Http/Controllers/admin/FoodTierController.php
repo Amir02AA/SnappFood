@@ -31,7 +31,9 @@ class FoodTierController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([]);
+        $validated = $request->validate([
+            'name' => ['bail','required','string','between:4,20','unique:food_tiers']
+        ]);
         FoodTier::create($validated);
         return redirect()->route('admin.food.index');
     }
@@ -57,7 +59,9 @@ class FoodTierController extends Controller
      */
     public function update(Request $request, FoodTier $foodTier)
     {
-        $validated = $request->validate([]);
+        $validated = $request->validate([
+            'name' => ['bail','required','string','between:4,20','unique:food_tiers']
+        ]);
         $foodTier->update($validated);
         return redirect()->route('admin.food.edit')->with($foodTier);
     }

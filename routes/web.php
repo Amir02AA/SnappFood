@@ -26,3 +26,5 @@ Route::post('/register', [AuthController::class, 'registerStore'])->name('regist
 
 require_once 'admin/web.php';
 require_once 'salesMan/web.php';
+
+

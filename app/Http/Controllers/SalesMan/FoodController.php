@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\SalesMan;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFoodRequest;
+use App\Http\Requests\UpdateFoodRequest;
 use App\Models\Food;
 use Illuminate\Http\Request;
 
@@ -29,9 +31,10 @@ class FoodController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreFoodRequest $request)
     {
-        $validated = $request->validate([]);
+
+        $validated = $request->validated();
         Food::create($validated);
         return redirect()->route('sales.food.index');
     }
@@ -55,9 +58,9 @@ class FoodController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Food $food)
+    public function update(UpdateFoodRequest $request, Food $food)
     {
-        $validated = $request->validate([]);
+        $validated = $request->validated();
         $food->update($validated);
         return redirect()->route('sales.food.edit')->with($food);
     }
