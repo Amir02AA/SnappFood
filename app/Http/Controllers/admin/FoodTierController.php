@@ -13,7 +13,9 @@ class FoodTierController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.food.index', [
+            'food' => FoodTier::all()
+        ]);
     }
 
     /**
@@ -21,7 +23,7 @@ class FoodTierController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.food.create');
     }
 
     /**
@@ -29,7 +31,9 @@ class FoodTierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([]);
+        FoodTier::create($validated);
+        return redirect()->route('admin.food.index');
     }
 
     /**
@@ -37,7 +41,7 @@ class FoodTierController extends Controller
      */
     public function show(FoodTier $foodTier)
     {
-        //
+        return view('admin.food.show', compact('foodTier'));
     }
 
     /**
@@ -45,7 +49,7 @@ class FoodTierController extends Controller
      */
     public function edit(FoodTier $foodTier)
     {
-        //
+        return view('admin.food.edit', compact('foodTier'));
     }
 
     /**
@@ -53,7 +57,9 @@ class FoodTierController extends Controller
      */
     public function update(Request $request, FoodTier $foodTier)
     {
-        //
+        $validated = $request->validate([]);
+        $foodTier->update($validated);
+        return redirect()->route('admin.food.edit')->with($foodTier);
     }
 
     /**
@@ -61,6 +67,7 @@ class FoodTierController extends Controller
      */
     public function destroy(FoodTier $foodTier)
     {
-        //
+        $foodTier->delete();
+        return redirect()->route('admin.food.index');
     }
 }

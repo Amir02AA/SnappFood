@@ -13,7 +13,9 @@ class RestaurantTierController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.restaurant.index', [
+            'restaurant' => RestaurantTier::all()
+        ]);
     }
 
     /**
@@ -21,7 +23,7 @@ class RestaurantTierController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.restaurant.create');
     }
 
     /**
@@ -29,7 +31,9 @@ class RestaurantTierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([]);
+        RestaurantTier::create($validated);
+        return redirect()->route('admin.restaurant.index');
     }
 
     /**
@@ -37,7 +41,7 @@ class RestaurantTierController extends Controller
      */
     public function show(RestaurantTier $restaurantTier)
     {
-        //
+        return view('admin.restaurant.show', compact('restaurantTier'));
     }
 
     /**
@@ -45,7 +49,7 @@ class RestaurantTierController extends Controller
      */
     public function edit(RestaurantTier $restaurantTier)
     {
-        //
+        return view('admin.restaurant.edit', compact('restaurantTier'));
     }
 
     /**
@@ -53,7 +57,9 @@ class RestaurantTierController extends Controller
      */
     public function update(Request $request, RestaurantTier $restaurantTier)
     {
-        //
+        $validated = $request->validate([]);
+        $restaurantTier->update($validated);
+        return redirect()->route('admin.restaurant.edit')->with($restaurantTier);
     }
 
     /**
@@ -61,6 +67,7 @@ class RestaurantTierController extends Controller
      */
     public function destroy(RestaurantTier $restaurantTier)
     {
-        //
+        $restaurantTier->delete();
+        return redirect()->route('admin.restaurant.index');
     }
 }

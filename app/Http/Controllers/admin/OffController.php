@@ -13,7 +13,9 @@ class OffController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.off.index', [
+            'offs' => OffCodes::all()
+        ]);
     }
 
     /**
@@ -21,7 +23,7 @@ class OffController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.off.create');
     }
 
     /**
@@ -29,7 +31,9 @@ class OffController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([]);
+        OffCodes::create($validated);
+        return redirect()->route('admin.off.index');
     }
 
     /**
@@ -37,23 +41,7 @@ class OffController extends Controller
      */
     public function show(OffCodes $offCode)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(OffCodes $offCode)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, OffCodes $offCode)
-    {
-        //
+        return view('admin.off.show', compact('offCode'));
     }
 
     /**
@@ -61,6 +49,7 @@ class OffController extends Controller
      */
     public function destroy(OffCodes $offCode)
     {
-        //
+        $offCode->delete();
+        return redirect()->route('admin.off.index');
     }
 }
