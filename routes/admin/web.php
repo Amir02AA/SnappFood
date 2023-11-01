@@ -11,7 +11,7 @@ Route::name('admin.')->prefix('/admin')->group(function () {
         'food' => FoodTierController::class,
         'restaurants' => RestaurantTierController::class
     ]);
-    Route::resource('offs', OffCodeController::class)->only([
+    Route::resource('off', OffCodeController::class)->only([
         'index', 'show', 'create', 'store', 'destroy'
     ]);
 

@@ -25,8 +25,7 @@ class StoreFoodRequest extends FormRequest
             'name' => ['bail','required','string','between:3,20','unique:food'],
             'materials' => ['nullable'],
             'price' => ['bail','required','numeric','min:10000'],
-            'food_tire_id' => ['bail','required','numeric','exists:food_tires,id'],
-            'restaurant_id'=>['bail','required','numeric','exists:restaurants,id']
+            'food_tier_id' => ['bail','required','numeric','exists:food_tiers,id'],
         ];
     }
 }

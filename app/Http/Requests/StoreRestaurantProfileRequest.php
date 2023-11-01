@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateFoodRequest extends FormRequest
+class StoreRestaurantProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,13 @@ class UpdateFoodRequest extends FormRequest
      */
     public function rules(): array
     {
-//        dd($this->get('id'));
         return [
-            'name' => ['bail', 'required', 'string', 'between:3,20',
-                Rule::unique('food')
-                    ->ignore($this->get('id'))
-            ],
-            'materials' => ['nullable'],
-            'price' => ['bail', 'required', 'numeric', 'min:10000'],
-            'food_tier_id' => ['bail', 'required', 'numeric', 'exists:food_tiers,id'],
+            'name' => ['bail','required','string','between:3,20','unique:restaurants'],
+            'phone' =>  ['bail','required','string','unique:restaurants'],
+            'address' => ['bail','required','string','between:3,200'],
+            'account' => ['bail','required','string','unique:restaurants'],
+            'opens_at' => ['bail','nullable','string'],
+            'closes_at' => ['bail','nullable','string']
         ];
     }
-
 }

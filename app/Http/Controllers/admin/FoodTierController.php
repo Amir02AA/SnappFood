@@ -41,37 +41,37 @@ class FoodTierController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FoodTier $foodTier)
+    public function show(FoodTier $food)
     {
-        return view('admin.food.show', compact('foodTier'));
+        return view('admin.food.show', compact('food'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FoodTier $foodTier)
+    public function edit(FoodTier $food)
     {
-        return view('admin.food.edit', compact('foodTier'));
+        return view('admin.food.edit', compact('food'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, FoodTier $foodTier)
+    public function update(Request $request, FoodTier $food)
     {
         $validated = $request->validate([
             'name' => ['bail','required','string','between:4,20','unique:food_tiers']
         ]);
-        $foodTier->update($validated);
-        return redirect()->route('admin.food.edit')->with($foodTier);
+        $food->update($validated);
+        return redirect()->route('admin.food.edit',['food' => $food]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FoodTier $foodTier)
+    public function destroy(FoodTier $food)
     {
-        $foodTier->delete();
+        $food->delete();
         return redirect()->route('admin.food.index');
     }
 }

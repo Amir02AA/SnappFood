@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Date;
 class Restaurant extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = [
+        'name' , 'phone' , 'address' ,'account' , 'opens_at' , 'closes_at' , 'is_open' , 'user_id'
+    ];
 
     public function isOpen()
     {

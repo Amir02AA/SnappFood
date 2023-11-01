@@ -13,8 +13,8 @@ class RestaurantTierController extends Controller
      */
     public function index()
     {
-        return view('admin.restaurant.index', [
-            'restaurant' => RestaurantTier::all()
+        return view('admin.restaurants.index', [
+            'restaurants' => RestaurantTier::all()
         ]);
     }
 
@@ -23,7 +23,7 @@ class RestaurantTierController extends Controller
      */
     public function create()
     {
-        return view('admin.restaurant.create');
+        return view('admin.restaurants.create');
     }
 
     /**
@@ -35,43 +35,43 @@ class RestaurantTierController extends Controller
             'name' => ['bail','required','string','between:4,20','unique:restaurant_tiers']
         ]);
         RestaurantTier::create($validated);
-        return redirect()->route('admin.restaurant.index');
+        return redirect()->route('admin.restaurants.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(RestaurantTier $restaurantTier)
+    public function show(RestaurantTier $restaurant)
     {
-        return view('admin.restaurant.show', compact('restaurantTier'));
+        return view('admin.restaurants.show', compact('restaurant'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(RestaurantTier $restaurantTier)
+    public function edit(RestaurantTier $restaurant)
     {
-        return view('admin.restaurant.edit', compact('restaurantTier'));
+        return view('admin.restaurants.edit', compact('restaurant'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, RestaurantTier $restaurantTier)
+    public function update(Request $request, RestaurantTier $restaurant)
     {
         $validated = $request->validate([
             'name' => ['bail','required','string','between:4,20','unique:restaurant_tiers']
         ]);
-        $restaurantTier->update($validated);
-        return redirect()->route('admin.restaurant.edit')->with($restaurantTier);
+        $restaurant->update($validated);
+        return redirect()->route('admin.restaurants.edit',$restaurant);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(RestaurantTier $restaurantTier)
+    public function destroy(RestaurantTier $restaurant)
     {
-        $restaurantTier->delete();
-        return redirect()->route('admin.restaurant.index');
+        $restaurant->delete();
+        return redirect()->route('admin.restaurants.index');
     }
 }

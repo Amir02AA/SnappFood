@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class FoodTier extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'name'
+    ];
+    public $timestamps = false;
     protected function food()
     {
         return $this->hasMany(Food::class);

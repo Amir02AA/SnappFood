@@ -10,6 +10,7 @@
 
                 <a href="{{route('sales.settings')}}" class="text-white hover:text-indigo-500">Restaurant Settings</a>
                 <a href="{{route('sales.food.index')}}" class="text-white hover:text-indigo-500">Food</a>
+                <p class="text-white hover:text-indigo-500">Restaurant : {{$user->restaurant->name}}</p>
 
 
                 <form method="post" action="{{route('logout')}}">
@@ -20,7 +21,7 @@
 
 
             <div class="flex-grow p-4">
-                <!-- Your content goes here -->
+                <h1>Welcome {{$user->name}}</h1>
 
             </div>
         </section>

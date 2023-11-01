@@ -43,17 +43,17 @@ class OffCodeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OffCodes $offCode)
+    public function show(OffCodes $off)
     {
-        return view('admin.off.show', compact('offCode'));
+        return view('admin.off.show', compact('off'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OffCodes $offCode)
+    public function destroy(OffCodes $off)
     {
-        $offCode->delete();
+        $off->delete();
         return redirect()->route('admin.off.index');
     }
 }

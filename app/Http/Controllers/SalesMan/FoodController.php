@@ -7,6 +7,7 @@ use App\Http\Requests\StoreFoodRequest;
 use App\Http\Requests\UpdateFoodRequest;
 use App\Models\Food;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
 {
@@ -16,7 +17,7 @@ class FoodController extends Controller
     public function index()
     {
         return view('sales.food.index', [
-            'food' => Food::all()
+            'foods' => Food::all()
         ]);
     }
 
@@ -33,9 +34,9 @@ class FoodController extends Controller
      */
     public function store(StoreFoodRequest $request)
     {
-
         $validated = $request->validated();
-        Food::create($validated);
+        $validated['restaurant_id'] = Auth::user()->restaurant->id;
+        Food::create(array_filter($validated));
         return redirect()->route('sales.food.index');
     }
 
@@ -61,8 +62,8 @@ class FoodController extends Controller
     public function update(UpdateFoodRequest $request, Food $food)
     {
         $validated = $request->validated();
-        $food->update($validated);
-        return redirect()->route('sales.food.edit')->with($food);
+        $food->update(array_filter($validated));
+        return redirect()->route('sales.food.edit',$food);
     }
 
     /**

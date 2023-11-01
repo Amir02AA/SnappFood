@@ -4,16 +4,15 @@
     <!-- Restaurant Categories Page -->
     <main class="bg-blue-200 mx-auto flex min-h-screen w-full items-center justify-center text-white">
         <section class="flex w-[30rem] flex-col space-y-6">
-            <div class="text-center text-4xl font-medium">Restaurant Foods</div>
-
-            <!-- Restaurant Category Cards -->
-            <div class="w-full space-y-4">
-                <!-- Restaurant Category Card 1 -->
-                @foreach($foods as $food)
+            <div class="text-center text-4xl font-medium">Restaurant Categories</div>
+            @foreach($restaurants as $restaurant)
+                <div class="w-full space-y-4">
                     <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
-                        <div class="text-lg font-semibold">{{$food->name}}</div>
+
+                        <div class="text-lg font-semibold">{{$restaurant->name}}</div>
                         <div class="flex flex-row items-center justify-between gap-2">
-                            <a href="{{route('sales.food.show',$food)}}"
+
+                            <a href="{{route('admin.restaurants.show',$restaurant)}}"
                                class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
@@ -21,7 +20,7 @@
                                           d="M9 5l7 7-7 7"></path>
                                 </svg>
                             </a>
-                            <form method="post" action="{{route('sales.food.destroy',$food)}}">
+                            <form method="post" action="{{route('admin.restaurants.destroy',$restaurant)}}">
                                 @csrf @method('delete')
                                 <button type="submit"
                                         class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">
@@ -33,10 +32,10 @@
                             </form>
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
 
 
-            </div>
+                </div>
         </section>
     </main>
 
