@@ -55,4 +55,9 @@ class User extends Authenticatable
     protected function orders(){
         return $this->hasMany(Order::class);
     }
+
+    protected function images()
+    {
+        return $this->morphOne(Image::class,'imageable');
+    }
 }

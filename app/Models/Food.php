@@ -27,4 +27,9 @@ class Food extends Model
     {
         return $this->hasOne(OffFood::class);
     }
+
+    protected function images()
+    {
+        return $this->morphMany(Image::class,'imageable');
+    }
 }

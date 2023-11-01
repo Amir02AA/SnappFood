@@ -18,3 +18,4 @@ yarn-error.log
 /.idea
 /.vscode
 app/Http/Controllers/TestController.php
+resources/views/test.blade.php
