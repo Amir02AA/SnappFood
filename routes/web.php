@@ -23,7 +23,7 @@ Route::get('/register', [AuthController::class, 'register'])->name('register');
 
 Route::post('/login', [AuthController::class, 'loginSubmit'])->name('login.submit');
 Route::post('/register', [AuthController::class, 'registerStore'])->name('register.store');
-
+Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 require_once 'admin/web.php';
 require_once 'salesMan/web.php';
 

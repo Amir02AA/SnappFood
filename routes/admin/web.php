@@ -1,16 +1,19 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\FoodTierController;
 use App\Http\Controllers\admin\OffCodeController;
-use App\Models\RestaurantTier;
+use App\Http\Controllers\admin\RestaurantTierController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:admin')->name('admin.')->prefix('/admin')->group(function () {
+Route::name('admin.')->prefix('/admin')->group(function () {
     Route::resources([
         'food' => FoodTierController::class,
-        'restaurants' => RestaurantTier::class
+        'restaurants' => RestaurantTierController::class
     ]);
     Route::resource('offs', OffCodeController::class)->only([
         'index', 'show', 'create', 'store', 'destroy'
     ]);
+
+    Route::get('/panel',[AdminController::class,'panel'])->name('panel');
 });

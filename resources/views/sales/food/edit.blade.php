@@ -1,3 +1,4 @@
+<?php
 @extends('layout.main')
 
 @section('content')
@@ -23,7 +24,9 @@
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
                     <input type="text" name="restaurant_id" placeholder="Restaurant ID" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
                 </div>
-                <button type="submit" class="bg-blue-500 py-2 font-bold duration-300 hover:bg-blue-400 text-white">Add Food</button>
+                <div class="w-full">
+                    <button type="submit" class="w-full transform rounded-sm bg-pink-600 py-2 font-bold duration-300 hover:bg-pink-400"> Add Food </button>
+                </div>
             </form>
         </section>
     </main>

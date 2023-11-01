@@ -8,17 +8,17 @@ class HomeController extends Controller
 {
     public function profile()
     {
-
+        return view('sales.profile');
     }
 
     public function dashboard()
     {
-
+        return view('sales.dashboard');
     }
 
     public function settings()
     {
-
+        return view('sales.settings');
     }
 
     public function profileStore()
