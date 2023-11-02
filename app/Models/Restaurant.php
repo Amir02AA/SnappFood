@@ -24,9 +24,9 @@ class Restaurant extends Model
                 ))
         );
     }
-    protected function tires()
+    public function tiers()
     {
-        return $this->belongsToMany(RestaurantTier::class,'tier_restaurant');
+        return $this->belongsToMany(RestaurantTier::class,'restaurant_tier');
     }
 
     protected function user()

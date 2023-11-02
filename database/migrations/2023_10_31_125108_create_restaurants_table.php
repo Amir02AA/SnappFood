@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('address')->unique();
             $table->string('account')->unique();
             $table->time('opens_at')->default('09:00:00');
-            $table->time('closes_at')->default('09:00:00');
+            $table->time('closes_at')->default('21:00:00');
             $table->boolean('is_open')->default(true);
             $table->foreignId('user_id')->constrained();
         });

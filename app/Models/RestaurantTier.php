@@ -9,8 +9,8 @@ class RestaurantTier extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
-    protected function restaurants()
+    public function restaurants()
     {
-        return $this->belongsToMany(Restaurant::class,'tier_restaurant');
+        return $this->belongsToMany(Restaurant::class,'restaurant_tier');
     }
 }

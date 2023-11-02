@@ -23,12 +23,13 @@ class StoreRestaurantProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['bail','required','string','between:3,20','unique:restaurants'],
-            'phone' =>  ['bail','required','string','unique:restaurants'],
+            'name' => ['bail','required','string','between:3,20'],
+            'phone' =>  ['bail','required','string'],
             'address' => ['bail','required','string','between:3,200'],
-            'account' => ['bail','required','string','unique:restaurants'],
+            'account' => ['bail','required','string',],
             'opens_at' => ['bail','nullable','string'],
-            'closes_at' => ['bail','nullable','string']
+            'closes_at' => ['bail','nullable','string'],
+            'tiers' => ['required','array']
         ];
     }
 }

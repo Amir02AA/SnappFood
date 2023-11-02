@@ -6,6 +6,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -28,14 +29,17 @@ class AuthController extends Controller
             return back()->withErrors(['email' => 'invalid login']);
         }
         session()->regenerate();
-        $route = Auth::user()->role == 2 ? 'admin.panel' : 'sales.dashboard';
+        $route = Auth::user()->role == 3 ? 'admin.panel' : 'sales.dashboard';
+        Log::info($route);
         return redirect()->route($route);
     }
 
     public function registerStore(StoreUserRequest $request)
     {
 //        dd($request->validated());
-        User::create($request->validated());
+        $user = $request->validated();
+        $user['role'] = 2;
+        User::create($user);
         return redirect()->route('login');
     }
 

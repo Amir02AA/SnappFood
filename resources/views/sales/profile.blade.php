@@ -21,6 +21,14 @@
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
                     <input type="text" name="account" placeholder="Account Number" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
                 </div>
+                <div>
+                    @foreach($tiers as $tier)
+                        <div>
+                            <label for="type{{$tier->id}}">{{$tier->name}}</label>
+                            <input type="checkbox" name="tiers[]" id="type{{$tier->id}}" value="{{$tier->id}}">
+                        </div>
+                    @endforeach
+                </div>
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
                     <input type="text" name="opens_at" placeholder="Opening Time" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
                 </div>

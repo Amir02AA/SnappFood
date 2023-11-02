@@ -6,7 +6,7 @@ use App\Http\Controllers\admin\OffCodeController;
 use App\Http\Controllers\admin\RestaurantTierController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('admin.')->prefix('/admin')->group(function () {
+Route::middleware(['auth', 'myAuth:admin'])->name('admin.')->prefix('/admin')->group(function () {
     Route::resources([
         'food' => FoodTierController::class,
         'restaurants' => RestaurantTierController::class
@@ -15,5 +15,5 @@ Route::name('admin.')->prefix('/admin')->group(function () {
         'index', 'show', 'create', 'store', 'destroy'
     ]);
 
-    Route::get('/panel',[AdminController::class,'panel'])->name('panel');
+    Route::get('/panel', [AdminController::class, 'panel'])->name('panel');
 });
