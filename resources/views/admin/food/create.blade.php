@@ -6,6 +6,7 @@
             <div class="text-center text-4xl font-medium text-white">Add Food Tier</div>
 
             <form action="{{route('admin.food.store')}}" method="post" class="space-y-6">
+                @csrf
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
                     <input type="text" name="name" placeholder="Name" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
                 </div>

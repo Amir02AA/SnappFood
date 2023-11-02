@@ -17,3 +17,4 @@ Route::middleware(['auth', 'myAuth:admin'])->name('admin.')->prefix('/admin')->g
 
     Route::get('/panel', [AdminController::class, 'panel'])->name('panel');
 });
+Route::redirect('/admin','/admin/panel');

@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\FoodTier;
+use App\Models\OffCodes;
+use App\Models\RestaurantTier;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,9 +19,28 @@ class DatabaseSeeder extends Seeder
 
          \App\Models\User::create([
              'name' => 'admin',
-             'email' => 'admin@example.com',
-             'password' => '$10$VWzjF14epWIiGyW14pWvfei3x6le/VenKG6dK8NELOX4ngFq8bYRW', // admin
+             'email' => 'admin@admin',
+             'phone' => '09354501122',
+             'password' => 'admin', // password
              'role' => 3
+         ]);
+
+         RestaurantTier::insert([
+             ['name' => 'Irani'],
+             ['name' => 'International'],
+             ['name' => 'Fast Food'],
+         ]);
+
+         FoodTier::insert([
+            ['name' => 'American Pizza'],
+            ['name' => 'Italian Pizza'],
+            ['name' => 'Kabab'],
+         ]);
+
+         OffCodes::insert([
+            ['percent' => 20 , 'code' => uniqid()],
+            ['percent' => 50 , 'code' => uniqid()],
+            ['percent' => 70 , 'code' => uniqid()],
          ]);
     }
 }

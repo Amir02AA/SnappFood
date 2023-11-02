@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */

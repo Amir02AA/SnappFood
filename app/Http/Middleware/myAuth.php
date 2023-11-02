@@ -6,8 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Illuminate\Auth\Access\AuthorizationException;
 class myAuth
 {
     /**
@@ -25,6 +24,6 @@ class myAuth
         if ($roles[$role] == $request->user()->role){
             return $next($request);
         }
-        throw new NotFoundHttpException();
+        throw new AuthorizationException();
     }
 }
