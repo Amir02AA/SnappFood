@@ -24,6 +24,13 @@ class DatabaseSeeder extends Seeder
              'password' => 'admin', // password
              'role' => 3
          ]);
+         \App\Models\User::create([
+             'name' => 'Salar',
+             'email' => 'salar@sales',
+             'phone' => '09354501133',
+             'password' => '123456', // password
+             'role' => 2
+         ]);
 
          RestaurantTier::insert([
              ['name' => 'Irani'],

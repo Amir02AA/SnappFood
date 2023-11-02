@@ -6,14 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRestaurantProfileRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantTier;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     public function profile()
     {
-        return view('sales.profile',[
+        return view('sales.profile', [
             'user' => Auth::user(),
             'tiers' => RestaurantTier::all()
         ]);
@@ -21,17 +20,17 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        if (Auth::user()->restaurant == null){
+        if (Auth::user()->restaurant == null) {
             return redirect()->route('sales.profile');
         }
-        return view('sales.dashboard',[
+        return view('sales.dashboard', [
             'user' => Auth::user()
         ]);
     }
 
     public function settings()
     {
-        return view('sales.settings',[
+        return view('sales.settings', [
             'restaurant' => Auth::user()->restaurant,
             'tiers' => RestaurantTier::all()
         ]);
@@ -50,9 +49,9 @@ class HomeController extends Controller
         return redirect()->route('sales.dashboard');
     }
 
-    public function settingsStore(StoreRestaurantProfileRequest $request , Restaurant $restaurant)
+    public function settingsStore(StoreRestaurantProfileRequest $request, Restaurant $restaurant)
     {
-        $validated = $request->validated();
+        $validated = array_filter($request->validated());
         $tiers = $validated['tiers'];
         unset($validated['tiers']);
         $validated['user_id'] = Auth::user()->id;

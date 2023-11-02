@@ -12,7 +12,7 @@ class Restaurant extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'name' , 'phone' , 'address' ,'account' , 'opens_at' , 'closes_at' , 'is_open' , 'user_id'
+        'name' , 'phone' , 'address' ,'account' , 'opens_at' , 'closes_at' , 'is_open' , 'user_id' , 'send_cost'
     ];
 
     public function isOpen()
