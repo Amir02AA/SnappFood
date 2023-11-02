@@ -2,8 +2,15 @@
 
 @section('content')
     <main class="bg-blue-200 mx-auto flex min-h-screen w-full items-center justify-center text-white">
+        <a href="{{route('admin.panel')}}" class="fixed top-4 left-4" > <!-- Home -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="#1f2937" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/></svg>
+        </a>
+
+        <a href="{{route('admin.off.create')}}" class="fixed top-4 right-4"> <!-- Add -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20"><path fill="#1f2937" d="M11 9V5H9v4H5v2h4v4h2v-4h4V9h-4zm-1 11a10 10 0 1 1 0-20a10 10 0 0 1 0 20z"/></svg>            </svg>
+        </a>
         <section class="flex w-[30rem] flex-col space-y-6">
-            <div class="text-center text-4xl font-medium">Off Codes</div>
+            <div class="text-center text-4xl font-medium text-black">Off Codes</div>
 
             <div class="w-full space-y-4">
                 @foreach($offs as $off)

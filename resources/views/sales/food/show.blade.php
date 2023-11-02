@@ -3,6 +3,9 @@
 @section('content')
     <!-- Food Show Page with Full-Screen Details -->
     <main class="min-h-screen bg-gray-900 text-white flex items-center justify-center">
+        <a href="{{route('sales.dashboard')}}" class="fixed top-4 left-4" > <!-- Home -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="#db2777" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/></svg>
+        </a>
         <section class="w-full h-screen flex items-center justify-center">
             <!-- Food Details -->
             <div class="bg-gray-800 p-8 rounded-lg text-center">

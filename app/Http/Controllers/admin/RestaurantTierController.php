@@ -14,7 +14,7 @@ class RestaurantTierController extends Controller
     public function index()
     {
         return view('admin.restaurants.index', [
-            'restaurants' => RestaurantTier::all()
+            'restaurants' => RestaurantTier::paginate(5)
         ]);
     }
 
