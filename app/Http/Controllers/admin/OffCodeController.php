@@ -14,7 +14,7 @@ class OffCodeController extends Controller
     public function index()
     {
         return view('admin.off.index', [
-            'offs' => OffCodes::all()
+            'offs' => OffCodes::paginate(5)
         ]);
     }
 

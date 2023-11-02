@@ -41,8 +41,7 @@
                         </div>
                     </div>
                 @endforeach
-
-
+                {{$foods->links()}}
             </div>
         </section>
     </main>

@@ -14,7 +14,7 @@ class FoodTierController extends Controller
     public function index()
     {
         return view('admin.food.index', [
-            'food' => FoodTier::all()
+            'food' => FoodTier::paginate(5)
         ]);
     }
 
