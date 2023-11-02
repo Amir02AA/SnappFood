@@ -27,8 +27,13 @@
                     <input type="text" name="price" placeholder="Price" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
                 </div>
                 @error('price') {{$message}} @enderror
-                <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
-                    <input type="text" name="food_tier_id" placeholder="Food Tier ID" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
+                <div class="w-full  text-lg duration-300 focus-within:border-indigo-500">
+                    <select id="countries" name="food_tier_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option selected>Choose a Tier</option>
+                        @foreach($tiers as $tier)
+                            <option value="{{$tier->id}}" >{{$tier->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 @error('food_tier_id') {{$message}} @enderror
                 <div class="w-full">

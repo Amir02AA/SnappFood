@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Food extends Model
 {
-    protected $fillable = ['name' , 'materials' , 'price' ,'food_tier_id','restaurant_id'];
+    protected $fillable = ['name', 'materials', 'price', 'food_tier_id', 'restaurant_id'];
     public $timestamps = false;
     use HasFactory;
 
@@ -16,7 +17,8 @@ class Food extends Model
         return $this->belongsToMany(Order::class);
     }
 
-    protected function restaurant(){
+    protected function restaurant()
+    {
         return $this->belongsTo(Restaurant::class);
     }
 
@@ -32,6 +34,17 @@ class Food extends Model
 
     protected function images()
     {
-        return $this->morphMany(Image::class,'imageable');
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    protected function finalPrice() : Attribute
+    {
+        return Attribute::make(
+            get: function (){
+                return ($this->off?->percent != null) ?
+                    $this->price * ($this->off->percent / 100)
+                    : $this->price;
+            }
+        );
     }
 }

@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFoodRequest;
 use App\Http\Requests\UpdateFoodRequest;
 use App\Models\Food;
-use Illuminate\Http\Request;
+use App\Models\FoodTier;
+use App\Models\OffFood;
 use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
@@ -27,7 +28,8 @@ class FoodController extends Controller
      */
     public function create()
     {
-        return view('sales.food.create');
+        $tiers = FoodTier::all();
+        return view('sales.food.create', compact('tiers'));
     }
 
     /**
@@ -54,7 +56,8 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        return view('sales.food.edit', compact('food'));
+        $tiers = FoodTier::all();
+        return view('sales.food.edit', compact('food', 'tiers'));
     }
 
     /**
@@ -63,8 +66,16 @@ class FoodController extends Controller
     public function update(UpdateFoodRequest $request, Food $food)
     {
         $validated = $request->validated();
+        $percent = $validated['percent'] ?? 0;
+        unset($validated['percent']);
+
+        OffFood::query()->updateOrCreate([
+            'id' => $food->off->id ,
+        ],[
+            'percent' => $percent,
+        ]);
         $food->update(array_filter($validated));
-        return redirect()->route('sales.food.edit',$food);
+        return redirect()->route('sales.food.edit', $food);
     }
 
     /**

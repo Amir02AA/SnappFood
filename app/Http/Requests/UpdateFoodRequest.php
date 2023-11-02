@@ -31,6 +31,7 @@ class UpdateFoodRequest extends FormRequest
             'materials' => ['nullable'],
             'price' => ['bail', 'required', 'numeric', 'min:10000'],
             'food_tier_id' => ['bail', 'required', 'numeric', 'exists:food_tiers,id'],
+            'percent' => ['bail','nullable','numeric','between:0,80']
         ];
     }
 

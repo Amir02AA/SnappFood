@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('off_food', function (Blueprint $table) {
             $table->id();
             $table->decimal('percent','2',0,true);
+            $table->dateTime('expire_date')
+                ->default(now()->addHour()->toDateTimeString());
             $table->foreignId('food_id')->constrained();
-            $table->timestamps();
         });
     }
 

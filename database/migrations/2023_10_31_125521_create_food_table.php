@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->text('materials');
+            $table->text('materials')->nullable();
             $table->integer('price',unsigned: true);
             $table->foreignId('food_tier_id')->constrained();
             $table->foreignId('restaurant_id')->constrained();

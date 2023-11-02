@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class OffFood extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'percent' , 'food_id'
+    ];
     protected function food()
     {
         return $this->belongsTo(Food::class);
