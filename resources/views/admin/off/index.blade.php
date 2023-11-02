@@ -15,7 +15,7 @@
             <div class="w-full space-y-4">
                 @foreach($offs as $off)
                     <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
-                        <div class="text-lg font-semibold">{{$off->code}}</div>
+                        <div class="text-lg font-semibold">{{$off->percent}}</div>
                         <div class="flex flex-row items-center justify-between gap-2">
 
                             <a href="{{route('admin.off.show',$off)}}"

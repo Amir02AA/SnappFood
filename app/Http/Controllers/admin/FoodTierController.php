@@ -43,7 +43,7 @@ class FoodTierController extends Controller
      */
     public function show(FoodTier $food)
     {
-        return view('admin.food.show', compact('food'));
+        return redirect()->route('admin.food.index');
     }
 
     /**

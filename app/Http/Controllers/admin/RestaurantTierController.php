@@ -43,7 +43,7 @@ class RestaurantTierController extends Controller
      */
     public function show(RestaurantTier $restaurant)
     {
-        return view('admin.restaurants.show', compact('restaurant'));
+        return redirect()->route('admin.restaurants.index');
     }
 
     /**

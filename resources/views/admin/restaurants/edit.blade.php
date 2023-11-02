@@ -8,7 +8,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="#db2777" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/></svg>
         </a>
         <section class="flex w-[30rem] flex-col space-y-6">
-            <div class="text-center text-4xl font-medium text-white">Add Food</div>
+            <div class="text-center text-4xl font-medium text-white">Edit Restaurant Tier</div>
 
             <!-- Form to add food -->
             <form action="{{route('admin.restaurants.update',$restaurant)}}" method="post" class="space-y-6">
@@ -19,7 +19,8 @@
                 </div>
 
                 <div class="w-full">
-                    <button type="submit" class="w-full transform rounded-sm bg-pink-600 py-2 font-bold duration-300 hover:bg-pink-400"> Add Food </button>
+                    <button type="submit" class="w-full transform rounded-sm bg-pink-600 py-2 font-bold duration-300 hover:bg-pink-400">
+                        Update Tier </button>
                 </div>
             </form>
         </section>

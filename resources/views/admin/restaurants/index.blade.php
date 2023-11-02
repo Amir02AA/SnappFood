@@ -12,7 +12,7 @@
         </a>
 
         <section class="flex w-[30rem] flex-col space-y-6">
-            <div class="text-center text-4xl font-medium text-black">Restaurant Categories</div>
+            <div class="text-center text-4xl font-medium text-black">Restaurant Tiers</div>
             @foreach($restaurants as $restaurant)
                 <div class="w-full space-y-4">
                     <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
@@ -20,7 +20,7 @@
                         <div class="text-lg font-semibold">{{$restaurant->name}}</div>
                         <div class="flex flex-row items-center justify-between gap-2">
 
-                            <a href="{{route('admin.restaurants.show',$restaurant)}}"
+                            <a href="{{route('admin.restaurants.edit',$restaurant)}}"
                                class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                                      stroke="currentColor">
