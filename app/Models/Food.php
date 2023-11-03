@@ -37,10 +37,19 @@ class Food extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    protected function finalPrice() : Attribute
+    protected function finalPercent(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->price * (1 - ($this->off?->percent / 100)),
+            get: fn()=> max($this->off?->percent, $this->party?->percent)
+        );
+    }
+
+    protected function finalPrice(): Attribute
+    {
+        $finalPercent = max($this->off?->percent, $this->party?->percent);
+        return Attribute::make(
+            get: fn() => $this->price *
+                (1 - ($finalPercent / 100)),
         );
     }
 

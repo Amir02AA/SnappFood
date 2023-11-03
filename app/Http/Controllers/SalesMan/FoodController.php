@@ -20,14 +20,19 @@ class FoodController extends Controller
     {
         $priceFilter = request('price_filter') ?? 'asc';
         $tierId = request('tier_filter') ?? 0;
-
+        $restaurantId = Auth::user()->restaurant->id;
 
         return ($tierId != 0) ?
             view('sales.food.index', [
-                'foods' => Food::query()->where('food_tier_id',$tierId)->orderBy('price',$priceFilter)->paginate(5)
+                'foods' => Food::query()->where([
+                    'restaurant_id' => $restaurantId ,
+                    'food_tier_id' => $tierId
+                ])
+                    ->orderBy('price',$priceFilter)->paginate(5)
             ])
             :view('sales.food.index', [
-                'foods' => Food::query()->orderBy('price',$priceFilter)->paginate(5)
+                'foods' => Food::query()->where('restaurant_id',$restaurantId)
+                    ->orderBy('price',$priceFilter)->paginate(5)
             ]);
     }
 

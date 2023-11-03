@@ -74,7 +74,7 @@
                         <div>
                             <div class="text-lg font-semibold">{{$food->name}}</div>
                             <div
-                                class="text-sm font-semibold">{{$food->final_price}}{{" ===> "}}{{(int)$food->off?->percent." %off"}} </div>
+                                class="text-sm font-semibold">{{$food->final_price}}{{" ===> "}}{{$food->final_percent." %off"}} </div>
                         </div>
                         <div class="flex flex-row items-center justify-between gap-2">
 
