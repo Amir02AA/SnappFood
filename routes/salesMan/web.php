@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PartyController;
 use App\Http\Controllers\SalesMan\FoodController;
 use App\Http\Controllers\SalesMan\HomeController;
 use App\Http\Middleware\SalesGateMiddleware;
@@ -19,6 +20,10 @@ Route::middleware(['auth', 'myAuth:sales', SalesGateMiddleware::class])->name('s
     Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
 
     Route::post('/settings/{restaurant}', [HomeController::class, 'settingsStore'])->name('settings.store');
+
+    Route::get('food/{food}/party',[PartyController::class,'create'])->name('party.create');
+    Route::post('food/{food}/party',[PartyController::class,'store'])->name('party.store');
+    Route::delete('food/{food}/party',[PartyController::class,'destroy'])->name('party.destroy');
 
 });
 Route::redirect('/sales','sales/dashboard');

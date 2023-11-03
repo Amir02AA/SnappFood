@@ -43,4 +43,9 @@ class Food extends Model
             get: fn() => $this->price * (1 - ($this->off?->percent / 100)),
         );
     }
+
+    public function party()
+    {
+        return $this->hasOne(Party::class);
+    }
 }
