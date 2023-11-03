@@ -40,11 +40,7 @@ class Food extends Model
     protected function finalPrice() : Attribute
     {
         return Attribute::make(
-            get: function (){
-                return ($this->off?->percent != null) ?
-                    $this->price * ($this->off->percent / 100)
-                    : $this->price;
-            }
+            get: fn() => $this->price * (1 - ($this->off?->percent / 100)),
         );
     }
 }

@@ -45,7 +45,8 @@
                     <input value="{{$restaurant->send_cost}}" type="text" name="send_cost" placeholder="Sending cost" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
                 </div>
                 <div class="w-full">
-                    <button type="submit" class="w-full transform rounded-sm bg-pink-600 py-2 font-bold duration-300 hover:bg-pink-400"> Add Food </button>
+                    <button type="submit" class="w-full transform rounded-sm bg-pink-600 py-2 font-bold duration-300 hover:bg-pink-400">
+                        Update Settings </button>
                 </div>
             </form>
         </section>

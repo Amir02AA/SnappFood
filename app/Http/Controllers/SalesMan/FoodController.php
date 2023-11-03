@@ -18,9 +18,17 @@ class FoodController extends Controller
      */
     public function index()
     {
-        return view('sales.food.index', [
-            'foods' => Food::paginate(5)
-        ]);
+        $priceFilter = request('price_filter') ?? 'asc';
+        $tierId = request('tier_filter') ?? 0;
+
+
+        return ($tierId != 0) ?
+            view('sales.food.index', [
+                'foods' => Food::query()->where('food_tier_id',$tierId)->orderBy('price',$priceFilter)->paginate(5)
+            ])
+            :view('sales.food.index', [
+                'foods' => Food::query()->orderBy('price',$priceFilter)->paginate(5)
+            ]);
     }
 
     /**
