@@ -15,15 +15,15 @@ class Restaurant extends Model
         'name' , 'phone' , 'address' ,'account' , 'opens_at' , 'closes_at' , 'is_open' , 'user_id' , 'send_cost'
     ];
 
-    public function isOpen()
-    {
-        return Attribute::make(
-            get: fn($value , $attributes) => ($value && now()->between(
-                Date::createFromTimeString($attributes['opens_at']),
-                Date::createFromTimeString($attributes['closes_at']),
-                ))
-        );
-    }
+//    public function isOpen()
+//    {
+//        return Attribute::make(
+//            get: fn($value , $attributes) => ($value && now()->between(
+//                Date::createFromTimeString($attributes['opens_at']),
+//                Date::createFromTimeString($attributes['closes_at']),
+//                ))
+//        );
+//    }
     public function tiers()
     {
         return $this->belongsToMany(RestaurantTier::class,'restaurant_tier');
