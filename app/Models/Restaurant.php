@@ -34,7 +34,7 @@ class Restaurant extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected function food()
+    public function food()
     {
         return $this->hasMany(Food::class);
     }
@@ -46,5 +46,10 @@ class Restaurant extends Model
     protected function images()
     {
         return $this->morphMany(Image::class,'imageable');
+    }
+
+    public function foodTiers(){
+        return $this->belongsToMany(FoodTier::class,'food');
+
     }
 }

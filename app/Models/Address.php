@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FoodTier extends Model
+class Address extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name'
+        'x' , 'y' , 'vahed' , 'address','user_id','is_selected'
     ];
-    public $timestamps = false;
-    public function food()
+    protected function user()
     {
-        return $this->hasMany(Food::class);
+        return $this->belongsTo(User::class);
     }
+
 }

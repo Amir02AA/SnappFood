@@ -11,11 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurant_id')->constrained();
+            $table->string('name');
+            $table->float('x');
+            $table->float('y');
+            $table->text('address');
+            $table->unsignedInteger('vahed')->default(1);
+            $table->boolean('is_selected')->default(false);
             $table->foreignId('user_id')->constrained();
-            $table->dateTime('paid_date')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('addresses');
     }
 };

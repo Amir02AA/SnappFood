@@ -15,16 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
-         \App\Models\User::create([
+        \App\Models\User::create([
              'name' => 'admin',
              'email' => 'admin@admin',
              'phone' => '09354501122',
              'password' => 'admin', // password
              'role' => 3
          ]);
-         \App\Models\User::create([
+        \App\Models\User::create([
              'name' => 'Salar',
              'email' => 'salar@sales',
              'phone' => '09354501133',
@@ -32,7 +31,9 @@ class DatabaseSeeder extends Seeder
              'role' => 2
          ]);
 
-         RestaurantTier::insert([
+        \App\Models\User::factory(3)->create();
+
+        RestaurantTier::insert([
              ['name' => 'Irani'],
              ['name' => 'International'],
              ['name' => 'Fast Food'],
@@ -48,6 +49,10 @@ class DatabaseSeeder extends Seeder
             ['percent' => 20 , 'code' => uniqid()],
             ['percent' => 50 , 'code' => uniqid()],
             ['percent' => 70 , 'code' => uniqid()],
+         ]);
+
+         $this->call([
+             AddressSeeder::class,
          ]);
     }
 }
