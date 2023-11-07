@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class UpdateCartRequest extends FormRequest
+class StoreCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,18 +20,12 @@ class UpdateCartRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    protected function prepareForValidation()
-    {
-        $this->mergeIfMissing([
-            'count' => $this->get('count') ?? '1'
-        ]);
-    }
-
     public function rules(): array
     {
         return [
-            'food_id' => ['required','exists:food,id'],
-            'count' => ['required','numeric']
+            'cart_id' => ['required','exists:carts,id'],
+            'content'=>['required','string'],
+            'score'=>['required','numeric','between:1,5']
         ];
     }
 }

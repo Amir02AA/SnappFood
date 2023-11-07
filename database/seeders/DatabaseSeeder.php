@@ -17,42 +17,44 @@ class DatabaseSeeder extends Seeder
     {
 
         \App\Models\User::create([
-             'name' => 'admin',
-             'email' => 'admin@admin',
-             'phone' => '09354501122',
-             'password' => 'admin', // password
-             'role' => 3
-         ]);
+            'name' => 'admin',
+            'email' => 'admin@admin',
+            'phone' => '09354501122',
+            'password' => 'admin', // password
+            'role' => 3
+        ]);
         \App\Models\User::create([
-             'name' => 'Salar',
-             'email' => 'salar@sales',
-             'phone' => '09354501133',
-             'password' => '123456', // password
-             'role' => 2
-         ]);
+            'name' => 'Salar',
+            'email' => 'salar@sales',
+            'phone' => '09354501133',
+            'password' => '123456', // password
+            'role' => 2
+        ]);
 
         \App\Models\User::factory(3)->create();
 
         RestaurantTier::insert([
-             ['name' => 'Irani'],
-             ['name' => 'International'],
-             ['name' => 'Fast Food'],
-         ]);
+            ['name' => 'Irani'],
+            ['name' => 'International'],
+            ['name' => 'Fast Food'],
+        ]);
 
-         FoodTier::insert([
+        FoodTier::insert([
             ['name' => 'American Pizza'],
             ['name' => 'Italian Pizza'],
             ['name' => 'Kabab'],
-         ]);
+        ]);
 
-         OffCodes::insert([
-            ['percent' => 20 , 'code' => uniqid()],
-            ['percent' => 50 , 'code' => uniqid()],
-            ['percent' => 70 , 'code' => uniqid()],
-         ]);
+        OffCodes::insert([
+            ['percent' => 20, 'code' => uniqid()],
+            ['percent' => 50, 'code' => uniqid()],
+            ['percent' => 70, 'code' => uniqid()],
+        ]);
 
-         $this->call([
-             AddressSeeder::class,
-         ]);
+        $this->call([
+            AddressSeeder::class,
+            RestaurantSeeder::class,
+            FoodSeeder::class
+        ]);
     }
 }

@@ -55,8 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    protected function orders(){
-        return $this->hasMany(Order::class);
+    protected function carts(){
+        return $this->hasMany(Cart::class);
     }
 
     protected function images()

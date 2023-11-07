@@ -9,20 +9,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('restaurants/{restaurant}/food',[RestaurantController::class,'food'])->name('restaurants.food');
 Route::middleware('auth:sanctum')->name('user.')->group(function () {
-    Route::post('carts/{cart}/pay',[CartController::class,'pay'])->name('carts.pay');
-    Route::post('/addresses/{address}',[AddressController::class,'setCurrentAddress'])->name('addresses.current');
+    Route::post('/carts/{cart}/pay',[CartController::class,'pay']);
+    Route::get('/carts',[CartController::class,'index']);
+    Route::post('/carts/add',[CartController::class,'store']);
+    Route::patch('/carts/add',[CartController::class,'update']);
 
-    Route::apiResource('carts', CartController::class)->except(['destroy']);
+    Route::get('/comments',[CommentController::class,'index']);
+    Route::post('/comments',[CommentController::class,'store']);
+
+    Route::post('/addresses/{address}',[AddressController::class,'setCurrentAddress']);
     Route::apiResource('addresses', AddressController::class)->only(['index', 'store']);
-    Route::apiResource('comments', CommentController::class)->only(['index', 'store']);
     Route::apiResource('restaurants', RestaurantController::class)->only(['index', 'show']);
 
-    Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+    Route::post('/logout',[AuthController::class,'logout']);
 });
 
-Route::post('/login',[AuthController::class,'login'])->name('login');
-Route::post('/register',[AuthController::class,'register'])->name('register');
+Route::post('/login',[AuthController::class,'login']);
+Route::post('/register',[AuthController::class,'register']);
 
-Route::get('/test',function (){
-   return \App\Models\User::find(1)->current;
+Route::get('/test',function (\App\Http\Requests\StoreCartRequest $request){
+   return $request->validated();
 });

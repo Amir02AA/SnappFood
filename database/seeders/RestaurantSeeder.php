@@ -13,5 +13,12 @@ class RestaurantSeeder extends Seeder
      */
     public function run(): void
     {
+        Restaurant::create([
+            'name' => 'sib 360',
+            'phone' => '021222222',
+            'address' => 'asdfdsfsdafasdfsdaf',
+            'account' => '225564488',
+            'user_id' => 2,
+        ]);
     }
 }

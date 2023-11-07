@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->text('content');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('food_id')->constrained();
-            $table->foreignId('comment_id')->nullable()->constrained();
+            $table->foreignId('cart_id')->constrained();
+            $table->unsignedInteger('score');
+            $table->foreignId('reply_to')->nullable()->constrained('comments');
             $table->timestamps();
         });
     }

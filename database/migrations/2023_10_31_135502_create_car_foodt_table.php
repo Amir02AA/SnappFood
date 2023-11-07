@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cart_order', function (Blueprint $table) {
+        Schema::create('cart_food', function (Blueprint $table) {
             $table->foreignId('food_id')->constrained();
             $table->foreignId('cart_id')->constrained();
+            $table->unsignedInteger('count');
         });
     }
 

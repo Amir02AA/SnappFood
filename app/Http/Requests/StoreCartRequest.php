@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class StoreCartRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreCartRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +20,20 @@ class StoreCartRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    protected function prepareForValidation()
+    {
+        $this->mergeIfMissing([
+            'count' => '1'
+        ]);
+    }
+
     public function rules(): array
     {
         return [
-            //
+            'food_id' => ['required','exists:food,id'],
+            'count' => ['required','numeric']
         ];
     }
+
+
 }
