@@ -25,6 +25,7 @@ class FoodController extends Controller
         return ($tierId != 0) ?
             view('sales.food.index', [
                 'foods' => Food::query()->where([
+<<<<<<< HEAD
                     'restaurant_id' => $restaurantId ,
                     'food_tier_id' => $tierId
                 ])
@@ -33,6 +34,15 @@ class FoodController extends Controller
             :view('sales.food.index', [
                 'foods' => Food::query()->where('restaurant_id',$restaurantId)
                     ->orderBy('price',$priceFilter)->paginate(5)
+=======
+                    'food_tier_id' => $tierId,
+                    'restaurant_id' => $restaurantId
+                ])->orderBy('price', $priceFilter)->paginate(5)
+            ])
+            : view('sales.food.index', [
+                'foods' => Food::query()->where('restaurant_id',$restaurantId)
+                    ->orderBy('price', $priceFilter)->paginate(5)
+>>>>>>> feature
             ]);
     }
 
@@ -83,8 +93,8 @@ class FoodController extends Controller
         unset($validated['percent']);
 
         OffFood::query()->updateOrCreate([
-            'id' => $food->off->id ,
-        ],[
+            'id' => $food->off->id,
+        ], [
             'percent' => $percent,
         ]);
         $food->update(array_filter($validated));

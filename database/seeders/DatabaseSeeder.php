@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
+<<<<<<< HEAD
          \App\Models\User::create([
              'name' => 'admin',
              'email' => 'admin@admin',
@@ -35,26 +35,47 @@ class DatabaseSeeder extends Seeder
             'name' => 'Salar2',
             'email' => 'salar2@sales',
             'phone' => '09354501122',
+=======
+        \App\Models\User::create([
+            'name' => 'admin',
+            'email' => 'admin@admin',
+            'phone' => '09354501122',
+            'password' => 'admin', // password
+            'role' => 3
+        ]);
+        \App\Models\User::create([
+            'name' => 'Salar',
+            'email' => 'salar@sales',
+            'phone' => '09354501133',
+>>>>>>> feature
             'password' => '123456', // password
             'role' => 2
         ]);
 
-         RestaurantTier::insert([
-             ['name' => 'Irani'],
-             ['name' => 'International'],
-             ['name' => 'Fast Food'],
-         ]);
+        \App\Models\User::factory(3)->create();
 
-         FoodTier::insert([
+        RestaurantTier::insert([
+            ['name' => 'Irani'],
+            ['name' => 'International'],
+            ['name' => 'Fast Food'],
+        ]);
+
+        FoodTier::insert([
             ['name' => 'American Pizza'],
             ['name' => 'Italian Pizza'],
             ['name' => 'Kabab'],
-         ]);
+        ]);
 
-         OffCodes::insert([
-            ['percent' => 20 , 'code' => uniqid()],
-            ['percent' => 50 , 'code' => uniqid()],
-            ['percent' => 70 , 'code' => uniqid()],
-         ]);
+        OffCodes::insert([
+            ['percent' => 20, 'code' => uniqid()],
+            ['percent' => 50, 'code' => uniqid()],
+            ['percent' => 70, 'code' => uniqid()],
+        ]);
+
+        $this->call([
+            AddressSeeder::class,
+            RestaurantSeeder::class,
+            FoodSeeder::class
+        ]);
     }
 }

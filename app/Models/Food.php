@@ -12,9 +12,9 @@ class Food extends Model
     public $timestamps = false;
     use HasFactory;
 
-    protected function orders()
+    public function carts()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsToMany(Cart::class);
     }
 
     protected function restaurant()
@@ -57,4 +57,5 @@ class Food extends Model
     {
         return $this->hasOne(Party::class);
     }
+
 }
