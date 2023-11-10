@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SalesMan;
+namespace App\Http\Controllers\salesman;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRestaurantProfileRequest;
@@ -40,9 +40,7 @@ class HomeController extends Controller
     {
         $validated = $request->validated();
         $tiers = $validated['tiers'];
-        unset($validated['tiers']);
         $validated['user_id'] = Auth::user()->id;
-
         $restaurant = Restaurant::create(array_filter($validated));
         $restaurant->tiers()->sync($tiers);
 
@@ -53,9 +51,7 @@ class HomeController extends Controller
     {
         $validated = array_filter($request->validated());
         $tiers = $validated['tiers'];
-        unset($validated['tiers']);
         $validated['user_id'] = Auth::user()->id;
-
         $restaurant->update($validated);
         $restaurant->tiers()->sync($tiers);
 

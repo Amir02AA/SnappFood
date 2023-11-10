@@ -6,7 +6,7 @@
             <!-- Navbar -->
             <nav class="bg-gray-800 h-screen w-64 p-4 flex flex-col space-y-4">
 
-                <div class="text-2xl font-semibold text-white">SalesMan Dashboard</div>
+                <div class="text-2xl font-semibold text-white">salesman Dashboard</div>
 
                 <a href="{{route('sales.settings')}}" class="text-white hover:text-indigo-500">Restaurant Settings</a>
                 <a href="{{route('sales.food.index')}}" class="text-white hover:text-indigo-500">Food</a>

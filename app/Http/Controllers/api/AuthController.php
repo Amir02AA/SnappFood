@@ -21,7 +21,7 @@ class AuthController extends Controller
             'email' => ['required','email'],
             'password' => ['required','string']
         ]))) ?
-            ['token' => Auth::user()->createToken('auth')->plainTextToken]
+            'registered !!'
             : 'wrong credentials';
     }
 

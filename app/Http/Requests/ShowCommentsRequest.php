@@ -28,23 +28,4 @@ class ShowCommentsRequest extends FormRequest
         ];
     }
 
-    public function after(): array
-    {
-        return [
-            function (Validator $validator) {
-                if (!$this->food_id && !$this->restaurant_id) {
-                    $validator->errors()->add(
-                        'filter values',
-                        'please enter restaurant or food to show comments , enter only one'
-                    );
-                }elseif ($this->food_id && $this->restaurant_id){
-                    $validator->errors()->add(
-                        'filter values',
-                        'please enter restaurant or food to show comments , not both'
-                    );
-                }
-            },
-
-        ];
-    }
 }

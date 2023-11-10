@@ -9,6 +9,7 @@ use App\Models\Comment;
 use App\Models\Food;
 use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isFalse;
 
 class CommentController extends Controller
 {
@@ -22,6 +23,10 @@ class CommentController extends Controller
 
     public function index(ShowCommentsRequest $request)
     {
+
+        if(!$request->validated('restaurant_id') & !$request->validated('food_id')) {
+            return 'please enter a field to filter';
+        }
         return ($request->missing('restaurant_id')) ?
 
             Food::find($request->validated('food_id'))

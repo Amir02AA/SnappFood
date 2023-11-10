@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SalesMan;
+namespace App\Http\Controllers\salesman;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFoodRequest;
@@ -25,7 +25,6 @@ class FoodController extends Controller
         return ($tierId != 0) ?
             view('sales.food.index', [
                 'foods' => Food::query()->where([
-<<<<<<< HEAD
                     'restaurant_id' => $restaurantId ,
                     'food_tier_id' => $tierId
                 ])
@@ -34,15 +33,6 @@ class FoodController extends Controller
             :view('sales.food.index', [
                 'foods' => Food::query()->where('restaurant_id',$restaurantId)
                     ->orderBy('price',$priceFilter)->paginate(5)
-=======
-                    'food_tier_id' => $tierId,
-                    'restaurant_id' => $restaurantId
-                ])->orderBy('price', $priceFilter)->paginate(5)
-            ])
-            : view('sales.food.index', [
-                'foods' => Food::query()->where('restaurant_id',$restaurantId)
-                    ->orderBy('price', $priceFilter)->paginate(5)
->>>>>>> feature
             ]);
     }
 

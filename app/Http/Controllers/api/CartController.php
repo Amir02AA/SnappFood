@@ -68,7 +68,7 @@ class CartController extends Controller
             'count' => $count,
         ]);
 
-        return (!$cart) ? 'you must add your item to a new cart' : $cart;
+        return (!$cart) ? 'you must add your item to a new cart' : ['msg'=>'updated',$cart];
 
     }
 

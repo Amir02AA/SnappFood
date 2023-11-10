@@ -7,7 +7,6 @@ use App\Http\Controllers\api\CommentController;
 use App\Http\Controllers\api\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('restaurants/{restaurant}/food',[RestaurantController::class,'food'])->name('restaurants.food');
 Route::middleware('auth:sanctum')->name('user.')->group(function () {
     Route::post('/carts/{cart}/pay',[CartController::class,'pay']);
     Route::get('/carts',[CartController::class,'index']);
@@ -20,9 +19,10 @@ Route::middleware('auth:sanctum')->name('user.')->group(function () {
     Route::post('/addresses/{address}',[AddressController::class,'setCurrentAddress']);
     Route::apiResource('addresses', AddressController::class)->only(['index', 'store']);
     Route::apiResource('restaurants', RestaurantController::class)->only(['index', 'show']);
-
+    Route::get('restaurants/{restaurant}/food',[RestaurantController::class,'food'])->name('restaurants.food');
     Route::post('/logout',[AuthController::class,'logout']);
 });
+
 
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);

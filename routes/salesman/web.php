@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\PartyController;
-use App\Http\Controllers\SalesMan\FoodController;
-use App\Http\Controllers\SalesMan\HomeController;
+use App\Http\Controllers\salesman\FoodController;
+use App\Http\Controllers\salesman\HomeController;
 use App\Http\Middleware\SalesGateMiddleware;
 use Illuminate\Support\Facades\Route;
 
