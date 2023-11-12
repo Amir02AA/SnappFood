@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class StoreFoodRequest extends FormRequest
 {
@@ -28,4 +29,6 @@ class StoreFoodRequest extends FormRequest
             'food_tier_id' => ['bail','required','numeric','exists:food_tiers,id'],
         ];
     }
+
+
 }

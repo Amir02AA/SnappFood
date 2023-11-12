@@ -38,10 +38,9 @@ class CartController extends Controller
 
         $cart->food()->attach($food->id, ['count' => $count]);
 
-        return [
+        return response()->json([
             'cart' => $cart,
-//            'food' => $cart->food
-        ];
+        ], 201);
 
     }
 
@@ -50,7 +49,7 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        return $cart;
+        return response()->json(['cart' => $cart]);
     }
 
     /**
@@ -59,17 +58,18 @@ class CartController extends Controller
     public function update(UpdateCartRequest $request)
     {
         $food = Food::query()->find($request->validated('food_id'));
-        $restaurantId = $food->restaurant_id;
         $count = $request->validated('count');
+        $cart = Cart::relatedCart($food->restaurant_id)->get()->first();
+        $cart?->food()->updateExistingPivot($food->id, ['count' => $count,]);
 
-        $cart = Cart::relatedCart($restaurantId)->get()->first();
-
-        $cart?->food()->updateExistingPivot($food->id, [
-            'count' => $count,
-        ]);
-
-        return (!$cart) ? 'you must add your item to a new cart' : ['msg'=>'updated',$cart];
-
+        return (!$cart) ?
+            response()->json([
+                'massage' => 'you must add your item to a new cart'
+            ])
+            : response()->json([
+                'massage' => 'updated',
+                'cart' => $cart
+            ],422);
     }
 
 
@@ -78,9 +78,9 @@ class CartController extends Controller
         $cart->update([
             'paid_date' => now()->toDateTimeString()
         ]);
-        return [
+        return response()->json([
             'massage' => 'thanks for your money',
             'paid for' => $cart
-        ];
+        ]);
     }
 }

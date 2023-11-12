@@ -12,7 +12,9 @@ class AuthController extends Controller
     public function register($request)
     {
         User::create($request->validated());
-        return 'user created';
+        return response()->json([
+            'msg' => 'user created'
+        ],201);
     }
 
     public function login(Request $request)
@@ -21,14 +23,16 @@ class AuthController extends Controller
             'email' => ['required','email'],
             'password' => ['required','string']
         ]))) ?
-            'registered !!'
-            : 'wrong credentials';
+            response()->json(['token' => Auth::user()->createToken('auth')->plainTextToken])
+            : response()->json(['msg'=>'wrong credentials'],401);
     }
 
     public function logout()
     {
         Auth::user()->currentAccessToken()->delete();
-        return 'logged Out';
+        return response()->json([
+            'msg' => 'logged Out'
+        ]);
     }
 
 }
