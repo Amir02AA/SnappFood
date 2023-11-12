@@ -12,6 +12,9 @@ class HomeController extends Controller
 {
     public function profile()
     {
+        if (Auth::user()->restaurant !== null){
+            return redirect()->route('sales.settings');
+        }
         return view('sales.profile', [
             'user' => Auth::user(),
             'tiers' => RestaurantTier::all()
@@ -20,7 +23,7 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        if (Auth::user()->restaurant == null) {
+        if (Auth::user()->restaurant === null) {
             return redirect()->route('sales.profile');
         }
         return view('sales.dashboard', [
@@ -30,6 +33,9 @@ class HomeController extends Controller
 
     public function settings()
     {
+        if (Auth::user()->restaurant === null) {
+            return redirect()->route('sales.profile');
+        }
         return view('sales.settings', [
             'restaurant' => Auth::user()->restaurant,
             'tiers' => RestaurantTier::all()

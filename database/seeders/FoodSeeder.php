@@ -18,6 +18,6 @@ class FoodSeeder extends Seeder
             'price' => '250000',
             'food_tier_id' => 1,
             'restaurant_id' => 1
-        ]);
+        ])->materials()->sync([1,2,3]);
     }
 }

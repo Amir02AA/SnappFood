@@ -58,4 +58,9 @@ class Food extends Model
         return $this->hasOne(Party::class);
     }
 
+    public function materials()
+    {
+        return $this->belongsToMany(Material::class);
+    }
+
 }

@@ -6,13 +6,12 @@ use App\Http\Controllers\salesman\HomeController;
 use App\Http\Middleware\SalesGateMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'role:sales', SalesGateMiddleware::class])->name('sales.')->prefix('/sales')->group(function () {
+Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->group(function () {
 
-    Route::get('/profile', [HomeController::class, 'profile'])->name('profile')
-        ->withoutMiddleware(SalesGateMiddleware::class);
+    Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 
-    Route::post('/profile', [HomeController::class, 'profileStore'])->name('profile.store')
-        ->withoutMiddleware(SalesGateMiddleware::class);
+    Route::post('/profile', [HomeController::class, 'profileStore'])->name('profile.store');
+
 
     Route::resource('food', FoodController::class);
 
