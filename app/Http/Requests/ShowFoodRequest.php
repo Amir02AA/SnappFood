@@ -3,16 +3,15 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Password;
 
-class StoreUserRequest extends FormRequest
+class ShowFoodRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -20,13 +19,23 @@ class StoreUserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    protected function prepareForValidation()
+    {
+        $this->mergeIfMissing([
+            'price_filter' => 'asc',
+        ]);
+    }
+
     public function rules(): array
     {
         return [
-            'name' => ['bail','required','string','unique:users','between:3,20'],
-            'email' =>  ['bail','required','email','unique:users','between:3,50'],
-            'phone' =>  ['bail','required','string','unique:users'],
-            'password' =>  [Password::defaults()],
+            'price_filter' => ['required','in:asc,desc'],
+            'tier_filter' => ['nullable','exits:food,id']
         ];
+    }
+
+    protected function passedValidation()
+    {
+
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\salesman;
 
+use App\Classes\AdminHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShowFoodRequest;
 use App\Http\Requests\StoreFoodRequest;
 use App\Http\Requests\UpdateFoodRequest;
 use App\Models\Food;
@@ -16,24 +18,12 @@ class FoodController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ShowFoodRequest $request)
     {
-        $priceFilter = request('price_filter') ?? 'asc';
-        $tierId = request('tier_filter') ?? 0;
-        $restaurantId = Auth::user()->restaurant->id;
+        $food = AdminHelper::foodInOrder($request->validated('price_filter'),
+            $request->validated('tier_filter'), 5);
 
-        return ($tierId != 0) ?
-            view('sales.food.index', [
-                'foods' => Food::query()->where([
-                    'restaurant_id' => $restaurantId ,
-                    'food_tier_id' => $tierId
-                ])
-                    ->orderBy('price',$priceFilter)->paginate(5)
-            ])
-            :view('sales.food.index', [
-                'foods' => Food::query()->where('restaurant_id',$restaurantId)
-                    ->orderBy('price',$priceFilter)->paginate(5)
-            ]);
+        return view('sales.food.index',compact('food'));
     }
 
     /**
@@ -79,15 +69,12 @@ class FoodController extends Controller
     public function update(UpdateFoodRequest $request, Food $food)
     {
         $validated = $request->validated();
-        $percent = $validated['percent'] ?? 0;
-        unset($validated['percent']);
+        $percent = $validated['percent'];
 
-        OffFood::query()->updateOrCreate([
-            'id' => $food->off->id,
-        ], [
+        OffFood::query()->updateOrCreate(['id' => $food->off->id,], [
             'percent' => $percent,
         ]);
-        $food->update(array_filter($validated));
+        $food->update($validated);
         return redirect()->route('sales.food.edit', $food);
     }
 

@@ -11,23 +11,25 @@ class AddressController extends Controller
 {
     public function index()
     {
-        return Auth::user()->addresses;
+        return \response()->json(['addresses' => Auth::user()->addresses]);
     }
 
     public function store(StoreAddressRequest $request)
     {
-        $validated=$request->validated();
+        $validated = $request->validated();
         $address = Address::create($validated);
-        return [
+        return response()->json([
             'created Address' => $address
-        ];
+        ], 201);
     }
 
     public function setCurrentAddress(Address $address)
     {
-        Auth::user()->addresses->toQuery()->update(['is_selected' => false]);
+        Auth::user()->addresses()->update(['is_selected' => false]);
+        if ($address->user_id !== Auth::id())
+            return response()->json(['massage' => 'address not found'], 404);
         $address->is_selected = true;
         $address->save();
-        return 'address: '.$address->name." selected";
+        return response()->json(['massage' => 'selected', 'address_id' => $address->id]);
     }
 }

@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register($request)
+    public function register(StoreUserRequest $request)
     {
-        User::create($request->validated());
+        $user = User::create($request->validated());
         return response()->json([
-            'msg' => 'user created'
+            'msg' => 'user created',
+            'token' => $user->createToken('auth')->plainTextToken
         ],201);
     }
 

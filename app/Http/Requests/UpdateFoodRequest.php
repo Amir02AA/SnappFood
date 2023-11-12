@@ -22,7 +22,6 @@ class UpdateFoodRequest extends FormRequest
      */
     public function rules(): array
     {
-//        dd($this->get('id'));
         return [
             'name' => ['bail', 'required', 'string', 'between:3,20',
                 Rule::unique('food')
@@ -33,6 +32,13 @@ class UpdateFoodRequest extends FormRequest
             'food_tier_id' => ['bail', 'required', 'numeric', 'exists:food_tiers,id'],
             'percent' => ['bail','nullable','numeric','between:0,80']
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->mergeIfMissing([
+            'percent' => 0
+        ]);
     }
 
 }
