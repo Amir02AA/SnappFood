@@ -6,7 +6,7 @@ use App\Http\Controllers\admin\OffCodeController;
 use App\Http\Controllers\admin\RestaurantTierController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'myAuth:admin'])->name('admin.')->prefix('/admin')->group(function () {
+Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->group(function () {
     Route::resources([
         'food' => FoodTierController::class,
         'restaurants' => RestaurantTierController::class

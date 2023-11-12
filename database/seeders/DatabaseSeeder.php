@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\FoodTier;
 use App\Models\OffCodes;
 use App\Models\RestaurantTier;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,44 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
-<<<<<<< HEAD
-         \App\Models\User::create([
-             'name' => 'admin',
-             'email' => 'admin@admin',
-             'phone' => '09354501122',
-             'password' => 'admin', // password
-             'role' => 3
-         ]);
-         \App\Models\User::create([
-             'name' => 'Salar',
-             'email' => 'salar@sales',
-             'phone' => '09354501133',
-             'password' => '123456', // password
-             'role' => 2
-         ]);
-        \App\Models\User::create([
-            'name' => 'Salar2',
-            'email' => 'salar2@sales',
-            'phone' => '09354501122',
-=======
-        \App\Models\User::create([
-            'name' => 'admin',
-            'email' => 'admin@admin',
-            'phone' => '09354501122',
-            'password' => 'admin', // password
-            'role' => 3
-        ]);
-        \App\Models\User::create([
-            'name' => 'Salar',
-            'email' => 'salar@sales',
-            'phone' => '09354501133',
->>>>>>> feature
-            'password' => '123456', // password
-            'role' => 2
-        ]);
-
-        \App\Models\User::factory(3)->create();
 
         RestaurantTier::insert([
             ['name' => 'Irani'],
@@ -73,9 +36,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
             AddressSeeder::class,
             RestaurantSeeder::class,
-            FoodSeeder::class
+            FoodSeeder::class,
         ]);
     }
 }

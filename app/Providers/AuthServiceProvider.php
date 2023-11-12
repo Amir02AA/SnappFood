@@ -23,9 +23,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define('sales.routes' , function (User $user){
-            if ($user->restaurant != null) return true;
-            return false;
-        });
+
     }
 }

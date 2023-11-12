@@ -6,7 +6,7 @@ use App\Http\Controllers\salesman\HomeController;
 use App\Http\Middleware\SalesGateMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'myAuth:sales', SalesGateMiddleware::class])->name('sales.')->prefix('/sales')->group(function () {
+Route::middleware(['auth', 'role:sales', SalesGateMiddleware::class])->name('sales.')->prefix('/sales')->group(function () {
 
     Route::get('/profile', [HomeController::class, 'profile'])->name('profile')
         ->withoutMiddleware(SalesGateMiddleware::class);
