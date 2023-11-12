@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
 
 class ShowCommentsRequest extends FormRequest
 {
@@ -23,8 +22,8 @@ class ShowCommentsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'food_id'=>['nullable','exists:food,id'],
-            'restaurant_id'=>['nullable','exists:restaurants,id'],
+            'food_id' => ['required_without:restaurant_id', 'nullable', 'exists:food,id'],
+            'restaurant_id' => ['required_without:food_id', 'nullable', 'exists:restaurants,id'],
         ];
     }
 

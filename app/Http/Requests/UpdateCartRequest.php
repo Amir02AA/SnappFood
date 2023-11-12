@@ -22,15 +22,15 @@ class UpdateCartRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->mergeIfMissing([
-            'count' => $this->get('count') ?? '1'
+            'count' => 1
         ]);
     }
 
     public function rules(): array
     {
         return [
-            'food_id' => ['required','exists:food,id'],
-            'count' => ['required','numeric']
+            'food_id' => ['required', 'exists:food,id'],
+            'count' => ['required', 'numeric', 'between:1,20']
         ];
     }
 }

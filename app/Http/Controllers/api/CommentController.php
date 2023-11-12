@@ -25,12 +25,6 @@ class CommentController extends Controller
 
     public function index(ShowCommentsRequest $request)
     {
-
-        if (!$request->validated('restaurant_id') & !$request->validated('food_id')) {
-            return response()->json([
-                'massage' => 'please enter a field to filter'
-            ], 422);
-        }
         ($request->missing('restaurant_id')) ?
 
             $comments = Food::find($request->validated('food_id'))

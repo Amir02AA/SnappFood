@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class StoreCartRequest extends FormRequest
 {
@@ -30,8 +29,8 @@ class StoreCartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'food_id' => ['required','exists:food,id'],
-            'count' => ['required','numeric']
+            'food_id' => ['required', 'exists:food,id'],
+            'count' => ['required', 'numeric', 'between:1,20']
         ];
     }
 

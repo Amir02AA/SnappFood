@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\FoodTierResource;
 use App\Http\Resources\restaurant\RestaurantResource;
 use App\Models\Food;
-use App\Models\FoodTier;
 use App\Models\Restaurant;
 use App\Models\RestaurantTier;
 use Illuminate\Http\Request;
@@ -45,7 +43,7 @@ class RestaurantController extends Controller
 
     public function food(Restaurant $restaurant)
     {
-        $food = $restaurant->food()->get()->groupBy(function (Food $item , $key){
+        $food = $restaurant->food()->get()->groupBy(function (Food $item) {
             return $item->foodTier->name;
         })->toArray();
         return response()->json([

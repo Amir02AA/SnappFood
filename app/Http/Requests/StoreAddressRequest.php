@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class StoreAddressRequest extends FormRequest
 {
@@ -24,13 +23,14 @@ class StoreAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'x' => ['required',],
-            'y' => ['required',],
-            'address' => ['required','string'],
-            'vahed' => ['required','numeric'],
-            'user_id' => ['required']
+            'x' => ['required','decimal:0,6'],
+            'y' => ['required','decimal:0,6'],
+            'address' => ['required', 'string', 'between:5,255'],
+            'vahed' => ['required', 'numeric', 'between:1,200'],
+            'user_id' => ['required', 'exists:user,id']
         ];
     }
+
     protected function prepareForValidation()
     {
         $this->merge(['user_id' => Auth::id()]);
