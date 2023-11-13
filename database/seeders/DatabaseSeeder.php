@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
         RestaurantTier::insert([
             ['name' => 'Irani'],
             ['name' => 'International'],

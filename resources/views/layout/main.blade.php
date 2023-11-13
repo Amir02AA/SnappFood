@@ -11,6 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @vite('resources/css/app.css')
+    <style>
+        .select2-selection__choice__display {
+            color: deeppink;
+        }
+    </style>
 </head>
 <body>
     @yield('content')

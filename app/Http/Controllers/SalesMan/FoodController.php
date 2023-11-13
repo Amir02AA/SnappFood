@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\salesman;
 
 use App\Classes\AdminHelper;
+use App\Classes\SalesHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShowFoodRequest;
 use App\Http\Requests\StoreFoodRequest;
 use App\Http\Requests\UpdateFoodRequest;
 use App\Models\Food;
 use App\Models\FoodTier;
+use App\Models\Material;
 use App\Models\OffFood;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +34,8 @@ class FoodController extends Controller
     public function create()
     {
         $tiers = FoodTier::all();
-        return view('sales.food.create', compact('tiers'));
+        $materials = Material::all();
+        return view('sales.food.create', compact('tiers','materials'));
     }
 
     /**
@@ -41,8 +44,9 @@ class FoodController extends Controller
     public function store(StoreFoodRequest $request)
     {
         $validated = $request->validated();
+        $materialIds = SalesHelper::getMaterials($validated['materials']);
         $validated['restaurant_id'] = Auth::user()->restaurant->id;
-        Food::create(array_filter($validated));
+        Food::query()->create(array_filter($validated))->materials()->sync($materialIds);
         return redirect()->route('sales.food.index');
     }
 
@@ -60,7 +64,8 @@ class FoodController extends Controller
     public function edit(Food $food)
     {
         $tiers = FoodTier::all();
-        return view('sales.food.edit', compact('food', 'tiers'));
+        $materials = Material::all();
+        return view('sales.food.edit', compact('food', 'tiers','materials'));
     }
 
     /**

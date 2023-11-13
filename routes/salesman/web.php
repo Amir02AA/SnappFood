@@ -3,7 +3,6 @@
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\salesman\FoodController;
 use App\Http\Controllers\salesman\HomeController;
-use App\Http\Middleware\SalesGateMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->group(function () {
@@ -11,7 +10,6 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
     Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 
     Route::post('/profile', [HomeController::class, 'profileStore'])->name('profile.store');
-
 
     Route::resource('food', FoodController::class);
 

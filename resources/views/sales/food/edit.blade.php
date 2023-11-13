@@ -24,7 +24,11 @@
                 @error('name') {{$message}} @enderror
 
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
-                    <input type="text" value="{{$food->materials}}" name="materials" placeholder="Material" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
+                    <select class="js-example-basic-multiple" name="materials[]" multiple="multiple" id="mySelect2">
+                        @foreach($materials as $material)
+                            <option value="{{$material->id}}">{{$material->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 @error('materials') {{$message}} @enderror
 
