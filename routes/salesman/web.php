@@ -3,6 +3,7 @@
 use App\Http\Controllers\PartyController;
 use App\Http\Controllers\salesman\FoodController;
 use App\Http\Controllers\salesman\HomeController;
+use App\Http\Controllers\salesman\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->group(function () {
@@ -22,5 +23,7 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
     Route::post('food/{food}/party',[PartyController::class,'store'])->name('party.store');
     Route::delete('food/{food}/party',[PartyController::class,'destroy'])->name('party.destroy');
 
+    Route::get('/{cart}/next',[OrderController::class,'nextState'])->name('order.next');
+    Route::delete('/{cart}/cancel',[OrderController::class,'cancel'])->name('order.cancel');
 });
 Route::redirect('/sales','sales/dashboard');

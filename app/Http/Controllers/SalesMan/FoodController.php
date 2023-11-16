@@ -22,10 +22,10 @@ class FoodController extends Controller
      */
     public function index(ShowFoodRequest $request)
     {
-        $food = AdminHelper::foodInOrder($request->validated('price_filter'),
+        $foods = AdminHelper::foodInOrder($request->validated('price_filter'),
             $request->validated('tier_filter'), 5);
 
-        return view('sales.food.index',compact('food'));
+        return view('sales.food.index',compact('foods'));
     }
 
     /**

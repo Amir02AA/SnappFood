@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('x');
-            $table->float('y');
+            $table->float('lang');
+            $table->float('long');
             $table->text('address');
             $table->unsignedInteger('vahed')->default(1);
             $table->boolean('is_selected')->default(false);

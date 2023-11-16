@@ -10,7 +10,6 @@
             <section class="flex w-[30rem] flex-col space-y-10">
                 <div class="text-center text-4xl font-medium">Create an Account</div>
 
-
                 <div
                     class="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-pink-500"
                 >

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\salesman;
 
+use App\Classes\OrderStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRestaurantProfileRequest;
 use App\Models\Restaurant;
@@ -12,7 +13,7 @@ class HomeController extends Controller
 {
     public function profile()
     {
-        if (Auth::user()->restaurant !== null){
+        if (Auth::user()->restaurant !== null) {
             return redirect()->route('sales.settings');
         }
         return view('sales.profile', [
@@ -26,8 +27,12 @@ class HomeController extends Controller
         if (Auth::user()->restaurant === null) {
             return redirect()->route('sales.profile');
         }
+
         return view('sales.dashboard', [
-            'user' => Auth::user()
+            'user' => Auth::user(),
+            'carts' => Auth::user()->restaurant->carts()
+                ->where('status', '!=', OrderStatus::Received)
+                ->where('paid_date', '!=', null)->get()
         ]);
     }
 

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
+            $table->enum('status',[1,2,3,4])->nullable();
             $table->foreignId('restaurant_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->dateTime('paid_date')->nullable();

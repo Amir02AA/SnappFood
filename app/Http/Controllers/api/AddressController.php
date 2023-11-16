@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAddressRequest;
+use App\Http\Resources\AddressResource;
 use App\Models\Address;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +12,9 @@ class AddressController extends Controller
 {
     public function index()
     {
-        return \response()->json(['addresses' => Auth::user()->addresses]);
+        return \response()->json(
+            ['addresses' => AddressResource::collection(Auth::user()->addresses)]
+        );
     }
 
     public function store(StoreAddressRequest $request)
@@ -19,7 +22,7 @@ class AddressController extends Controller
         $validated = $request->validated();
         $address = Address::create($validated);
         return response()->json([
-            'created Address' => $address
+            'created Address' => new AddressResource($address)
         ], 201);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShowCommentsRequest;
 use App\Http\Requests\StoreCommentRequest;
+use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Food;
 use App\Models\Restaurant;
@@ -19,7 +20,7 @@ class CommentController extends Controller
         $validated['user_id'] = Auth::id();
 
         return \response()->json([
-            'comment' => Comment::create($validated)
+            'comment' => new CommentResource(Comment::create($validated))
         ]);
     }
 
@@ -32,6 +33,7 @@ class CommentController extends Controller
 
             :$comments =Restaurant::find($request->validated('restaurant_id'))
                 ->carts()->with('comment')->getRelation('comment')->get();
-        return response()->json(['comments' => $comments]);
+
+        return response()->json(['comments' => CommentResource::collection($comments)]);
     }
 }

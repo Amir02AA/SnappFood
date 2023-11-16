@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Food;
 use App\Models\Order;
@@ -17,7 +18,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return Auth::user()->carts;
+        return CartResource::collection(Auth::user()->carts);
     }
 
     /**
@@ -39,7 +40,7 @@ class CartController extends Controller
         $cart->food()->attach($food->id, ['count' => $count]);
 
         return response()->json([
-            'cart' => $cart,
+            'cart' =>new CartResource($cart),
         ], 201);
 
     }
@@ -68,7 +69,7 @@ class CartController extends Controller
             ])
             : response()->json([
                 'massage' => 'updated',
-                'cart' => $cart
+                'cart' => new CartResource($cart)
             ],422);
     }
 
