@@ -7,7 +7,7 @@ use App\Http\Controllers\api\CommentController;
 use App\Http\Controllers\api\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth:sanctum','role:customer'])->group(function () {
+Route::middleware(['auth:sanctum','role:customer'])->prefix('/v1')->group(function () {
     // Carts
     Route::post('/carts/{cart}/pay',[CartController::class,'pay']);
     Route::get('/carts',[CartController::class,'index']);

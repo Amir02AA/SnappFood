@@ -2,35 +2,24 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Classes\UserHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\restaurant\RestaurantResource;
 use App\Models\Food;
 use App\Models\Restaurant;
-use App\Models\RestaurantTier;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
     public function index(Request $request)
     {
-        $restaurants = Restaurant::all();
         $validated = ($request->validate([
             'is_open' => ['boolean'],
-            'type' => ['string'],
+            'type' => ['string', 'max:20'],
         ]));
-        if (isset($validated['is_open'])) {
-            $restaurants =
-                Restaurant::query()->where('is_open', $validated['is_open'])->get();
-
-        }
-        if (isset($validated['type'])) {
-            $restaurants =
-                RestaurantTier::query()->where('name', $validated['type'])->first()->restaurants;
-
-        }
 
         return response()->json([
-            'restaurants' => RestaurantResource::collection($restaurants)
+            'restaurants' => UserHelper::getSortedRestaurants($validated['is_open'], $validated['type'])
         ]);
     }
 
