@@ -19,7 +19,7 @@ class FoodResource extends JsonResource
         return [
             'name' => $this->name,
             'price'=> $this->price,
-            'count' => $this->cart()->pivot->count
+            'count' => $this->pivot->count
         ];
     }
 }

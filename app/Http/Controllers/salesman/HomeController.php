@@ -32,7 +32,8 @@ class HomeController extends Controller
             'user' => Auth::user(),
             'carts' => Auth::user()->restaurant->carts()
                 ->where('status', '!=', OrderStatus::Received)
-                ->where('paid_date', '!=', null)->get()
+                ->where('paid_date', '!=', null)
+                ->get()
         ]);
     }
 

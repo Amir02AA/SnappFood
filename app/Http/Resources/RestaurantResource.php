@@ -15,6 +15,7 @@ class RestaurantResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'restaurant name' => $this->name,
             'menu' => FoodTierResource::collection($this->foodTiers)
         ];

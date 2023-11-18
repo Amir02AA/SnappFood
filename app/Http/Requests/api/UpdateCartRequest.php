@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCartRequest extends FormRequest
+class UpdateCartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class StoreCartRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->mergeIfMissing([
-            'count' => '1'
+            'count' => 1
         ]);
     }
 
@@ -33,6 +33,4 @@ class StoreCartRequest extends FormRequest
             'count' => ['required', 'numeric', 'between:1,20']
         ];
     }
-
-
 }

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\api;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class StoreCommentRequest extends FormRequest
+class GetRestaurantsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +22,8 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'cart_id' => ['required','exists:carts,id'],
-            'content'=>['required','string'],
-            'score'=>['required','numeric','between:1,5']
+            'is_open' => ['nullable','boolean'],
+            'type' => ['nullable','string', 'max:20'],
         ];
     }
 }

@@ -21,11 +21,15 @@ class Cart extends Model
 
     protected $fillable = ['user_id', 'restaurant_id', 'paid_date', 'status'];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    public function restaurant()
+    {
+        return $this->belongsTo(Restaurant::class);
+    }
     public function food(): BelongsToMany
     {
         return $this->belongsToMany(Food::class)->withPivot('count');

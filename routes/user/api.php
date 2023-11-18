@@ -34,6 +34,6 @@ Route::middleware(['auth:sanctum','role:customer'])->prefix('/v1')->group(functi
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
 
-Route::get('/test',function (\App\Http\Requests\StoreCartRequest $request){
+Route::get('/test',function (\App\Http\Requests\api\StoreCartRequest $request){
    return $request->validated();
 });

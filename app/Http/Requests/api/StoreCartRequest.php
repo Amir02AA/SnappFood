@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShowCommentsRequest extends FormRequest
+class StoreCartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,12 +19,20 @@ class ShowCommentsRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    protected function prepareForValidation()
+    {
+        $this->mergeIfMissing([
+            'count' => '1'
+        ]);
+    }
+
     public function rules(): array
     {
         return [
-            'food_id' => ['required_without:restaurant_id', 'nullable', 'exists:food,id'],
-            'restaurant_id' => ['required_without:food_id', 'nullable', 'exists:restaurants,id'],
+            'food_id' => ['required', 'exists:food,id'],
+            'count' => ['required', 'numeric', 'between:1,20']
         ];
     }
+
 
 }

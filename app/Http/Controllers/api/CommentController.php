@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ShowCommentsRequest;
-use App\Http\Requests\StoreCommentRequest;
+use App\Http\Requests\api\ShowCommentsRequest;
+use App\Http\Requests\api\StoreCommentRequest;
 use App\Http\Resources\CommentResource;
 use App\Models\Comment;
 use App\Models\Food;
 use App\Models\Restaurant;
-use http\Env\Response;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller

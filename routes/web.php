@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PartyController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +32,7 @@ require_once 'admin/web.php';
 require_once 'salesman/web.php';
 
 Route::get('/test',function (){
+
+    Mail::to('aghighi@mail.com')->send(new \App\Mail\statusChangedMail());
     return view('test');
 });
