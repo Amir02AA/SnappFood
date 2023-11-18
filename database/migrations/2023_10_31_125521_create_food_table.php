@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->integer('price',unsigned: true);
-            $table->foreignId('food_tier_id')->constrained();
-            $table->foreignId('restaurant_id')->constrained();
+            $table->foreignId('food_tier_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
         });
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('address');
             $table->unsignedInteger('vahed')->default(1);
             $table->boolean('is_selected')->default(false);
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

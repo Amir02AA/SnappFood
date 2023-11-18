@@ -16,7 +16,7 @@ return new class extends Migration
             $table->decimal('percent','2',0,true);
             $table->dateTime('expire_date')
                 ->default(now()->addHour()->toDateTimeString());
-            $table->foreignId('food_id')->constrained();
+            $table->foreignId('food_id')->constrained()->cascadeOnDelete();
         });
     }
 

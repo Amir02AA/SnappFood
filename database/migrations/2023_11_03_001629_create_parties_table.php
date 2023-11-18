@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('count')->default(1);
             $table->decimal('percent',2,0,true)->default(30);
-            $table->foreignId('food_id')->constrained();
+            $table->foreignId('food_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
