@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Restaurant extends Model
 {
@@ -51,5 +52,10 @@ class Restaurant extends Model
     public function foodTiers()
     {
         return $this->belongsToMany(FoodTier::class, 'food');
+    }
+
+    public function address()
+    {
+        return $this->morphOne(Address::class,'addressable');
     }
 }

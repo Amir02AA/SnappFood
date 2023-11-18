@@ -17,12 +17,15 @@ class AddressFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::query()->inRandomOrder()->first();
         return [
             'name' => fake()->title,
-            'address'=>fake()->address(),
-            'x'=>fake()->numerify('#'),
-            'y'=>fake()->numerify('#'),
-            'user_id'=> User::inRandomOrder()->first()->id
-            ];
+            'address' => fake()->address(),
+            'lang' => fake()->numerify('##.###'),
+            'long' => fake()->numerify('##.###'),
+            'vahed' => fake()->numberBetween(1,10),
+            'addressable_type' => $user::class,
+            'addressable_id' => $user->id
+        ];
     }
 }
