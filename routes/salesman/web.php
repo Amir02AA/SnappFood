@@ -19,11 +19,13 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
 
     Route::post('/settings/{restaurant}', [HomeController::class, 'settingsStore'])->name('settings.store');
 
-    Route::get('food/{food}/party',[PartyController::class,'create'])->name('party.create');
-    Route::post('food/{food}/party',[PartyController::class,'store'])->name('party.store');
-    Route::delete('food/{food}/party',[PartyController::class,'destroy'])->name('party.destroy');
+    Route::get('food/{food}/party', [PartyController::class, 'create'])->name('party.create');
+    Route::post('food/{food}/party', [PartyController::class, 'store'])->name('party.store');
+    Route::delete('food/{food}/party', [PartyController::class, 'destroy'])->name('party.destroy');
 
-    Route::get('/{cart}/next',[OrderController::class,'nextState'])->name('order.next');
-    Route::delete('/{cart}/cancel',[OrderController::class,'cancel'])->name('order.cancel');
+    Route::get('/{cart}/next', [OrderController::class, 'nextState'])->name('order.next');
+    Route::delete('/{cart}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+
+    Route::get('/carts/archive', [OrderController::class, 'archive'])->name('carts.archive');
 });
-Route::redirect('/sales','sales/dashboard');
+Route::redirect('/sales', 'sales/dashboard');

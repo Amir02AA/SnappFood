@@ -23,4 +23,8 @@ class OrderController extends Controller
         return redirect()->route('sales.dashboard');
     }
 
+    public function archive()
+    {
+        return 'archive';
+    }
 }

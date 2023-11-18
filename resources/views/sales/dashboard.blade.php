@@ -10,6 +10,7 @@
 
                 <a href="{{route('sales.settings')}}" class="text-white hover:text-indigo-500">Restaurant Settings</a>
                 <a href="{{route('sales.food.index')}}" class="text-white hover:text-indigo-500">Food</a>
+                <a href="{{route('sales.carts.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
                 <p class="text-white hover:text-indigo-500">Restaurant : </p>
 
 
