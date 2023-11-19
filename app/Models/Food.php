@@ -9,16 +9,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Food extends Model
 {
+    use HasFactory, SoftDeletes;
+
     protected $fillable = ['name', 'price', 'food_tier_id', 'restaurant_id'];
     protected $appends = [
         'final_price',
         'final_percent'
     ];
     public $timestamps = false;
-    use HasFactory;
 
     public function carts(): BelongsToMany
     {
@@ -48,7 +50,7 @@ class Food extends Model
     protected function finalPercent(): Attribute
     {
         return Attribute::make(
-            get: fn()=> max($this->off?->percent, $this->party?->percent)
+            get: fn() => max($this->off?->percent, $this->party?->percent)
         );
     }
 

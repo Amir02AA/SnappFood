@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -12,7 +12,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable , HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -53,21 +53,23 @@ class User extends Authenticatable
         return $this->hasOne(Restaurant::class);
     }
 
-    protected function comments(){
+    protected function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 
-    protected function carts(){
+    protected function carts()
+    {
         return $this->hasMany(Cart::class);
     }
 
     protected function images()
     {
-        return $this->morphOne(Image::class,'imageable');
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     public function addresses()
     {
-        return $this->morphMany(Address::class,'addressable');
+        return $this->morphMany(Address::class, 'addressable');
     }
 }
