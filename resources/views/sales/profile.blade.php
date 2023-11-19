@@ -15,8 +15,15 @@
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
                     <input type="text" name="phone" placeholder="Phone" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
                 </div>
-                <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
-                    <textarea type="text" name="address" placeholder="Address" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white"></textarea>
+                <div class="w-full text-lg duration-300">
+                    <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500 mb-2">
+                        <textarea type="text" name="address" placeholder="Address" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white"></textarea>
+                    </div>
+                    <div class="flex gap-1.5 w-full  text-lg duration-300 ">
+                        <input type="text" name="lang" placeholder="Langitude" class="w-full border-b-2 focus-within:border-indigo-500 bg-transparent outline-none placeholder-italic focus:outline-none text-white"></input>
+                        <input type="text" name="long" placeholder="Longitude" class="w-full border-b-2 focus-within:border-indigo-500 bg-transparent outline-none placeholder-italic focus:outline-none text-white">
+                    </div>
+
                 </div>
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
                     <input type="text" name="account" placeholder="Account Number" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
