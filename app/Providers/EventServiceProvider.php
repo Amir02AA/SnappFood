@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\CartPaid;
 use App\Events\CartStatusChanged;
+use App\Listeners\ChangePartyCount;
 use App\Listeners\SendCartPaidEmail;
 use App\Listeners\SendStatusEmail;
 use Illuminate\Auth\Events\Registered;
@@ -22,7 +23,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         CartStatusChanged::class => [SendStatusEmail::class],
-        CartPaid::class => [SendCartPaidEmail::class]
+        CartPaid::class => [
+            SendCartPaidEmail::class,
+            ChangePartyCount::class
+        ]
     ];
 
     /**

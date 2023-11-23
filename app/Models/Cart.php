@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class Cart extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
+
     protected $appends = [
-        'total_fee'
+        'total_fee',
+        'total_off',
+        'total_fee_after_off'
     ];
     protected $casts = [
         'status' => OrderStatus::class
@@ -31,6 +34,7 @@ class Cart extends Model
     {
         return $this->belongsTo(Restaurant::class);
     }
+
     public function food(): BelongsToMany
     {
         return $this->belongsToMany(Food::class)->withPivot('count');
@@ -62,13 +66,27 @@ class Cart extends Model
 
     public function totalFee(): Attribute
     {
-//        return $this?->food->map(function ($food) {
-//            return $food->price * $food->pivot->count;
-//        })->sum();
         return Attribute::make(
             get: fn() => $this?->food->sum(function ($food) {
                 return $food->price * $food->pivot->count;
             })
         );
     }
+
+    public function totalOff(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->food->sum(function (Food $food) {
+                return (1 - $food->final_percent / 100) * $food->price * $food->pivot->count;
+            })
+        );
+    }
+
+    public function totalFeeAfterOff(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->total_fee - $this->total_off
+        );
+    }
+
 }

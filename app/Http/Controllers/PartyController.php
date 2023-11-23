@@ -16,6 +16,7 @@ class PartyController extends Controller
 
     public function create(Food $food)
     {
+        if ($food->party !== null) return redirect()->route('sales.food.index');
         return view('sales.party.create', compact('food'));
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\restaurant;
 
+use App\Http\Resources\AddressResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,7 +19,7 @@ class RestaurantResource extends JsonResource
             'id' => $this->id,
             'restaurant name' => $this->name,
             'type' => $this->tiers->pluck('name'),
-            'address' => $this->address,
+            'address' => new AddressResource($this->address),
             'is_open' => $this->is_open
         ];
     }

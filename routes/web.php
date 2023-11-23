@@ -32,7 +32,7 @@ require_once 'admin/web.php';
 require_once 'salesman/web.php';
 
 Route::get('/test',function (){
-
-    Mail::to('aghighi@mail.com')->send(new \App\Mail\statusChangedMail());
-    return view('test');
+    $food = \App\Models\FoodTier::paginate(5);
+//    Mail::to('aghighi@mail.com')->send(new \App\Mail\statusChangedMail());
+    return view('test',compact('food'));
 });

@@ -50,13 +50,13 @@ class Food extends Model
     protected function finalPercent(): Attribute
     {
         return Attribute::make(
-            get: fn() => max($this->off?->percent, $this->party?->percent)
+            get: fn() => max($this->off?->percent, $this->party?->final_percent)
         );
     }
 
     protected function finalPrice(): Attribute
     {
-        $finalPercent = max($this->off?->percent, $this->party?->percent);
+        $finalPercent = $this->final_percent;
         return Attribute::make(
             get: fn() => $this->price *
                 (1 - ($finalPercent / 100)),

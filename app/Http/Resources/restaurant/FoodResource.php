@@ -15,8 +15,11 @@ class FoodResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
-            'price'=> $this->price,
+            'price'=> $this->price ." t",
+             'off' => $this->final_percent . " %",
+            'price after off' => $this->final_price. " t",
             'materials' =>  MaterialResource::collection($this->materials)
         ];
     }

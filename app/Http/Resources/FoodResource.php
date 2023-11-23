@@ -17,6 +17,7 @@ class FoodResource extends JsonResource
     {
 
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'price'=> $this->price,
             'count' => $this->pivot->count

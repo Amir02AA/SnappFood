@@ -13,16 +13,33 @@ class RestaurantSeeder extends Seeder
      */
     public function run(): void
     {
-        Restaurant::create([
+        $restaurantSib = Restaurant::create([
             'name' => 'sib 360',
             'phone' => '021222222',
             'account' => '225564488',
             'user_id' => 2,
-        ])->address()->create([
-            'name' => 'sib360 address',
+        ]);
+        $restaurantSib->address()->create([
+            'name' => 'sib360',
             'address' => fake()->address(),
             'lang' => fake()->numerify('##.###'),
             'long' => fake()->numerify('##.###'),
         ]);
+
+        $restaurantSib->tiers()->sync([1, 2]);
+
+        $restaurantShila = Restaurant::create([
+            'name' => 'Shila',
+            'phone' => '021222223',
+            'account' => '225564487',
+            'user_id' => 3,
+        ]);
+        $restaurantShila->address()->create([
+            'name' => 'Shila',
+            'address' => fake()->address(),
+            'lang' => fake()->numerify('##.###'),
+            'long' => fake()->numerify('##.###'),
+        ]);
+        $restaurantShila->tiers()->sync([3]);
     }
 }

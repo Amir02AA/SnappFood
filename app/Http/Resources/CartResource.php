@@ -18,7 +18,9 @@ class CartResource extends JsonResource
             'id' => $this->id,
             'restaurant' => $this->restaurant->name,
             'food' => FoodResource::collection($this->food),
-            'total price' => $this->total_fee
+            'total price' => $this->total_fee,
+            'total off' => $this->total_off,
+            'total price after off' => $this->total_fee_after_off
         ];
     }
 }
