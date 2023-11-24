@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\salesman;
 
 use App\Classes\OrderStatus;
+use App\Classes\SalesHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRestaurantProfileRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantTier;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -22,18 +24,16 @@ class HomeController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
+        $request->validate(['status' => ['nullable','in:1,2,3']]);
         if (Auth::user()->restaurant === null) {
             return redirect()->route('sales.profile');
         }
 
         return view('sales.dashboard', [
             'user' => Auth::user(),
-            'carts' => Auth::user()->restaurant->carts()
-                ->where('status', '!=', OrderStatus::Received)
-                ->where('paid_date', '!=', null)
-                ->get()
+            'carts' => SalesHelper::getSortedOrders($request->get('status'))
         ]);
     }
 

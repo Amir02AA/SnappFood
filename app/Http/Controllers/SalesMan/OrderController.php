@@ -18,12 +18,6 @@ class OrderController extends Controller
         return redirect()->route('sales.dashboard');
     }
 
-    public function cancel(Cart $cart)
-    {
-        $cart->delete();
-        return redirect()->route('sales.dashboard');
-    }
-
     public function archive()
     {
         $carts = Auth::user()->restaurant->carts()->where('status',OrderStatus::Received)->paginate(3);

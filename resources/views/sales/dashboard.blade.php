@@ -2,6 +2,40 @@
 
 @section('content')
     <main class="min-h-screen bg-gray-900 text-white">
+        <aside id="default-sidebar"
+               class="fixed top-0 right-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+               aria-label="Sidebar">
+            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+                <form method="get">
+                    <ul class="space-y-3 font-medium">
+                        <li>
+                            <div class="flex flex-row gap-3">
+                                <div class="w-full  text-lg duration-300 focus-within:border-indigo-500">
+                                    <select id="status" name="status"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option value="">Choose a Tier</option>
+                                        <option value="1">waiting</option>
+                                        <option value="2">accepted</option>
+                                        <option value="3">processing</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <dive class="flex flex-row gap-3">
+                                <div class=" w-full text-lg duration-300 focus-within:border-indigo-500">
+                                    <button
+                                        class="bg-transparent hover:bg-blue-400 text-blue-500 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+                                        type="submit">Filter
+                                    </button>
+                                </div>
+                            </dive>
+                        </li>
+                    </ul>
+                </form>
+
+            </div>
+        </aside>
         <section class="flex">
             <!-- Navbar -->
             <nav class="bg-gray-800 h-screen w-64 p-4 flex flex-col space-y-4">
@@ -32,7 +66,7 @@
                     <div class="w-1/2 bg-gray-800 rounded-lg p-4 flex items-center justify-between">
 
                             <div>
-                                <div class="text-lg font-semibold">{{$cart->id}}</div>
+{{--                                <div class="text-lg font-semibold">{{$cart->id}}</div>--}}
                                 <div class="text-sm font-semibold">{{$cart->paid_date}}</div>
                                 <div class="text-sm font-semibold">{{$cart->status->name}}</div>
                             </div>
@@ -47,17 +81,17 @@
                                               d="M16 30a14 14 0 1 1 14-14a14.016 14.016 0 0 1-14 14Zm0-26a12 12 0 1 0 12 12A12.014 12.014 0 0 0 16 4Z"/>
                                     </svg>
                                 </a>
-                                <form method="post" action="{{route('sales.order.cancel',$cart)}}">
-                                    @csrf @method('delete')
-                                    <button type="submit"
-                                            class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                             viewBox="0 0 24 24">
-                                            <path fill="red"
-                                                  d="M12 4c-4.419 0-8 3.582-8 8s3.581 8 8 8s8-3.582 8-8s-3.581-8-8-8zm3.707 10.293a.999.999 0 1 1-1.414 1.414L12 13.414l-2.293 2.293a.997.997 0 0 1-1.414 0a.999.999 0 0 1 0-1.414L10.586 12L8.293 9.707a.999.999 0 1 1 1.414-1.414L12 10.586l2.293-2.293a.999.999 0 1 1 1.414 1.414L13.414 12l2.293 2.293z"/>
-                                        </svg>
-                                    </button>
-                                </form>
+{{--                                <form method="post" action="{{route('sales.order.cancel',$cart)}}">--}}
+{{--                                    @csrf @method('delete')--}}
+{{--                                    <button type="submit"--}}
+{{--                                            class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">--}}
+{{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"--}}
+{{--                                             viewBox="0 0 24 24">--}}
+{{--                                            <path fill="red"--}}
+{{--                                                  d="M12 4c-4.419 0-8 3.582-8 8s3.581 8 8 8s8-3.582 8-8s-3.581-8-8-8zm3.707 10.293a.999.999 0 1 1-1.414 1.414L12 13.414l-2.293 2.293a.997.997 0 0 1-1.414 0a.999.999 0 0 1 0-1.414L10.586 12L8.293 9.707a.999.999 0 1 1 1.414-1.414L12 10.586l2.293-2.293a.999.999 0 1 1 1.414 1.414L13.414 12l2.293 2.293z"/>--}}
+{{--                                        </svg>--}}
+{{--                                    </button>--}}
+{{--                                </form>--}}
                             </div>
                     </div>
                     @endforeach
