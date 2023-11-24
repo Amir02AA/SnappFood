@@ -11,6 +11,7 @@ Route::middleware(['auth:sanctum','role:customer'])->prefix('/v1')->group(functi
     // Carts
     Route::post('/carts/{cart}/pay',[CartController::class,'pay']);
     Route::get('/carts',[CartController::class,'index']);
+    Route::get('/carts/{cart}',[CartController::class,'show']);
     Route::post('/carts/add',[CartController::class,'store']);
     Route::patch('/carts/add',[CartController::class,'update']);
 

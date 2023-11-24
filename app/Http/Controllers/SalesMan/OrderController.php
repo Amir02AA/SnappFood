@@ -14,7 +14,7 @@ class OrderController extends Controller
     public function nextState(Cart $cart)
     {
         $cart->nextStep();
-//        CartStatusChanged::dispatch($cart);
+        CartStatusChanged::dispatch($cart);
         return redirect()->route('sales.dashboard');
     }
 

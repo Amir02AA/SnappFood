@@ -31,7 +31,7 @@ class statusChangedMail extends Mailable
     {
         return new Envelope(
             from: new Address('amir@laravel.com') ,
-            subject: 'My Test Mail'
+            subject: 'New Cart Status'
         );
     }
 

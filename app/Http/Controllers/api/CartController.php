@@ -89,7 +89,7 @@ class CartController extends Controller
 
         $cart->update([
             'paid_date' => now()->toDateTimeString(),
-            'address_id' => $cart->user->curren_address,
+            'address_id' => $cart->user->current_address->id,
             'off_code_id' => $offCode?->id,
             'status' => OrderStatus::Wait
         ]);

@@ -28,7 +28,7 @@ class CartPaidEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order Shipped',
+            subject: 'Cart Paid',
         );
     }
 
