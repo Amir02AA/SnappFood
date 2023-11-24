@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,6 +26,10 @@ class User extends Authenticatable
         'password',
         'phone',
         'role'
+    ];
+
+    protected $appends = [
+        'current_address'
     ];
 
 
@@ -71,5 +76,12 @@ class User extends Authenticatable
     public function addresses()
     {
         return $this->morphMany(Address::class, 'addressable');
+    }
+
+    public function currentAddress(): Attribute
+    {
+        return Attribute::make(
+            get: fn() => $this->addresses()->where('is_selected', true)->first()
+        );
     }
 }

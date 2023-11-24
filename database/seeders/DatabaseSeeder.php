@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\FoodTier;
-use App\Models\OffCodes;
+use App\Models\OffCode;
 use App\Models\RestaurantTier;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Kabab'],
         ]);
 
-        OffCodes::insert([
+        OffCode::insert([
             ['percent' => 20, 'code' => uniqid()],
             ['percent' => 50, 'code' => uniqid()],
             ['percent' => 70, 'code' => uniqid()],

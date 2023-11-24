@@ -23,7 +23,8 @@ class Cart extends Model
         'status' => OrderStatus::class
     ];
 
-    protected $fillable = ['user_id', 'restaurant_id', 'paid_date', 'status'];
+    protected $fillable = ['user_id', 'restaurant_id', 'paid_date', 'status', 'address_id', 'off_code_id'];
+
 
     public function user()
     {
@@ -77,7 +78,7 @@ class Cart extends Model
     {
         return Attribute::make(
             get: fn() => $this->food->sum(function (Food $food) {
-                return (1 - $food->final_percent / 100) * $food->price * $food->pivot->count;
+                return ($food->final_percent / 100) * $food->price * $food->pivot->count;
             })
         );
     }
@@ -85,8 +86,13 @@ class Cart extends Model
     public function totalFeeAfterOff(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->total_fee - $this->total_off
+            get: fn() => ($this->total_fee - $this->total_off) * (1 - $this->off_code?->percent/100)
         );
+    }
+
+    public function offCode()
+    {
+        return $this->belongsTo(OffCode::class);
     }
 
 }

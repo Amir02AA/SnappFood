@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Classes\OrderStatus;
 use App\Events\CartPaid;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\StoreCartRequest;
@@ -9,7 +10,8 @@ use App\Http\Requests\api\UpdateCartRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Food;
-use App\Models\Order;
+use App\Models\OffCode;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -51,7 +53,7 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        return response()->json(['cart' => $cart]);
+        return response()->json(['cart' => new CartResource($cart)]);
     }
 
     /**
@@ -75,16 +77,27 @@ class CartController extends Controller
     }
 
 
-    public function pay(Cart $cart)
+    public function pay(Cart $cart, Request $request)
     {
+        if ($cart->paid_date) return response()->json(['massage' => 'Already Paid'], 404);
+        if (!$cart->user->current_address) return response()->json(['massage' => 'Please Select an Address'], 404);
+
+        $request->validate([
+            'code' => 'nullable|string|max:100|exists:off_codes,code'
+        ]);
+        $offCode = OffCode::query()->where('code',$request->get('code'))->first();
+
         $cart->update([
-            'paid_date' => now()->toDateTimeString()
+            'paid_date' => now()->toDateTimeString(),
+            'address_id' => $cart->user->curren_address,
+            'off_code_id' => $offCode?->id,
+            'status' => OrderStatus::Wait
         ]);
         CartPaid::dispatch($cart);
 
         return response()->json([
             'massage' => 'thanks for your money',
-            'paid for' => $cart
+            'data' => new CartResource($cart)
         ]);
     }
 }

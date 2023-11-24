@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->dateTime('paid_date')->nullable();
+            $table->unsignedInteger('paid_price')->nullable();
             $table->timestamps();
         });
     }

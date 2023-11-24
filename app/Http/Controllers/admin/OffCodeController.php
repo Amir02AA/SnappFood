@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\OffCodes;
+use App\Models\OffCode;
 use Illuminate\Http\Request;
 
 class OffCodeController extends Controller
@@ -14,7 +14,7 @@ class OffCodeController extends Controller
     public function index()
     {
         return view('admin.off.index', [
-            'offs' => OffCodes::paginate(5)
+            'offs' => OffCode::paginate(5)
         ]);
     }
 
@@ -35,7 +35,7 @@ class OffCodeController extends Controller
             'percent' => ['bail', 'required', 'numeric', 'min:10', 'max:80']
         ]);
         $validated['code'] = uniqid();
-        OffCodes::create($validated);
+        OffCode::create($validated);
 
         return redirect()->route('admin.off.index');
     }
@@ -43,7 +43,7 @@ class OffCodeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OffCodes $off)
+    public function show(OffCode $off)
     {
         return view('admin.off.show', compact('off'));
     }
@@ -51,7 +51,7 @@ class OffCodeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OffCodes $off)
+    public function destroy(OffCode $off)
     {
         $off->delete();
         return redirect()->route('admin.off.index');

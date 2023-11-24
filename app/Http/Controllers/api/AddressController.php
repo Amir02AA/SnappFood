@@ -29,9 +29,9 @@ class AddressController extends Controller
 
     public function setCurrentAddress(Address $address)
     {
-        Auth::user()->addresses()->update(['is_selected' => false]);
-        if ($address->user_id !== Auth::id())
+        if ($address->addressable->isNot(Auth::user()))
             return response()->json(['massage' => 'address not found'], 404);
+        Auth::user()->addresses()->update(['is_selected' => false]);
         $address->update(['is_selected' => true]);
         return response()->json(['massage' => 'selected', 'address_id' => $address->id]);
     }
