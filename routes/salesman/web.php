@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PartyController;
+use App\Http\Controllers\salesman\CommentController;
 use App\Http\Controllers\salesman\FoodController;
 use App\Http\Controllers\salesman\HomeController;
 use App\Http\Controllers\salesman\OrderController;
@@ -27,5 +28,7 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
 //    Route::delete('/{cart}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 
     Route::get('/carts/archive', [OrderController::class, 'archive'])->name('carts.archive');
+
+    Route::get('/comments', [CommentController::class,'index'])->name('comments.index');
 });
 Route::redirect('/sales', 'sales/dashboard');

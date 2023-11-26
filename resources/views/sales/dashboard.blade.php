@@ -11,7 +11,7 @@
                         <li>
                             <div class="flex flex-row gap-3">
                                 <div class="w-full  text-lg duration-300 focus-within:border-indigo-500">
-                                    <select id="status" name="status"
+                                    <select id="food_id" name="status"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                         <option value="">Choose a Tier</option>
                                         <option value="1">waiting</option>
@@ -45,6 +45,7 @@
                 <a href="{{route('sales.settings')}}" class="text-white hover:text-indigo-500">Restaurant Settings</a>
                 <a href="{{route('sales.food.index')}}" class="text-white hover:text-indigo-500">Food</a>
                 <a href="{{route('sales.carts.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
+                <a href="{{route('sales.comments.index')}}" class="text-white hover:text-indigo-500">Comments</a>
                 <p class="text-white hover:text-indigo-500">Restaurant : {{\Illuminate\Support\Facades\Auth::user()->restaurant->name}}</p>
 
 

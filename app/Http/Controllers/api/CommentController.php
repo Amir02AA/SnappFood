@@ -16,7 +16,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         $this->authorize('create', [
-            Comment::class , $request->validated('cart_id')
+            Comment::class, $request->validated('cart_id')
         ]);
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
@@ -31,10 +31,10 @@ class CommentController extends Controller
         ($request->missing('restaurant_id')) ?
 
             $comments = Food::find($request->validated('food_id'))
-                ->carts()->with('comment')->getRelation('comment')->get()
+                ->carts()->has('comment')->get()->pluck('comment')
 
-            :$comments =Restaurant::find($request->validated('restaurant_id'))
-                ->carts()->with('comment')->getRelation('comment')->get();
+            : $comments = Restaurant::find($request->validated('restaurant_id'))
+                ->carts()->has('comment')->get()->pluck('comment');
 
         return response()->json(['comments' => CommentResource::collection($comments)]);
     }

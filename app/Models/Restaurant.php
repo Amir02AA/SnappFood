@@ -58,4 +58,9 @@ class Restaurant extends Model
     {
         return $this->morphOne(Address::class, 'addressable');
     }
+
+    public function comments()
+    {
+        return $this->carts()->with('comment')->getRelation('comment');
+    }
 }
