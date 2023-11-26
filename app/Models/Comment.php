@@ -15,7 +15,8 @@ class Comment extends Model
         'user_id',
         'cart_id',
         'content',
-        'score'
+        'score',
+        'status'
     ];
     protected $casts = [
         'status' => CommentsStatus::class
@@ -31,9 +32,9 @@ class Comment extends Model
         return $this->belongsTo(Food::class);
     }
 
-    protected function comment()
+    protected function replied()
     {
-        return $this->belongsTo(Comment::class);
+        return $this->hasOne(Comment::class,'reply_to');
     }
 
     public function cart()

@@ -46,11 +46,8 @@
             <div class="w-full space-y-4">
 
                 @foreach($comments as $comment)
-                    <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
-                        <div class="text-lg font-semibold">{{$comment->user->name}}</div>
-                        <p class="text-lg font-semibold">{{$comment->content}}</p>
-                        <p class="text-cyan-400 font-semibold">{{$comment->score}} / 5</p>
-                    </div>
+                    @php $component = 'comments.'.strtolower($comment->status->name) @endphp
+                    <x-dynamic-component :component="$component" :$comment/>
                 @endforeach
             </div>
         </section>

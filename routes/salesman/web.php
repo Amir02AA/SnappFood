@@ -29,6 +29,12 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
 
     Route::get('/carts/archive', [OrderController::class, 'archive'])->name('carts.archive');
 
-    Route::get('/comments', [CommentController::class,'index'])->name('comments.index');
+    Route::controller(CommentController::class)->group(function (){
+        Route::get('/comments', 'index')->name('comments.index');
+        Route::post('/comments/{comment}/reply', 'reply')->name('comments.reply');
+        Route::post('/comments/{comment}/accept', 'accept')->name('comments.accept');
+        Route::post('/comments/{comment}/delete', 'deleteRequest')->name('comments.delete');
+    });
+
 });
 Route::redirect('/sales', 'sales/dashboard');

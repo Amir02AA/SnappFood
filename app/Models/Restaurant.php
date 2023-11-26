@@ -61,6 +61,6 @@ class Restaurant extends Model
 
     public function comments()
     {
-        return $this->carts()->with('comment')->getRelation('comment');
+        return $this->carts()->has('comment')->get()->pluck('comment');
     }
 }
