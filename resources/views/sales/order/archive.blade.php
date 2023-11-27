@@ -1,17 +1,33 @@
 @extends('layout.main')
 
 @section('content')
-    <main class="bg-blue-200 mx-auto flex min-h-screen w-full items-center justify-center text-white">
-        <section class="flex w-[30rem] flex-col space-y-6">
-            <div class="text-center text-4xl font-medium text-black">Archive Carts</div>
+    <main class="bg-blue-200 mx-auto flex min-h-screen w-full items-center justify-center text-white px-7">
+        <section class="flex w-full flex-col space-y-6 items-center justify-center">
+            <div class="text-center text-4xl font-medium text-black w-full">Archive Carts (Orders)</div>
+            <div class="w-full space-y-4 text-black flex flex-col items-center justify-center">
+                <div class="px-9 w-full flex justify-between">
+                    <div class="flex-col flex">
+                        <label>Total Income : {{$totalIncome}} T</label>
+                        <label>Carts Count : {{$carts->count()}}</label>
+                    </div>
+                    <div>
+                        <form class="flex gap-2">
+                            <div class="flex gap-2 p-2">
+                                <label for="from">From</label>
+                                <input id="from" type="date" name="from">
+                            </div>
+                            <div class="flex gap-2 p-2">
+                                <label for="to">To</label>
+                                <input id="to" type="date" name="to">
+                            </div>
+                            <button type="submit" class="button bg-indigo-600 text-white font-bold p-3">Filter</button>
+                        </form>
+                    </div>
+                </div>
             @if($carts->isNotEmpty())
-
-                <div class="w-full space-y-4 text-black">
-                    <!-- Restaurant Category Card 1 -->
-                    <!-- component -->
-                    <div class="flex flex-col">
-                        <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                            <div class="py-2 inline-block  sm:px-6 lg:px-8">
+                    <div class="flex flex-col w-full">
+                        <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5 w-full">
+                            <div class="py-2 inline-block  sm:px-6 lg:px-8 w-full">
                                 <div class="overflow-hidden">
                                     <table class="w-full">
                                         <thead class="bg-gray-200 border-b">
@@ -50,9 +66,11 @@
                             </div>
                         </div>
                     </div>
-                    {{$carts->links()}}
+{{--                    {{$carts->links()}}--}}
                 </div>
             @endif
+            @error('from') {{$message}} @enderror
+            @error('to') {{$message}} @enderror
         </section>
     </main>
 

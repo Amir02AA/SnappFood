@@ -33,6 +33,7 @@ class CommentController extends Controller
         ]);
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
+        $validated['reply_to'] = $comment->id;
         Comment::create($validated);
         $comment->update(['status' => CommentsStatus::Replied]);
         return redirect()->route('sales.comments.index');

@@ -19,6 +19,6 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
     Route::get('/panel', [AdminController::class, 'panel'])->name('panel');
 
     Route::resource('comments', CommentController::class)->only('index','destroy');
-    Route::get('comments/{comment}/cancel',[CommentController::class,'cancel'])->name('comments.cancel');
+    Route::post('comments/{comment}/cancel',[CommentController::class,'cancel'])->name('comments.cancel');
 });
 Route::redirect('/admin','/admin/panel');

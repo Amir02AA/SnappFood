@@ -16,7 +16,8 @@ class Comment extends Model
         'cart_id',
         'content',
         'score',
-        'status'
+        'status',
+        'reply_to'
     ];
     protected $casts = [
         'status' => CommentsStatus::class
