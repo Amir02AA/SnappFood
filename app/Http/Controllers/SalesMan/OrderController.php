@@ -21,17 +21,20 @@ class OrderController extends Controller
 
     public function archive(SortArchiveRequest $request)
     {
-        $carts = Auth::user()->restaurant->carts()->where('status', OrderStatus::Received);
-        if ($request->anyFilled(['from', 'to']))
-            $carts = SalesHelper::getSortedOrdersByDate(
+        $carts = SalesHelper::getSortedOrdersByDate(
                 $request->validated('from'),
                 $request->validated('to')
-            );
-        $carts = $carts->get();
+            )->get();
         $totalIncome = $carts
             ->sum(function (Cart $cart) {
                 return $cart->total_fee_after_off;
             });
         return view('sales.order.archive', compact('carts', 'totalIncome'));
+    }
+
+    public function cancel(Cart $cart)
+    {
+        $cart->delete();
+        return redirect()->route('sales.dashboard');
     }
 }

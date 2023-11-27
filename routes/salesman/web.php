@@ -25,7 +25,7 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
     Route::delete('food/{food}/party', [PartyController::class, 'destroy'])->name('party.destroy');
 
     Route::get('/{cart}/next', [OrderController::class, 'nextState'])->name('order.next');
-//    Route::delete('/{cart}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+    Route::delete('/{cart}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 
     Route::get('/carts/archive', [OrderController::class, 'archive'])->name('carts.archive');
 

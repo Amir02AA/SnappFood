@@ -2,11 +2,10 @@
 
 @section('content')
     <main class="bg-blue-200 mx-auto flex min-h-screen w-full items-center justify-center text-white px-7">
-        <a href="{{route('sales.dashboard')}}" class="fixed top-3 left-4"> <!-- Home -->
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
-                <path fill="#1f2937" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/>
-            </svg>
+        <a href="{{route('admin.panel')}}" class="fixed top-4 left-4" > <!-- Home -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="#1f2937" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/></svg>
         </a>
+{{--Admin Archive--}}
         <section class="flex w-full flex-col space-y-6 items-center justify-center">
             <div class="text-center text-4xl font-medium text-black w-full">Archive Carts (Orders)</div>
             <div class="w-full space-y-4 text-black flex flex-col items-center justify-center">

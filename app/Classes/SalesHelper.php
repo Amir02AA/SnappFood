@@ -37,15 +37,15 @@ class SalesHelper
 
     }
 
-    public static function getSortedOrdersByDate($from, $to)
+    public static function getSortedOrdersByDate($from, $to, bool $isAdmin = false)
     {
         $to = $to ?? now()->toDateString();
         $from = $from ?? Date::create(2020)->toDateString();
-        $carts = Auth::user()->restaurant->carts()
-            ->where('status','=', OrderStatus::Received)
+        $query = ($isAdmin) ? Cart::query() : Auth::user()->restaurant->carts();
+        $carts = $query
+            ->where('status', '=', OrderStatus::Received)
             ->where('paid_date', '>', $from)
-            ->where('paid_date', '<', $to)
-;
+            ->where('paid_date', '<', $to);
         return $carts;
     }
 }

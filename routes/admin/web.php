@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CommentController;
 use App\Http\Controllers\admin\FoodTierController;
 use App\Http\Controllers\admin\OffCodeController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\RestaurantTierController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,6 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
 
     Route::resource('comments', CommentController::class)->only('index','destroy');
     Route::post('comments/{comment}/cancel',[CommentController::class,'cancel'])->name('comments.cancel');
+    Route::get('/carts/archive', [OrderController::class, 'archive'])->name('carts.archive');
 });
 Route::redirect('/admin','/admin/panel');
