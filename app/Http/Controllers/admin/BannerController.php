@@ -7,5 +7,23 @@ use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
-    //
+    public function index()
+    {
+        
+    }
+
+    public function create()
+    {
+        
+    }
+
+    public function store()
+    {
+        
+    }
+
+    public function destroy()
+    {
+        
+    }
 }
