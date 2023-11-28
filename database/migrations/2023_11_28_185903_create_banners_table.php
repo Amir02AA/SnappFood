@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('comment', function (Blueprint $table) {
-            $table->enum('status',[1,2,3,4])->default(\App\Classes\CommentsStatus::New);
+        Schema::create('banners', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('comment', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('banners');
     }
 };

@@ -36,6 +36,6 @@ class CommentController extends Controller
             : $comments = Restaurant::find($request->validated('restaurant_id'))
                 ->carts()->has('comment')->get()->pluck('comment');
 
-        return response()->json(['comments' => CommentResource::collection($comments)]);
+        return response()->json(['comment' => CommentResource::collection($comments)]);
     }
 }

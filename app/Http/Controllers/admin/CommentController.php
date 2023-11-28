@@ -12,18 +12,18 @@ class CommentController extends Controller
     public function index()
     {
         $comments = Comment::query()->where('status',CommentsStatus::Delete)->get();
-        return view('admin.comments.index',compact('comments'));
+        return view('admin.comment.index',compact('comments'));
     }
 
     public function destroy(Comment $comment)
     {
         $comment->delete();
-        return redirect()->route('admin.comments.index');
+        return redirect()->route('admin.comment.index');
     }
 
     public function cancel(Comment $comment)
     {
         $comment->update(['status' => CommentsStatus::NoReply]);
-        return redirect()->route('admin.comments.index');
+        return redirect()->route('admin.comment.index');
     }
 }

@@ -45,7 +45,7 @@
                 <a href="{{route('sales.settings')}}" class="text-white hover:text-indigo-500">Restaurant Settings</a>
                 <a href="{{route('sales.food.index')}}" class="text-white hover:text-indigo-500">Food</a>
                 <a href="{{route('sales.carts.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
-                <a href="{{route('sales.comments.index')}}" class="text-white hover:text-indigo-500">Comments</a>
+                <a href="{{route('sales.comment.index')}}" class="text-white hover:text-indigo-500">Comments</a>
                 <p class="text-white hover:text-indigo-500">Restaurant : {{\Illuminate\Support\Facades\Auth::user()->restaurant->name}}</p>
 
 

@@ -8,7 +8,7 @@
         <p class="text-cyan-400 font-semibold">{{$comment->score}} / 5</p>
     </div>
     <div class="flex gap-4 w-full">
-        <form method="post" action="{{route('sales.comments.reply',$comment)}}">
+        <form method="post" action="{{route('sales.comment.reply',$comment)}}">
             @csrf
             <textarea name="content" class="text-black" placeholder="reply to comment"></textarea>
             <button class="button bg-blue-400 text-black rounded p-3" type="submit">reply</button>

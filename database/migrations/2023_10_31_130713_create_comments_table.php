@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('comment', function (Blueprint $table) {
             $table->id();
             $table->text('content');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('cart_id')->nullable()->constrained()->cascadeOnDelete();
             $table->unsignedInteger('score')->nullable();
-            $table->foreignId('reply_to')->nullable()->constrained('comments')->cascadeOnDelete();
+            $table->foreignId('reply_to')->nullable()->constrained('comment')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('comment');
     }
 };

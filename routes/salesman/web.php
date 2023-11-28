@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PartyController;
+use App\Http\Controllers\salesman\ChartController;
 use App\Http\Controllers\salesman\CommentController;
 use App\Http\Controllers\salesman\FoodController;
 use App\Http\Controllers\salesman\HomeController;
@@ -30,11 +31,11 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
     Route::get('/carts/archive', [OrderController::class, 'archive'])->name('carts.archive');
 
     Route::controller(CommentController::class)->group(function (){
-        Route::get('/comments', 'index')->name('comments.index');
-        Route::post('/comments/{comment}/reply', 'reply')->name('comments.reply');
-        Route::post('/comments/{comment}/accept', 'accept')->name('comments.accept');
-        Route::post('/comments/{comment}/delete', 'deleteRequest')->name('comments.delete');
+        Route::get('/comment', 'index')->name('comment.index');
+        Route::post('/comment/{comment}/reply', 'reply')->name('comment.reply');
+        Route::post('/comment/{comment}/accept', 'accept')->name('comment.accept');
+        Route::post('/comment/{comment}/delete', 'deleteRequest')->name('comment.delete');
     });
-
+    Route::get('/carts/charts',[ChartController::class,'index'])->name('carts.charts');
 });
 Route::redirect('/sales', 'sales/dashboard');

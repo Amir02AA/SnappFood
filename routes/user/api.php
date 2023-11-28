@@ -15,9 +15,9 @@ Route::middleware(['auth:sanctum','role:customer'])->prefix('/v1')->group(functi
     Route::post('/carts/add',[CartController::class,'store']);
     Route::patch('/carts/add',[CartController::class,'update']);
 
-    //comments
-    Route::get('/comments',[CommentController::class,'index']);
-    Route::post('/comments',[CommentController::class,'store']);
+    //comment
+    Route::get('/comment',[CommentController::class,'index']);
+    Route::post('/comment',[CommentController::class,'store']);
     //endcomment
 
     // Addresses

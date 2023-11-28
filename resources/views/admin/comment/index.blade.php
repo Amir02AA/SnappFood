@@ -14,11 +14,11 @@
                 @foreach($comments as $comment)
                     <div class="bg-blue-900">
                         <p>{{$comment->content}}</p>
-                        <form method="post" action="{{route('admin.comments.destroy',$comment)}}">
+                        <form method="post" action="{{route('admin.comment.destroy',$comment)}}">
                             @csrf @method('delete')
                             <button type="submit">delete comment</button>
                         </form>
-                        <form method="post" action="{{route('admin.comments.cancel',$comment)}}">
+                        <form method="post" action="{{route('admin.comment.cancel',$comment)}}">
                             @csrf
                             <button type="submit">cancel request</button>
                         </form>

@@ -22,6 +22,6 @@ class Replied extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.comments.replied');
+        return view('components.comment.replied');
     }
 }

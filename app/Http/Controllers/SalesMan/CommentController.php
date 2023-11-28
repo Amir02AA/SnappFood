@@ -23,7 +23,7 @@ class CommentController extends Controller
             $comments = CommentHelper::getCommentsByFoodId($request->validated('food_id'));
         }
 
-        return view('sales.comments.index',compact('comments','foods'));
+        return view('sales.comment.index',compact('comments','foods'));
     }
 
     public function reply(StoreReplyRequest $request,Comment $comment)
@@ -36,7 +36,7 @@ class CommentController extends Controller
         $validated['reply_to'] = $comment->id;
         Comment::create($validated);
         $comment->update(['status' => CommentsStatus::Replied]);
-        return redirect()->route('sales.comments.index');
+        return redirect()->route('sales.comment.index');
     }
 
     public function accept(Comment $comment)
@@ -45,7 +45,7 @@ class CommentController extends Controller
             Comment::class,$comment
         ]);
         $comment->update(['status' => CommentsStatus::NoReply]);
-        return redirect()->route('sales.comments.index');
+        return redirect()->route('sales.comment.index');
 
     }
 
@@ -55,6 +55,6 @@ class CommentController extends Controller
             Comment::class,$comment
         ]);
         $comment->update(['status' => CommentsStatus::Delete]);
-        return redirect()->route('sales.comments.index');
+        return redirect()->route('sales.comment.index');
     }
 }

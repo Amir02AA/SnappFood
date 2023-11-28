@@ -8,11 +8,11 @@
         <p class="text-cyan-400 font-semibold">{{$comment->score}} / 5</p>
     </div>
     <div>
-        <form method="post" action="{{route('sales.comments.delete',$comment)}}">
+        <form method="post" action="{{route('sales.comment.delete',$comment)}}">
             @csrf
             <button type="submit">delete</button>
         </form>
-        <form method="post" action="{{route('sales.comments.accept',$comment)}}">
+        <form method="post" action="{{route('sales.comment.accept',$comment)}}">
             @csrf
             <button type="submit">accept</button>
         </form>
