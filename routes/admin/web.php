@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\BannerController;
 use App\Http\Controllers\admin\CommentController;
 use App\Http\Controllers\admin\FoodTierController;
 use App\Http\Controllers\admin\OffCodeController;
@@ -13,9 +14,9 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
         'food' => FoodTierController::class,
         'restaurants' => RestaurantTierController::class
     ]);
-    Route::resource('off', OffCodeController::class)->only([
-        'index', 'show', 'create', 'store', 'destroy'
-    ]);
+    Route::resource('off', OffCodeController::class)->except(['update','edit']);
+
+    Route::resource('banners', BannerController::class)->except(['update','edit','show']);
 
     Route::get('/panel', [AdminController::class, 'panel'])->name('panel');
 
