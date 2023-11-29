@@ -46,8 +46,9 @@
             <div class="w-full space-y-4">
 
                 @foreach($comments as $comment)
-                    @php $component = 'comment.'.strtolower($comment->status->name) @endphp
+                    @php $component = 'comments.'.strtolower($comment->status->name) @endphp
                     <x-dynamic-component :component="$component" :$comment/>
+{{--                    @dd($component)--}}
                 @endforeach
             </div>
         </section>

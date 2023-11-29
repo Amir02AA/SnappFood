@@ -22,6 +22,6 @@ class Delete extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.comment.delete');
+        return view('components.comments.delete');
     }
 }

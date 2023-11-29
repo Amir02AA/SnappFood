@@ -22,6 +22,6 @@ class NewComment extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.comment.new');
+        return view('components.comments.new');
     }
 }

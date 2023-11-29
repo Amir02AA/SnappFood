@@ -23,7 +23,7 @@ class CommentController extends Controller
             $comments = CommentHelper::getCommentsByFoodId($request->validated('food_id'));
         }
 
-        return view('sales.comment.index',compact('comments','foods'));
+        return view('sales.comments.index',compact('comments','foods'));
     }
 
     public function reply(StoreReplyRequest $request,Comment $comment)

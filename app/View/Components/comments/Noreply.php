@@ -22,6 +22,6 @@ class Noreply extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.comment.noreply');
+        return view('components.comments.noreply');
     }
 }
