@@ -21,9 +21,10 @@ class StoreBannerRequesat extends FormRequest
      */
     public function rules(): array
     {
+//        $this->dd('image');
         return [
             'content' => ['bail','required','string','between:5,30'],
-            'image' => ['bail','required','image','lte:3000']
+            'image' => ['bail','required','image','max:3000']
         ];
     }
 }

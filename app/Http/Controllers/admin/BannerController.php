@@ -22,7 +22,7 @@ class BannerController extends Controller
 
     public function store(StoreBannerRequesat $request)
     {
-        Banner::create($request->validated);
+        Banner::create($request->validated());
         return redirect()->route('admin.banners.index');
     }
 

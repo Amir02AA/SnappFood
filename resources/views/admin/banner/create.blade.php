@@ -13,22 +13,31 @@
             <div class="text-center text-4xl font-medium text-white">Add Banner</div>
 
             <!-- Form to add food -->
-            <form action="{{route('admin.banners.store')}}" method="post" class="space-y-6">
+            <form action="{{route('admin.banners.store')}}" method="post" class="space-y-6" enctype="multipart/form-data">
                 @csrf
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
-                    <input type="text" name="content" placeholder="content" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
+                    <input type="text" name="content" placeholder="content" class="w-full border-none bg-transparent
+                    outline-none placeholder-italic focus:outline-none text-white">
                 </div>
+
                 @error('content') {{$message}} @enderror
+
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                        for="file_input">Upload Background Image</label>
+
                 <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer
-                        bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                       id="file_input" type="file">
+                        bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600
+                        dark:placeholder-gray-400"
+                       id="file_input" type="file" name="image">
+
                 @error('image') {{$message}} @enderror
 
 
                 <div class="w-full">
-                    <button type="submit" class="w-full transform rounded-sm bg-pink-600 py-2 font-bold duration-300 hover:bg-pink-400"> Add </button>
+                    <button type="submit"
+                            class="w-full transform rounded-sm bg-pink-600 py-2 font-bold duration-300 hover:bg-pink-400">
+                        Add
+                    </button>
                 </div>
             </form>
         </section>
