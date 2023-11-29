@@ -6,27 +6,19 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="#1f2937" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/></svg>
         </a>
 
-        <a href="{{route('admin.off.create')}}" class="fixed top-4 right-4"> <!-- Add -->
+        <a href="{{route('admin.banners.create')}}" class="fixed top-4 right-4"> <!-- Add -->
             <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 20 20"><path fill="#1f2937" d="M11 9V5H9v4H5v2h4v4h2v-4h4V9h-4zm-1 11a10 10 0 1 1 0-20a10 10 0 0 1 0 20z"/></svg>            </svg>
         </a>
         <section class="flex w-[30rem] flex-col space-y-6">
-            <div class="text-center text-4xl font-medium text-black">Off Codes</div>
+            <div class="text-center text-4xl font-medium text-black">Banners</div>
 
             <div class="w-full space-y-4">
-                @foreach($offs as $off)
+                @foreach($banners as $banner)
                     <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
-                        <div class="text-lg font-semibold">{{$off->percent}}</div>
+                        <div class="text-lg font-semibold">{{$banner->content}}</div>
                         <div class="flex flex-row items-center justify-between gap-2">
 
-                            <a href="{{route('admin.off.show',$off)}}"
-                               class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                                     stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                          d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
-                            <form method="post" action="{{route('admin.off.destroy',$off)}}">
+                            <form method="post" action="{{route('admin.banner.destroy',$banner)}}">
                                 @csrf @method('delete')
                                 <button type="submit"
                                         class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">
@@ -39,7 +31,7 @@
                         </div>
                     </div>
                 @endforeach
-                {{$offs->links()}}
+                {{$banners->links()}}
             </div>
         </section>
     </main>
