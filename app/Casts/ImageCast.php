@@ -4,6 +4,7 @@ namespace App\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ImageCast implements CastsAttributes
 {
@@ -24,7 +25,6 @@ class ImageCast implements CastsAttributes
      */
     public function set(Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        request()->file('image')->store();
-        return $value;
+        return request()?->file('image')?->store(options: ['disk'=>'images']);
     }
 }

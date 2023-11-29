@@ -23,7 +23,7 @@ class StoreBannerRequesat extends FormRequest
     {
         return [
             'content' => ['bail','required','string','between:5,30'],
-            'image' => ['bail','required','string','between:3,100']
+            'image' => ['bail','required','image','lte:3000']
         ];
     }
 }
