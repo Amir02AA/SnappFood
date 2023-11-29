@@ -13,7 +13,7 @@
                                 <div class="w-full  text-lg duration-300 focus-within:border-indigo-500">
                                     <select id="food_id" name="food_id"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="">Choose a Tier</option>
+                                        <option value="">Choose a Food</option>
                                         @foreach($foods as $food)
                                             <option value="{{$food->id}}">{{$food->name}}</option>
                                         @endforeach
@@ -36,19 +36,22 @@
 
             </div>
         </aside>
+
         <a href="{{route('sales.dashboard')}}" class="fixed top-4 left-4">
             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24">
                 <path fill="#1f2937" d="M10 20v-6h4v6h5v-8h3L12 3L2 12h3v8z"/>
             </svg>
         </a>
+
+
         <section class="flex w-[30rem] flex-col space-y-6">
             <div class="text-center text-4xl font-medium text-black">Comments</div>
-            <div class="w-full space-y-4">
+
+            <div class="w-3/4 space-y-4 flex justify-center items-center mx-auto">
 
                 @foreach($comments as $comment)
                     @php $component = 'comments.'.strtolower($comment->status->name) @endphp
                     <x-dynamic-component :component="$component" :$comment/>
-{{--                    @dd($component)--}}
                 @endforeach
             </div>
         </section>

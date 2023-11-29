@@ -1,11 +1,13 @@
 @extends('layout.main')
-
+@php
+$banner = \App\Models\Banner::query()->inRandomOrder()->first();
+@endphp
 @section('content')
     <main class="min-h-screen bg-gray-900 text-white">
         <aside id="default-sidebar"
                class="fixed top-0 right-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
                aria-label="Sidebar">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col gap-3 justify-between">
                 <form method="get">
                     <ul class="space-y-3 font-medium">
                         <li>
@@ -13,7 +15,7 @@
                                 <div class="w-full  text-lg duration-300 focus-within:border-indigo-500">
                                     <select id="food_id" name="status"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <option value="">Choose a Tier</option>
+                                        <option value="">Choose a Status</option>
                                         <option value="1">waiting</option>
                                         <option value="2">accepted</option>
                                         <option value="3">processing</option>
@@ -33,8 +35,11 @@
                         </li>
                     </ul>
                 </form>
-
+                <div>
+                    <img src="{{asset('images/'.$banner->image)}}" alt="banner"/>
+                </div>
             </div>
+
         </aside>
         <section class="flex">
             <!-- Navbar -->
