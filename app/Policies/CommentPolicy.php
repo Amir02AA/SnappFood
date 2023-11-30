@@ -12,7 +12,7 @@ class CommentPolicy
     public function create(User $user , $cartId): bool
     {
         $cart = Cart::find($cartId);
-        return $user->carts->where('paid_date','!=',null)->contains($cartId) && !$cart->comment;
+        return $user->carts->where('paid_date','!=',null)->doesntHave('comment')->contains($cartId) && !$cart->comment;
     }
 
     public function changeStatus(User $user,Comment $comment)
