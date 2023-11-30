@@ -8,6 +8,7 @@ use App\Http\Requests\api\GetRestaurantsRequest;
 use App\Http\Resources\restaurant\FoodResource;
 use App\Http\Resources\restaurant\RestaurantResource;
 use App\Models\Restaurant;
+use http\Env\Response;
 use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
@@ -15,9 +16,11 @@ class RestaurantController extends Controller
     public function index(GetRestaurantsRequest $request)
     {
         $validated = $request->validated();
-        $restaurants = UserHelper::getSortedRestaurants(@$validated['is_open'], @$validated['type']);
+        $restaurants = UserHelper::getSortedRestaurantsQuery(@$validated['is_open'], @$validated['type']);
+        $restaurants = UserHelper::getNearRestaurantsQuery($restaurants,30);
+        if (!$restaurants) return \response()->json(['massage' => 'not found'],404);
         return response()->json([
-            'restaurants' => RestaurantResource::collection($restaurants)
+            'restaurants' => RestaurantResource::collection($restaurants->get())
         ]);
     }
 

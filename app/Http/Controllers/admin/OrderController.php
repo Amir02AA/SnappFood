@@ -25,4 +25,9 @@ class OrderController extends Controller
             });
         return view('admin.order.archive', compact('carts', 'totalIncome'));
     }
+
+    public function show(Cart $cart)
+    {
+        return view('admin.order.show',compact('cart'));
+    }
 }

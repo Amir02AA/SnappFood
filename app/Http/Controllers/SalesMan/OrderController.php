@@ -37,4 +37,11 @@ class OrderController extends Controller
         $cart->delete();
         return redirect()->route('sales.dashboard');
     }
+
+    public function show(Cart $cart)
+    {
+        if ($cart->restaurant->isNot(Auth::user()->restaurant)) return redirect()->route('sales.order.archive');
+
+        return view('sales.order.show',compact('cart'));
+    }
 }

@@ -49,6 +49,9 @@
                                                 class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                 Paid Date
                                             </th>
+                                            <th scope="col"
+                                                class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -62,6 +65,11 @@
                                                 </td>
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     {{$cart->paid_date}}
+                                                </td>
+                                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <a href="{{route('sales.carts.show',$cart)}}">
+                                                        Details
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

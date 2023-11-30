@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources\restaurant;
 
-use App\Http\Resources\restaurant\AddressResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RestaurantResource extends JsonResource
+class AddressResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +15,9 @@ class RestaurantResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'restaurant name' => $this->name,
-            'type' => $this->tiers->pluck('name'),
-            'address' => new AddressResource($this->address),
-            'is_open' => $this->is_open
+            'title' => $this->name,
+            'lang' => $this->lang,
+            'long' => $this->long,
         ];
     }
 }

@@ -37,5 +37,6 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
         Route::post('/comment/{comment}/delete', 'deleteRequest')->name('comment.delete');
     });
     Route::get('/carts/charts',[ChartController::class,'index'])->name('carts.charts');
+    Route::get('/carts/{cart}',[OrderController::class,'show'])->name('carts.show');
 });
 Route::redirect('/sales', 'sales/dashboard');
