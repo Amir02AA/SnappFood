@@ -72,8 +72,9 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                     <div class="w-1/2 bg-gray-800 rounded-lg p-4 flex items-center justify-between">
 
                             <div>
-{{--                                <div class="text-lg font-semibold">{{$cart->id}}</div>--}}
-                                <div class="text-sm font-semibold">{{$cart->paid_date}}</div>
+                                <div class="text-lg font-semibold">Bought by: {{$cart->user->name}}</div>
+                                <div class="text-sm font-semibold">Paid at: {{$cart->paid_date}}</div>
+                                <div class="text-sm font-semibold">Total: {{$cart->total_fee_after_off}} T</div>
                                 <div class="text-sm font-semibold">{{$cart->status->name}}</div>
                             </div>
                             <div class="flex flex-row items-center justify-between gap-2">
