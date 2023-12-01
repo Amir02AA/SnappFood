@@ -21,7 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return CartResource::collection(Auth::user()->carts);
+        return CartResource::collection(Auth::user()->carts()->where('paid_date',null)->get());
     }
 
     /**

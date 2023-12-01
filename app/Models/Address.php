@@ -14,10 +14,7 @@ class Address extends Model
         'lang', 'long', 'name', 'vahed', 'address', 'is_selected'
     ];
 
-    protected function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+
 
     public function addressable()
     {

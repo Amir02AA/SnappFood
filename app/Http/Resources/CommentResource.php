@@ -18,6 +18,7 @@ class CommentResource extends JsonResource
             'author' => $this->user->name,
             'food' => $this->cart->food->pluck('name'),
             'content' => $this->content,
+            'commented_at' => $this->created_at
         ];
     }
 }

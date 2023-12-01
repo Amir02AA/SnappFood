@@ -19,7 +19,7 @@ class CommentController extends Controller
         $foods = Auth::user()->restaurant->food;
         $comments = Auth::user()->restaurant->comments();
         if ($request->validated('food_id')) {
-            $this->authorize('viewFiltered', [Comment::class, $request->validated('food_id')]);
+            $this->authorize('view-filtered', [Comment::class, $request->validated('food_id')]);
             $comments = CommentHelper::getCommentsByFoodId($request->validated('food_id'));
         }
         return view('sales.comments.index', compact('comments', 'foods'));

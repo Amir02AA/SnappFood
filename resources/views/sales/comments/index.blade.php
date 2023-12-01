@@ -47,7 +47,7 @@
         <section class="flex w-[30rem] flex-col space-y-6">
             <div class="text-center text-4xl font-medium text-black">Comments</div>
 
-            <div class="w-3/4 space-y-4 flex justify-center items-center mx-auto">
+            <div class="w-3/4 space-y-4 flex justify-center items-center mx-auto gap-5">
 
                 @foreach($comments as $comment)
                     @php $component = 'comments.'.strtolower($comment->status->name) @endphp

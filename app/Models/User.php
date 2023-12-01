@@ -63,7 +63,7 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    protected function carts()
+    public function carts()
     {
         return $this->hasMany(Cart::class);
     }
