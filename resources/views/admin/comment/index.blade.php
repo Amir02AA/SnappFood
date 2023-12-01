@@ -9,18 +9,18 @@
         </a>
         <section class="flex w-[30rem] flex-col space-y-6">
             <div class="text-center text-4xl font-medium text-black">Comments Delete Requests</div>
-            <div class="w-full space-y-4">
+            <div class="w-full space-y-4 flex">
 
                 @foreach($comments as $comment)
-                    <div class="bg-blue-900">
+                    <div class="bg-gray-800 rounded-lg p-4 flex flex-col gap-2 w-80 ">
                         <p>{{$comment->content}}</p>
                         <form method="post" action="{{route('admin.comment.destroy',$comment)}}">
                             @csrf @method('delete')
-                            <button type="submit">delete comment</button>
+                            <button class="button bg-red-500 text-white font-bold px-2 py-1 rounded-3xl" type="submit">delete comment</button>
                         </form>
                         <form method="post" action="{{route('admin.comment.cancel',$comment)}}">
                             @csrf
-                            <button type="submit">cancel request</button>
+                            <button class="button bg-green-500 text-white font-bold px-2 py-1 rounded-3xl" type="submit">cancel request</button>
                         </form>
                     </div>
                 @endforeach
