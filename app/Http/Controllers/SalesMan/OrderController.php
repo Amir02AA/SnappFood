@@ -24,11 +24,9 @@ class OrderController extends Controller
         $carts = SalesHelper::getSortedOrdersByDate(
                 $request->validated('from'),
                 $request->validated('to')
-            )->get();
-        $totalIncome = $carts
-            ->sum(function (Cart $cart) {
-                return $cart->total_fee_after_off;
-            });
+            );
+        $totalIncome = $carts->get()->sum(function (Cart $cart) {return $cart->total_fee_after_off;});
+        $carts = $carts->paginate(5);
         return view('sales.order.archive', compact('carts', 'totalIncome'));
     }
 

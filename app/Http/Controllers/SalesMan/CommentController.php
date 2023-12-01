@@ -18,18 +18,17 @@ class CommentController extends Controller
     {
         $foods = Auth::user()->restaurant->food;
         $comments = Auth::user()->restaurant->comments();
-
-        if ($request->validated('food_id')){
+        if ($request->validated('food_id')) {
+            $this->authorize('viewFiltered', [Comment::class, $request->validated('food_id')]);
             $comments = CommentHelper::getCommentsByFoodId($request->validated('food_id'));
         }
-
-        return view('sales.comments.index',compact('comments','foods'));
+        return view('sales.comments.index', compact('comments', 'foods'));
     }
 
-    public function reply(StoreReplyRequest $request,Comment $comment)
+    public function reply(StoreReplyRequest $request, Comment $comment)
     {
         $this->authorize('changeStatus', [
-            Comment::class,$comment
+            Comment::class, $comment
         ]);
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
@@ -42,7 +41,7 @@ class CommentController extends Controller
     public function accept(Comment $comment)
     {
         $this->authorize('changeStatus', [
-            Comment::class,$comment
+            Comment::class, $comment
         ]);
         $comment->update(['status' => CommentsStatus::NoReply]);
         return redirect()->route('sales.comment.index');
@@ -52,7 +51,7 @@ class CommentController extends Controller
     public function deleteRequest(Comment $comment)
     {
         $this->authorize('changeStatus', [
-            Comment::class,$comment
+            Comment::class, $comment
         ]);
         $comment->update(['status' => CommentsStatus::Delete]);
         return redirect()->route('sales.comment.index');

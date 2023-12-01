@@ -13,7 +13,7 @@
                 <div class="px-9 w-full flex justify-between">
                     <div class="flex-col flex">
                         <label>Total Income : {{$totalIncome}} T</label>
-                        <label>Carts Count : {{$carts->count()}}</label>
+                        <label>Carts Count : {{$carts->total()}}</label>
                     </div>
                     <div>
                         <form class="flex gap-2">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-{{--                    {{$carts->links()}}--}}
+                    {{$carts->links()}}
                 </div>
             @endif
             @error('from') {{$message}} @enderror
