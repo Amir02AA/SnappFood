@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('content');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('cart_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->nullable()->constrained()->cascadeOnDelete();
             $table->unsignedInteger('score')->nullable();
             $table->foreignId('reply_to')->nullable()->constrained('comment')->cascadeOnDelete();
             $table->timestamps();

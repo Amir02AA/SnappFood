@@ -19,11 +19,11 @@ class Cart extends Model
         'total_off',
         'total_fee_after_off'
     ];
-    protected $casts = [
-        'status' => OrderStatus::class
-    ];
 
-    protected $fillable = ['user_id', 'restaurant_id', 'paid_date', 'status', 'address_id', 'off_code_id'];
+    protected $fillable = [
+        'user_id', 'restaurant_id',
+        'address_id', 'off_code_id'
+    ];
 
 
     public function user()
@@ -48,11 +48,6 @@ class Cart extends Model
             'user_id' => Auth::id(),
             'paid_date' => null
         ]);
-    }
-
-    public function comment()
-    {
-        return $this->hasOne(Comment::class);
     }
 
     public function nextStep()

@@ -38,8 +38,8 @@ class Comment extends Model
         return $this->hasOne(Comment::class,'reply_to');
     }
 
-    public function cart()
+    public function order()
     {
-        return $this->belongsTo(Cart::class);
+        return $this->belongsTo(Order::class);
     }
 }
