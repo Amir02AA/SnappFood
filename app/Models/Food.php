@@ -26,6 +26,10 @@ class Food extends Model
     {
         return $this->belongsToMany(Cart::class)->withPivot('count');
     }
+    public function orders(): BelongsToMany
+    {
+        return $this->belongsToMany(Order::class)->withPivot('count');
+    }
 
     protected function restaurant(): BelongsTo
     {
