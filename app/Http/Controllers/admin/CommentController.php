@@ -11,7 +11,7 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $comments = Comment::query()->where('status',CommentsStatus::Delete)->get();
+        $comments = Comment::query()->where('status',CommentsStatus::Delete)->paginate(5);
         return view('admin.comment.index',compact('comments'));
     }
 

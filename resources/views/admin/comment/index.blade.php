@@ -25,6 +25,7 @@
                     </div>
                 @endforeach
             </div>
+            {{$comments->links()}}
         </section>
     </main>
 @endsection

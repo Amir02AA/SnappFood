@@ -93,8 +93,7 @@ class CartController extends Controller
             'off_code_id' => $offCode?->id,
             'status' => OrderStatus::Wait
         ]);
-        CartPaid::dispatch($cart);
-
+//        CartPaid::dispatch($cart);
         return response()->json([
             'massage' => 'thanks for your money',
             'data' => new CartResource($cart)
