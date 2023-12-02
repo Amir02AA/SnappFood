@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('address_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('off_code_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

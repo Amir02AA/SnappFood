@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('send_cost');
             $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('address_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });
