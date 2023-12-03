@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Comment;
 use App\Models\User;
+use App\Policies\AddressPolicy;
 use App\Policies\CartPolicy;
 use App\Policies\CommentPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -20,7 +22,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Comment::class => CommentPolicy::class,
-        Cart::class => CartPolicy::class
+        Cart::class => CartPolicy::class,
+        Address::class => AddressPolicy::class
     ];
 
     /**
