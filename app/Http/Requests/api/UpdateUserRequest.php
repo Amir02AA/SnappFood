@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\api;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
-class StoreUserRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,8 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['bail','required','string','unique:users','between:3,20'],
-            'email' =>  ['bail','required','email','unique:users','between:3,50'],
-            'phone' =>  ['bail','required','string','unique:users'],
+            'name' => ['bail','string','unique:users','between:3,20'],
+            'phone' =>  ['bail','string','unique:users'],
             'password' =>  [Password::defaults(),'confirmed'],
         ];
     }

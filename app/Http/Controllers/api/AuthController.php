@@ -35,5 +35,4 @@ class AuthController extends Controller
             'massage' => 'logged Out'
         ]);
     }
-
 }
