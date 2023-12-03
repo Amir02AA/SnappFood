@@ -21,7 +21,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        return CartResource::collection(Auth::user()->carts);
+        $carts = Auth::user()->carts;
+        if ($carts->isEmpty()) return response()->json(['massage' => 'there is no carts'], 404);
+        return CartResource::collection($carts);
     }
 
     /**
@@ -56,10 +58,16 @@ class CartController extends Controller
     {
         $food = Food::query()->find($request->validated('food_id'));
         $cart = Cart::relatedCart($food->restaurant_id)->first();
-        $cart?->food()->updateExistingPivot($food->id, ['count' => $request->validated('count')]);
+        if (!$cart)
+            return response()->json(['massage' => 'you must add your item to a new cart'], 404);
+        $cart->food()->updateExistingPivot($food->id, ['count' => $request->validated('count')]);
 
-        if ((int)$request->validated('count') === 0) $cart->food()->detach($request->validated('food_id'));
-        if (!$cart) return response()->json(['massage' => 'you must add your item to a new cart'], 404);
+        if ((int)$request->validated('count') === 0)
+            $cart->food()->detach($request->validated('food_id'));
+
+        if (!UserHelper::afterCartUpdateCheck($cart))
+            return response()->json(['massage' => 'cart deleted', 'cart_id' => $cart->id]);
+
         return response()->json(['massage' => 'cart updated', 'cart' => new CartResource($cart)], 422);
     }
 

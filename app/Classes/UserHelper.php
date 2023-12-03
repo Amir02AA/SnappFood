@@ -69,4 +69,13 @@ class UserHelper
             ['count' => $count + $cart->food()->find($foodId)?->pivot->count]
         );
     }
+
+    public static function afterCartUpdateCheck(Cart $cart): bool
+    {
+        if ($cart->food->isEmpty()) {
+            $cart->delete();
+            return false;
+        }
+        return true;
+    }
 }
