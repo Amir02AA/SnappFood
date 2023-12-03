@@ -23,7 +23,7 @@ return new class extends Migration {
     public function down(): void
     {
         foreach (Schema::getAllTables() as $table) {
-            Schema::table($table, function (Blueprint $blueprint) {
+            Schema::table($table->Tables_in_final_project, function (Blueprint $blueprint) {
                 $blueprint->dropSoftDeletes();
             });
         }

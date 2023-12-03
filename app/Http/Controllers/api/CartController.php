@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Classes\OrderStatus;
+use App\Classes\UserHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\PayRequest;
 use App\Http\Requests\api\StoreCartRequest;
 use App\Http\Requests\api\UpdateCartRequest;
 use App\Http\Resources\CartResource;
+use App\Http\Resources\OrderResource;
 use App\Models\Cart;
 use App\Models\Food;
 use App\Models\OffCode;
-use App\Models\Order;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -22,7 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return CartResource::collection(Auth::user()->carts()->where('paid_date', null)->get());
+        return CartResource::collection(Auth::user()->carts);
     }
 
     /**
@@ -31,22 +30,13 @@ class CartController extends Controller
     public function store(StoreCartRequest $request)
     {
         $food = Food::query()->find($request->validated('food_id'));
-        $restaurantId = $food->restaurant_id;
-        $count = $request->validated('count');
-
-        $cart = Cart::relatedCart($restaurantId)->get()->first();
-
-        $cart = (!$cart) ? Cart::create([
+        $cart = Cart::relatedCart($food->restaurant_id)->firstOrCreate([
             'user_id' => Auth::id(),
-            'restaurant_id' => $restaurantId,
-        ]) : $cart;
-
-        $cart->food()->attach($food->id, ['count' => $count]);
-
-        return response()->json([
-            'cart' => new CartResource($cart),
-        ], 201);
-
+            'restaurant_id' => $food->restaurant_id,
+            'address_id' => Auth::user()->current_address->id
+        ]);
+        $cart->food()->attach($food->id, ['count' => $request->validated('count')]);
+        return response()->json(['cart' => new CartResource($cart),], 201);
     }
 
     /**
@@ -54,6 +44,7 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
+        $this->authorize('view', [Cart::class, $cart]);
         return response()->json(['cart' => new CartResource($cart)]);
     }
 
@@ -67,46 +58,22 @@ class CartController extends Controller
         $cart = Cart::relatedCart($food->restaurant_id)->get()->first();
         $cart?->food()->updateExistingPivot($food->id, ['count' => $count,]);
 
-        return (!$cart) ?
-            response()->json([
-                'massage' => 'you must add your item to a new cart'
-            ])
-            : response()->json([
-                'massage' => 'updated',
-                'cart' => new CartResource($cart)
-            ], 422);
+        if (!$cart) return response()->json(['massage' => 'you must add your item to a new cart'], 404);
+        return response()->json(['massage' => 'cart updated', 'cart' => new CartResource($cart)], 422);
     }
 
 
     public function pay(Cart $cart, PayRequest $request)
     {
-        $this->authorize('pay',Cart::class);
+        $this->authorize('pay', Cart::class);
         $offCode = OffCode::query()->where('code', $request->get('code'))->first();
-
-        $cart->update([
-            'off_code_id' => $offCode?->id,
-            'status' => OrderStatus::Wait
-        ]);
-
-        $order = Order::query()->create([
-            'user_id' => $cart->user_id,
-            'restaurant_id' => $cart->restaurant_id,
-            'address_id' => $cart->address_id,
-            'total_price' => $cart->total_fee,
-            'total_discount' => $cart->total_off,
-            'send_cost' => $cart->restaurant->send_cost
-        ]);
-
-        $cart->food->map(function (Food $food) use ($order) {
-            $order->food()->attach($food->id, ['count' => $food->pivot->count]);
-        });
-        $cart->food()->detach();
-
+        $cart->update(['off_code_id' => $offCode?->id,]);
+        $order = UserHelper::createOrderForCart($cart);
         $cart->delete();
 //        CartPaid::dispatch($cart);
         return response()->json([
             'massage' => 'thanks for your money',
-            'data' => new CartResource($cart)
+            'data' => new OrderResource($order)
         ]);
     }
 }

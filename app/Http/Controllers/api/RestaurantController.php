@@ -15,6 +15,7 @@ class RestaurantController extends Controller
 {
     public function index(GetRestaurantsRequest $request)
     {
+        $this->authorize('viewAny',Restaurant::class);
         $validated = $request->validated();
         $restaurants = UserHelper::getSortedRestaurantsQuery(@$validated['is_open'], @$validated['type']);
         $restaurants = UserHelper::getNearRestaurantsQuery($restaurants,30);

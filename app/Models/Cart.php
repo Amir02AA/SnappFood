@@ -49,8 +49,6 @@ class Cart extends Model
         ]);
     }
 
-
-
     public function totalFee(): Attribute
     {
         return Attribute::make(

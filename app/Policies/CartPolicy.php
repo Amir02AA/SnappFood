@@ -14,4 +14,9 @@ class CartPolicy
     {
         return $user->currentAddress;
     }
+
+    public function view(User $user, Cart $cart)
+    {
+        return $user->carts->contains($cart);
+    }
 }

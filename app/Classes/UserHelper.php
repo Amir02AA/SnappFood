@@ -2,6 +2,9 @@
 
 namespace App\Classes;
 
+use App\Models\Cart;
+use App\Models\Food;
+use App\Models\Order;
 use App\Models\Restaurant;
 use App\Models\RestaurantTier;
 use Illuminate\Database\Eloquent\Builder;
@@ -34,10 +37,27 @@ class UserHelper
 
         $userAddress = Auth::user()->current_address;
         return $restaurants->has('address')->whereRelation('address', [
-            ['lang', '<=', $userAddress->lang + $radios],
-            ['lang', '>=', $userAddress->lang - $radios],
-            ['long', '<=', $userAddress->long + $radios],
-            ['long', '>=', $userAddress->long - $radios],
+            ['lang', '<=', $userAddress?->lang + $radios],
+            ['lang', '>=', $userAddress?->lang - $radios],
+            ['long', '<=', $userAddress?->long + $radios],
+            ['long', '>=', $userAddress?->long - $radios],
         ]);
+    }
+
+    public static function createOrderForCart(Cart $cart)
+    {
+        $order = Order::query()->create([
+            'user_id' => $cart->user_id,
+            'restaurant_id' => $cart->restaurant_id,
+            'address_id' => $cart->address_id,
+            'total_price' => $cart->total_fee,
+            'total_discount' => $cart->total_off,
+            'send_cost' => $cart->restaurant->send_cost
+        ]);
+        $cart->food->map(function (Food $food) use ($order) {
+            $order->food()->attach($food->id, ['count' => $food->pivot->count]);
+        });
+        $cart->food()->detach();
+        return $order;
     }
 }
