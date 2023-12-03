@@ -17,11 +17,12 @@ class CartPolicy
             Response::allow()
             : Response::deny('You must select an address');
     }
-    public function pay(User $user)
+
+    public function pay(User $user, Cart $cart)
     {
-        return ($user->current_address) ?
+        return ($user->carts->contains($cart)) ?
             Response::allow()
-            : Response::deny('You must select an address');
+            : Response::deny('You dont own the cart');
     }
 
     public function view(User $user, Cart $cart)

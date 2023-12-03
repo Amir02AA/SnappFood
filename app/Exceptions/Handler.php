@@ -30,10 +30,17 @@ class Handler extends ExceptionHandler
             //
         });
 
-        $this->renderable(function (NotFoundHttpException|AccessDeniedHttpException $exception, Request $request) {
+        $this->renderable(function (AccessDeniedHttpException $exception, Request $request) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'msg' => $exception->getMessage(),
+                ], $exception->getStatusCode());
+            }
+        });
+        $this->renderable(function (NotFoundHttpException $exception, Request $request) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'msg' => 'not found',
                 ], $exception->getStatusCode());
             }
         });

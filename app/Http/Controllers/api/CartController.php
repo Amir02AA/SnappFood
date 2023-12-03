@@ -74,7 +74,7 @@ class CartController extends Controller
 
     public function pay(Cart $cart, PayRequest $request)
     {
-        $this->authorize('pay', Cart::class);
+        $this->authorize('pay', [Cart::class, $cart]);
         $offCode = OffCode::query()->where('code', $request->get('code'))->first();
         $cart->update(['off_code_id' => $offCode?->id,]);
         $order = UserHelper::createOrderForCart($cart);
