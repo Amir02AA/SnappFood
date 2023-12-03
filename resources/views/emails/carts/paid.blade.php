@@ -1,8 +1,8 @@
 <x-mail::message>
 # Introduction
 
-Dear {{$cart->user->name}} Your cart has been paid. Please Wait til your order is ready for you.
-    Cart id : {{$cart->id}}
+Dear {{$order->user->name}} Your order has been paid. Please Wait til your order is ready for you.
+    Cart id : {{$order->id}}
 <x-mail::button :url="''">
 Button Text
 </x-mail::button>

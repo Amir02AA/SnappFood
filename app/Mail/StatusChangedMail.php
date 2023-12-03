@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -19,7 +20,7 @@ class statusChangedMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public Cart $cart)
+    public function __construct(public Order $order)
     {
         //
     }
