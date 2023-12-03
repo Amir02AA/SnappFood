@@ -10,6 +10,7 @@ use App\Models\RestaurantTier;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserHelper
 {
@@ -59,5 +60,13 @@ class UserHelper
         });
         $cart->food()->detach();
         return $order->refresh();
+    }
+
+    public static function cartFoodPivotUpdate(Cart $cart, int $foodId, int $count)
+    {
+        DB::table('cart_food')->updateOrInsert(
+            ['cart_id' => $cart->id, 'food_id' => $foodId],
+            ['count' => $count + $cart->food()->find($foodId)?->pivot->count]
+        );
     }
 }

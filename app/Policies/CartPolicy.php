@@ -11,6 +11,12 @@ class CartPolicy
     /**
      * Create a new policy instance.
      */
+    public function create(User $user)
+    {
+        return ($user->current_address) ?
+            Response::allow()
+            : Response::deny('You must select an address');
+    }
     public function pay(User $user)
     {
         return ($user->current_address) ?

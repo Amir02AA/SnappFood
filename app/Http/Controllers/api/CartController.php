@@ -29,13 +29,14 @@ class CartController extends Controller
      */
     public function store(StoreCartRequest $request)
     {
+        $this->authorize('create', Cart::class);
         $food = Food::query()->find($request->validated('food_id'));
         $cart = Cart::relatedCart($food->restaurant_id)->firstOrCreate([
             'user_id' => Auth::id(),
             'restaurant_id' => $food->restaurant_id,
             'address_id' => Auth::user()->current_address->id
         ]);
-        $cart->food()->attach($food->id, ['count' => $request->validated('count')]);
+        UserHelper::cartFoodPivotUpdate($cart, $food->id, $request->validated('count'));
         return response()->json(['cart' => new CartResource($cart),], 201);
     }
 
