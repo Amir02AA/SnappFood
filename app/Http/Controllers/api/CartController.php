@@ -55,10 +55,10 @@ class CartController extends Controller
     public function update(UpdateCartRequest $request)
     {
         $food = Food::query()->find($request->validated('food_id'));
-        $count = $request->validated('count');
-        $cart = Cart::relatedCart($food->restaurant_id)->get()->first();
-        $cart?->food()->updateExistingPivot($food->id, ['count' => $count,]);
+        $cart = Cart::relatedCart($food->restaurant_id)->first();
+        $cart?->food()->updateExistingPivot($food->id, ['count' => $request->validated('count')]);
 
+        if ((int)$request->validated('count') === 0) $cart->food()->detach($request->validated('food_id'));
         if (!$cart) return response()->json(['massage' => 'you must add your item to a new cart'], 404);
         return response()->json(['massage' => 'cart updated', 'cart' => new CartResource($cart)], 422);
     }

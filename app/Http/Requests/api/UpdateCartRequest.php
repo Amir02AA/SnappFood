@@ -19,18 +19,12 @@ class UpdateCartRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    protected function prepareForValidation()
-    {
-        $this->mergeIfMissing([
-            'count' => 1
-        ]);
-    }
 
     public function rules(): array
     {
         return [
             'food_id' => ['required', 'exists:food,id'],
-            'count' => ['required', 'numeric', 'between:1,20']
+            'count' => ['required', 'numeric', 'between:0,20']
         ];
     }
 }
