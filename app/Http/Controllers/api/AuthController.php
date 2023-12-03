@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -14,26 +14,25 @@ class AuthController extends Controller
     {
         $user = User::create($request->validated());
         return response()->json([
-            'msg' => 'user created',
+            'massage' => 'user created',
             'token' => $user->createToken('auth')->plainTextToken
-        ],201);
+        ], 201);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        return (Auth::attempt($request->validate([
-            'email' => ['required','email'],
-            'password' => ['required','string']
-        ]))) ?
-            response()->json(['token' => Auth::user()->createToken('auth')->plainTextToken])
-            : response()->json(['msg'=>'wrong credentials'],401);
+        if (!Auth::attempt($request->validated())) return response()->json(['msg' => 'wrong credentials'], 401);
+
+        Auth::user()->tokens()->delete();
+        $token = Auth::user()->createToken('auth')->plainTextToken;
+        return response()->json(['massage' => 'welcome', 'token' => $token]);
     }
 
     public function logout()
     {
         Auth::user()->currentAccessToken()->delete();
         return response()->json([
-            'msg' => 'logged Out'
+            'massage' => 'logged Out'
         ]);
     }
 
