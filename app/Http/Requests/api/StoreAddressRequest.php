@@ -2,7 +2,11 @@
 
 namespace App\Http\Requests\api;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Builder;
 
 class StoreAddressRequest extends FormRequest
 {
@@ -26,7 +30,9 @@ class StoreAddressRequest extends FormRequest
             'long' => ['required', 'decimal:0,6'],
             'address' => ['required', 'string', 'between:5,255'],
             'vahed' => ['required', 'numeric', 'between:1,200'],
-            'title' => ['required', 'string', 'between:3,50']
+            'name' => ['required', 'string', 'between:3,50',Rule::unique('addresses')->where(function ($query){
+                    $query->where('addressable_id',Auth::id())->where('addressable_type',User::class);
+                })]
         ];
     }
 
