@@ -44,6 +44,11 @@ class Restaurant extends Model
         return $this->hasMany(Cart::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     protected function images()
     {
         return $this->morphMany(Image::class, 'imageable');
@@ -61,6 +66,6 @@ class Restaurant extends Model
 
     public function comments()
     {
-        return $this->carts()->has('comment')->get()->pluck('comment');
+        return $this->orders()->has('comment')->get()->pluck('comment');
     }
 }

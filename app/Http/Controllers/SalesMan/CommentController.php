@@ -45,7 +45,6 @@ class CommentController extends Controller
         ]);
         $comment->update(['status' => CommentsStatus::NoReply]);
         return redirect()->route('sales.comment.index');
-
     }
 
     public function deleteRequest(Comment $comment)

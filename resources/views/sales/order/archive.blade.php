@@ -13,7 +13,7 @@
                 <div class="px-9 w-full flex justify-between">
                     <div class="flex-col flex">
                         <label>Total Income : {{$totalIncome}} T</label>
-                        <label>Carts Count : {{$carts->total()}}</label>
+                        <label>Carts Count : {{$orders->total()}}</label>
                     </div>
                     <div>
                         <form class="flex gap-2">
@@ -29,7 +29,7 @@
                         </form>
                     </div>
                 </div>
-            @if($carts->isNotEmpty())
+            @if($orders->isNotEmpty())
                     <div class="flex flex-col w-full">
                         <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5 w-full">
                             <div class="py-2 inline-block  sm:px-6 lg:px-8 w-full">
@@ -55,19 +55,19 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($carts as $cart)
+                                        @foreach($orders as $order)
                                             <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {{$cart->user->name}}
+                                                    {{$order->user->name}}
                                                 </td>
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {{$cart->total_fee}}
+                                                    {{$order->total_fee}}
                                                 </td>
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {{$cart->paid_date}}
+                                                    {{$order->paid_date}}
                                                 </td>
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    <a href="{{route('sales.carts.show',$cart)}}">
+                                                    <a href="{{route('sales.orders.show',$order)}}">
                                                         Details
                                                     </a>
                                                 </td>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    {{$carts->links()}}
+                    {{$orders->links()}}
                 </div>
             @endif
             @error('from') {{$message}} @enderror

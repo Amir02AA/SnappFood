@@ -10,15 +10,13 @@ class CommentPolicy
 {
     public function create(User $user, $cartId): bool
     {
-        return $user->carts()->where([
-            ['paid_date', '!=', null],
-            ['status', '=', OrderStatus::Received]
-        ])->doesntHave('comment')->get()->contains($cartId);
+        return $user->orders()->where('status', OrderStatus::Received)
+            ->doesntHave('comment')->get()->contains($cartId);
     }
 
     public function changeStatus(User $user, Comment $comment)
     {
-        return $user->restaurant->carts()->has('comment')->get()->pluck('comment')->contains($comment);
+        return $user->restaurant->orders()->has('comment')->get()->pluck('comment')->contains($comment);
     }
 
     public function viewFiltered(User $user, int $foodId)

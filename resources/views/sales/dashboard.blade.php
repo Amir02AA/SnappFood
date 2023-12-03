@@ -35,9 +35,12 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                         </li>
                     </ul>
                 </form>
-                <div>
-                    <img src="{{asset('images/'.$banner->image)}}" alt="banner"/>
-                </div>
+                @isset($banner)
+                    <div>
+                        <img src="{{asset('images/'.$banner->image)}}" alt="banner"/>
+                    </div>
+                @endisset
+
             </div>
 
         </aside>
@@ -49,7 +52,7 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
 
                 <a href="{{route('sales.settings')}}" class="text-white hover:text-indigo-500">Restaurant Settings</a>
                 <a href="{{route('sales.food.index')}}" class="text-white hover:text-indigo-500">Food</a>
-                <a href="{{route('sales.carts.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
+                <a href="{{route('sales.orders.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
                 <a href="{{route('sales.comment.index')}}" class="text-white hover:text-indigo-500">Comments</a>
                 <p class="text-white hover:text-indigo-500">Restaurant : {{\Illuminate\Support\Facades\Auth::user()->restaurant->name}}</p>
 
@@ -68,18 +71,18 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                 <div class="w-full space-y-4 flex flex-col items-center">
                     <!-- Restaurant Category Card 1 -->
 
-                    @foreach($carts as $cart)
+                    @foreach($orders as $order)
                     <div class="w-1/2 bg-gray-800 rounded-lg p-4 flex items-center justify-between">
 
                             <div>
-                                <div class="text-lg font-semibold">Bought by: {{$cart->user->name}}</div>
-                                <div class="text-sm font-semibold">Paid at: {{$cart->paid_date}}</div>
-                                <div class="text-sm font-semibold">Total: {{$cart->total_fee_after_off}} T</div>
-                                <div class="text-sm font-semibold">{{$cart->status->name}}</div>
+                                <div class="text-lg font-semibold">Bought by: {{$order->user->name}}</div>
+                                <div class="text-sm font-semibold">Paid at: {{$order->paid_date}}</div>
+                                <div class="text-sm font-semibold">Total: {{$order->total_fee_after_off}} T</div>
+                                <div class="text-sm font-semibold">{{$order->status->name}}</div>
                             </div>
                             <div class="flex flex-row items-center justify-between gap-2">
 
-                                <a href="{{route('sales.order.next',$cart)}}"
+                                <a href="{{route('sales.order.next',$order)}}"
                                    class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                                         <path fill="currentColor"
@@ -88,7 +91,7 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                                               d="M16 30a14 14 0 1 1 14-14a14.016 14.016 0 0 1-14 14Zm0-26a12 12 0 1 0 12 12A12.014 12.014 0 0 0 16 4Z"/>
                                     </svg>
                                 </a>
-                                <form method="post" action="{{route('sales.order.cancel',$cart)}}">
+                                <form method="post" action="{{route('sales.order.cancel',$order)}}">
                                     @csrf @method('delete')
                                     <button type="submit"
                                             class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">

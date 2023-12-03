@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('content');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('order_id')->nullable()->constrained()->cascadeOnDelete();
             $table->unsignedInteger('score')->nullable();
-            $table->foreignId('reply_to')->nullable()->constrained('comment')->cascadeOnDelete();
+            $table->foreignId('reply_to')->nullable()->constrained('comments')->cascadeOnDelete();
             $table->timestamps();
         });
     }

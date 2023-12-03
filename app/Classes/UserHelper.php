@@ -13,7 +13,7 @@ class UserHelper
     public static function getSortedRestaurantsQuery(?bool $isOpen = null, ?string $tier = null): Builder|null
     {
         $restaurants = Restaurant::all();
-        if ($isOpen !== null) {
+        if ($isOpen) {
             $restaurants = $restaurants->intersect(
                 Restaurant::query()->where('is_open', $isOpen)->get()
             );

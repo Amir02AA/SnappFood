@@ -15,10 +15,9 @@ class Order extends Model
 
     protected $fillable = [
         'user_id', 'restaurant_id',
-        'paid_date', 'status',
-        'address_id', 'off_code_id',
-        'total_price', 'total_discount',
-        'send_cost'
+        'status', 'address_id',
+        'off_code_id', 'total_price',
+        'total_discount', 'send_cost'
     ];
     protected $casts = [
         'status' => OrderStatus::class

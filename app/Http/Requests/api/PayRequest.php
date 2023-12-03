@@ -4,7 +4,7 @@ namespace App\Http\Requests\api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCommentRequest extends FormRequest
+class PayRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,7 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'order_id' => ['required','exists:orderss,id'],
-            'content'=>['required','string'],
-            'score'=>['required','numeric','between:1,5']
+            'code' => 'nullable|string|max:100|exists:off_codes,code'
         ];
     }
 }

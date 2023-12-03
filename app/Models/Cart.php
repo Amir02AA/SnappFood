@@ -46,19 +46,10 @@ class Cart extends Model
         $query->where([
             'restaurant_id' => $restaurantId,
             'user_id' => Auth::id(),
-            'paid_date' => null
         ]);
     }
 
-    public function nextStep()
-    {
-        if ($this->status !== OrderStatus::Received) {
-            $this->update([
-                'status' => $this->status->value + 1
-            ]);
-        }
-        return $this->status;
-    }
+
 
     public function totalFee(): Attribute
     {

@@ -33,7 +33,7 @@ class HomeController extends Controller
 
         return view('sales.dashboard', [
             'user' => Auth::user(),
-            'carts' => SalesHelper::getSortedOrders($request->get('status'))
+            'orders' => SalesHelper::getSortedOrders($request->get('status'))
         ]);
     }
 

@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\api;
 
 use App\Classes\OrderStatus;
-use App\Events\CartPaid;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\PayRequest;
 use App\Http\Requests\api\StoreCartRequest;
 use App\Http\Requests\api\UpdateCartRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Food;
 use App\Models\OffCode;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return CartResource::collection(Auth::user()->carts()->where('paid_date',null)->get());
+        return CartResource::collection(Auth::user()->carts()->where('paid_date', null)->get());
     }
 
     /**
@@ -77,22 +78,31 @@ class CartController extends Controller
     }
 
 
-    public function pay(Cart $cart, Request $request)
+    public function pay(Cart $cart, PayRequest $request)
     {
-        if ($cart->paid_date) return response()->json(['massage' => 'Already Paid'], 404);
-        if (!$cart->user->current_address) return response()->json(['massage' => 'Please Select an Address'], 404);
-
-        $request->validate([
-            'code' => 'nullable|string|max:100|exists:off_codes,code'
-        ]);
-        $offCode = OffCode::query()->where('code',$request->get('code'))->first();
+        $this->authorize('pay',Cart::class);
+        $offCode = OffCode::query()->where('code', $request->get('code'))->first();
 
         $cart->update([
-            'paid_date' => now()->toDateTimeString(),
-            'address_id' => $cart->user->current_address->id,
             'off_code_id' => $offCode?->id,
             'status' => OrderStatus::Wait
         ]);
+
+        $order = Order::query()->create([
+            'user_id' => $cart->user_id,
+            'restaurant_id' => $cart->restaurant_id,
+            'address_id' => $cart->address_id,
+            'total_price' => $cart->total_fee,
+            'total_discount' => $cart->total_off,
+            'send_cost' => $cart->restaurant->send_cost
+        ]);
+
+        $cart->food->map(function (Food $food) use ($order) {
+            $order->food()->attach($food->id, ['count' => $food->pivot->count]);
+        });
+        $cart->food()->detach();
+
+        $cart->delete();
 //        CartPaid::dispatch($cart);
         return response()->json([
             'massage' => 'thanks for your money',

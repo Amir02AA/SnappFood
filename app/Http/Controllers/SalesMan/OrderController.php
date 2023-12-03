@@ -8,38 +8,39 @@ use App\Events\CartStatusChanged;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SortArchiveRequest;
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function nextState(Cart $cart)
+    public function nextState(Order $order)
     {
-        $cart->nextStep();
-//        CartStatusChanged::dispatch($cart);
+        $order->nextStep();
+//        CartStatusChanged::dispatch($order);
         return redirect()->route('sales.dashboard');
     }
 
     public function archive(SortArchiveRequest $request)
     {
-        $carts = SalesHelper::getSortedOrdersByDate(
+        $orders = SalesHelper::getSortedOrdersByDate(
                 $request->validated('from'),
                 $request->validated('to')
             );
-        $totalIncome = $carts->get()->sum(function (Cart $cart) {return $cart->total_fee_after_off;});
-        $carts = $carts->paginate(5);
-        return view('sales.order.archive', compact('carts', 'totalIncome'));
+        $totalIncome = $orders->get()->sum(function (Order $order) {return $order->total_fee_after_off;});
+        $orders = $orders->paginate(5);
+        return view('sales.order.archive', compact('orders', 'totalIncome'));
     }
 
-    public function cancel(Cart $cart)
+    public function cancel(Order $order)
     {
-        $cart->delete();
+        $order->delete();
         return redirect()->route('sales.dashboard');
     }
 
-    public function show(Cart $cart)
+    public function show(Order $order)
     {
-        if ($cart->restaurant->isNot(Auth::user()->restaurant)) return redirect()->route('sales.order.archive');
+        if ($order->restaurant->isNot(Auth::user()->restaurant)) return redirect()->route('sales.order.archive');
 
-        return view('sales.order.show',compact('cart'));
+        return view('sales.order.show',compact('order'));
     }
 }

@@ -25,10 +25,13 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
     Route::post('food/{food}/party', [PartyController::class, 'store'])->name('party.store');
     Route::delete('food/{food}/party', [PartyController::class, 'destroy'])->name('party.destroy');
 
-    Route::get('/{cart}/next', [OrderController::class, 'nextState'])->name('order.next');
-    Route::delete('/{cart}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+    Route::get('/{order}/next', [OrderController::class, 'nextState'])->name('order.next');
+    Route::delete('/{order}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
 
-    Route::get('/carts/archive', [OrderController::class, 'archive'])->name('carts.archive');
+    Route::get('/orders/archive', [OrderController::class, 'archive'])->name('orders.archive');
+
+    Route::get('/orders/{order}',[OrderController::class,'show'])->name('orders.show');
+    Route::get('/orders/charts',[ChartController::class,'index'])->name('orders.charts');
 
     Route::controller(CommentController::class)->group(function (){
         Route::get('/comment', 'index')->name('comment.index');
@@ -36,7 +39,5 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
         Route::post('/comment/{comment}/accept', 'accept')->name('comment.accept');
         Route::post('/comment/{comment}/delete', 'deleteRequest')->name('comment.delete');
     });
-    Route::get('/carts/charts',[ChartController::class,'index'])->name('carts.charts');
-    Route::get('/carts/{cart}',[OrderController::class,'show'])->name('carts.show');
 });
 Route::redirect('/sales', 'sales/dashboard');

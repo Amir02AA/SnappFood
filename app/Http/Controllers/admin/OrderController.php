@@ -6,23 +6,24 @@ use App\Classes\SalesHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SortArchiveRequest;
 use App\Models\Cart;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
     public function archive(SortArchiveRequest $request)
     {
-        $carts = SalesHelper::getSortedOrdersByDate(
+        $orders = SalesHelper::getSortedOrdersByDate(
             $request->validated('from'),
             $request->validated('to'),
             true
         );
-        $totalIncome = $carts->get()->sum(fn(Cart $cart) => $cart->total_fee_after_off);
-        $carts = $carts->paginate(5);
-        return view('admin.order.archive', compact('carts', 'totalIncome'));
+        $totalIncome = $orders->get()->sum(fn(Order $order) => $order->total_fee_after_off);
+        $orders = $orders->paginate(5);
+        return view('admin.order.archive', compact('orders', 'totalIncome'));
     }
 
-    public function show(Cart $cart)
+    public function show(Order $order)
     {
-        return view('admin.order.show', compact('cart'));
+        return view('admin.order.show', compact('order'));
     }
 }

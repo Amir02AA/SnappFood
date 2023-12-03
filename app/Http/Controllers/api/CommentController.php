@@ -16,7 +16,7 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         $this->authorize('create', [
-            Comment::class, $request->validated('cart_id')
+            Comment::class, $request->validated('order_id')
         ]);
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
@@ -32,10 +32,10 @@ class CommentController extends Controller
         ($request->isNotFilled('restaurant_id')) ?
 
             $comments = Food::find($request->validated('food_id'))
-                ->carts()->has('comment')->get()->pluck('comment')
+                ->orders()->has('comment')->get()->pluck('comment')
 
             : $comments = Restaurant::find($request->validated('restaurant_id'))
-            ->carts()->has('comment')->get()->pluck('comment');
+            ->orders()->has('comment')->get()->pluck('comment');
 
         if ($comments->isEmpty()) return \response()->json(['massage' => 'no comments found'], 404);
         return response()->json(['comment' => CommentResource::collection($comments)]);
