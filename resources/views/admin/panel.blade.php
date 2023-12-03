@@ -14,7 +14,7 @@
                 <a href="{{route('admin.restaurants.index')}}" class="text-white hover:text-indigo-500">Restaurant Categories</a>
                 <a href="{{route('admin.off.index')}}" class="text-white hover:text-indigo-500">Offs</a>
                 <a href="{{route('admin.comment.index')}}" class="text-white hover:text-indigo-500">Delete Comment Requests</a>
-                <a href="{{route('admin.carts.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
+                <a href="{{route('admin.orders.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
                 <a href="{{route('admin.banners.index')}}" class="text-white hover:text-indigo-500">Banners</a>
 
 
