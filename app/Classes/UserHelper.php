@@ -58,6 +58,6 @@ class UserHelper
             $order->food()->attach($food->id, ['count' => $food->pivot->count]);
         });
         $cart->food()->detach();
-        return $order;
+        return $order->refresh();
     }
 }

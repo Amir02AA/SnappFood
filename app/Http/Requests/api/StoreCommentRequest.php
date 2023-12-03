@@ -22,7 +22,7 @@ class StoreCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'order_id' => ['required','exists:orderss,id'],
+            'order_id' => ['required','exists:orders,id'],
             'content'=>['required','string'],
             'score'=>['required','numeric','between:1,5']
         ];

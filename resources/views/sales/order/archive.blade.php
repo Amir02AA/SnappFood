@@ -61,7 +61,7 @@
                                                     {{$order->user->name}}
                                                 </td>
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                    {{$order->total_fee}}
+                                                    {{$order->total_price}}
                                                 </td>
                                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                     {{$order->paid_date}}
@@ -82,8 +82,10 @@
                     {{$orders->links()}}
                 </div>
             @endif
-            @error('from') {{$message}} @enderror
-            @error('to') {{$message}} @enderror
+            <div class="text-red-600">
+                @error('from') {{$message}} @enderror
+                @error('to') {{$message}} @enderror
+            </div>
         </section>
     </main>
 

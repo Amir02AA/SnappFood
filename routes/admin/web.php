@@ -22,8 +22,8 @@ Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('/admin')->gro
 
     Route::resource('comment', CommentController::class)->only('index','destroy');
     Route::post('comment/{comment}/cancel',[CommentController::class,'cancel'])->name('comment.cancel');
-    Route::get('/carts/archive', [OrderController::class, 'archive'])->name('carts.archive');
-    Route::get('/carts/{cart}',[OrderController::class,'show'])->name('carts.show');
+    Route::get('/carts/archive', [OrderController::class, 'archive'])->name('orders.archive');
+    Route::get('/orders/{order}',[OrderController::class,'show'])->name('orders.show');
 
 });
 Route::redirect('/admin','/admin/panel');

@@ -14,7 +14,7 @@ class CommentPolicy
         if ($user->orders()->where('status', OrderStatus::Received)
             ->doesntHave('comment')->get()->contains($orderId))
             return Response::allow();
-        return Response::deny('You dont own this order',404);
+        return Response::deny('You cant comment on this order',404);
     }
 
     public function changeStatus(User $user, Comment $comment)

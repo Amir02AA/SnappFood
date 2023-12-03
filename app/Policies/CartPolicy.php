@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Cart;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
 
 class CartPolicy
 {
@@ -12,11 +13,15 @@ class CartPolicy
      */
     public function pay(User $user)
     {
-        return $user->currentAddress;
+        return ($user->current_address) ?
+            Response::allow()
+            : Response::deny('You must select an address');
     }
 
     public function view(User $user, Cart $cart)
     {
-        return $user->carts->contains($cart);
+        return ($user->carts->contains($cart)) ?
+            Response::allow()
+            : Response::deny('You dont own the cart');
     }
 }

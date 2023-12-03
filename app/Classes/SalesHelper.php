@@ -2,7 +2,6 @@
 
 namespace App\Classes;
 
-use App\Models\Cart;
 use App\Models\Material;
 use App\Models\Order;
 use Illuminate\Support\Facades\Auth;
@@ -28,9 +27,9 @@ class SalesHelper
         return $ordersQuery->get();
     }
 
-    public static function getSortedOrdersByDate($from, $to, bool $isAdmin = false)
+    public static function getSortedOrdersByDate(?string $from, ?string $to, bool $isAdmin = false)
     {
-        $to = $to ?? now()->toDateString();
+        $to = $to ?? now()->addDay()->toDateString();
         $from = $from ?? Date::create(2020)->toDateString();
         $query = ($isAdmin) ? Order::query() : Auth::user()->restaurant->orders();
         $carts = $query

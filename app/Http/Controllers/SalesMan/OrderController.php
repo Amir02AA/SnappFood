@@ -26,7 +26,7 @@ class OrderController extends Controller
                 $request->validated('from'),
                 $request->validated('to')
             );
-        $totalIncome = $orders->get()->sum(function (Order $order) {return $order->total_fee_after_off;});
+        $totalIncome = $orders->get()->sum(function (Order $order) {return $order->total_price;});
         $orders = $orders->paginate(5);
         return view('sales.order.archive', compact('orders', 'totalIncome'));
     }
