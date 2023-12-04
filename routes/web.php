@@ -32,7 +32,6 @@ require_once 'admin/web.php';
 require_once 'salesman/web.php';
 
 Route::get('/test',function (){
+    return view('test');
 
-
-
-});
+})->name('test');
