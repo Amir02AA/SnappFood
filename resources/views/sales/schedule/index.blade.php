@@ -2,18 +2,18 @@
 @section('content')
     @php $weekDay= ['saturday','sunday','monday','tuesday','wednesday','thursday','friday'] @endphp
     <main class="min-h-screen bg-blue-200 p-8 w-full">
-
         <div
             class="w-full max-w-md mx-auto bg-white p-8 rounded-md shadow-md border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <form action="#" method="">
+            <form action="{{route('sales.schedule.update')}}" method="post">
+                @csrf @method('patch')
                 <div class="mb-4">
                     <label for="day" class="block text-white font-semibold mb-2">Select Day:</label>
                     <select id="day" name="day" class="w-full p-2 border border-gray-300 rounded-md">
                         @foreach($weekDay as $day)
                             <option value="{{$day}}">{{ucfirst($day)}}</option>
                         @endforeach
-                        <option value="not_friday">every day but friday</option>
-                        <option value="all">every day</option>
+                        <option value="not_friday">Every Day But Friday</option>
+                        <option value="all">Every Day</option>
                     </select>
                 </div>
                 <div class="mb-4">
@@ -38,7 +38,7 @@
 
         </div>
         <div class="mt-8  border border-gray-200 dark:bg-gray-800 dark:border-gray-700 p-8 rounded-md shadow-md">
-            <form>
+            <form action="{{route('sales.schedule.close')}}" method="post"> @csrf
                 <table class="w-full border border-collapse border-gray-300 bg-gray-500">
                     <thead>
                     <tr>
@@ -52,7 +52,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <!-- Add dynamic data here if available -->
                     <tr>
                         <td class="border p-2">08:00 - 18:00</td>
                         <td class="border p-2">08:00 - 18:00</td>
@@ -72,8 +71,6 @@
                             </td>
                         @endforeach
                     </tr>
-
-                    <!-- Repeat for other days -->
                     </tbody>
                 </table>
             </form>

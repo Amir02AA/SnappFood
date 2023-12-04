@@ -20,11 +20,14 @@ class ScheduleController extends Controller
 
     public function setTime(SetScheduleTimeRequest $request)
     {
-
+        dd($request->all());
+        return redirect()->route('sales.schedule.index');
     }
 
     public function closeDay(CloseDayRequest $request)
     {
+        dd($request->all());
 
+        return redirect()->route('sales.schedule.index');
     }
 }

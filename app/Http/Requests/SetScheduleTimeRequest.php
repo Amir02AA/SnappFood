@@ -23,8 +23,8 @@ class SetScheduleTimeRequest extends FormRequest
     {
         return [
             'day' => ['required', 'string', 'in:saturday,sunday,monday,tuesday,wednesday,thursday,friday,not_friday,all'],
-            'start_time' => ['required', 'time'],
-            'end_time' => ['required', 'time']
+            'start_time' => ['required', 'string'],
+            'end_time' => ['required', 'string']
         ];
     }
 }
