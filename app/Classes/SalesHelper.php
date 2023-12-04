@@ -4,6 +4,7 @@ namespace App\Classes;
 
 use App\Models\Material;
 use App\Models\Order;
+use App\Models\Restaurant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 
@@ -38,4 +39,5 @@ class SalesHelper
             ->where('paid_date', '<=', $to);
         return $carts;
     }
+
 }

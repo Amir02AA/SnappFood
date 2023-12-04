@@ -68,4 +68,9 @@ class Restaurant extends Model
     {
         return $this->orders()->has('comment')->get()->pluck('comment');
     }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }
