@@ -22,6 +22,8 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
 
     Route::controller(ScheduleController::class)->name('schedule.')->group(function (){
         Route::get('/schedule', 'schedule')->name('index');
+        Route::patch('/schedule', 'setTime')->name('update');
+        Route::post('/schedule/close', 'closeDay')->name('close');
     });
 
     Route::controller(PartyController::class)->name('party.')->group(function (){
