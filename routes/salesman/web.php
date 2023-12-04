@@ -10,34 +10,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->group(function () {
 
-    Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
-
-    Route::post('/profile', [HomeController::class, 'profileStore'])->name('profile.store');
-
     Route::resource('food', FoodController::class);
+    Route::controller(HomeController::class)->group(function (){
+        Route::get('/profile','profile')->name('profile');
+        Route::post('/profile', 'profileStore')->name('profile.store');
+        Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/settings', 'settings')->name('settings');
+        Route::post('/settings/{restaurant}','settingsStore')->name('settings.store');
+    });
 
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
-    Route::get('/settings', [HomeController::class, 'settings'])->name('settings');
+    Route::controller(PartyController::class)->name('party.')->group(function (){
+        Route::get('food/{food}/party', 'create')->name('party.create');
+        Route::post('food/{food}/party', 'store')->name('party.store');
+        Route::delete('food/{food}/party', 'destroy')->name('party.destroy');
+    });
 
-    Route::post('/settings/{restaurant}', [HomeController::class, 'settingsStore'])->name('settings.store');
-
-    Route::get('food/{food}/party', [PartyController::class, 'create'])->name('party.create');
-    Route::post('food/{food}/party', [PartyController::class, 'store'])->name('party.store');
-    Route::delete('food/{food}/party', [PartyController::class, 'destroy'])->name('party.destroy');
-
-    Route::get('/{order}/next', [OrderController::class, 'nextState'])->name('order.next');
-    Route::delete('/{order}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
-
-    Route::get('/orders/archive', [OrderController::class, 'archive'])->name('orders.archive');
-
-    Route::get('/orders/{order}',[OrderController::class,'show'])->name('orders.show');
+    Route::controller(OrderController::class)->name('orders.')->group(function (){
+        Route::get('orders/{order}/next','nextState')->name('next');
+        Route::delete('orders/{order}/cancel','cancel')->name('cancel');
+        Route::get('/orders/archive','archive')->name('archive');
+        Route::get('/orders/{order}','show')->name('show');
+    });
     Route::get('/orders/charts',[ChartController::class,'index'])->name('orders.charts');
 
-    Route::controller(CommentController::class)->group(function (){
-        Route::get('/comment', 'index')->name('comment.index');
-        Route::post('/comment/{comment}/reply', 'reply')->name('comment.reply');
-        Route::post('/comment/{comment}/accept', 'accept')->name('comment.accept');
-        Route::post('/comment/{comment}/delete', 'deleteRequest')->name('comment.delete');
+    Route::controller(CommentController::class)->name('comment.')->group(function (){
+        Route::get('/comment', 'index')->name('index');
+        Route::post('/comment/{comment}/reply', 'reply')->name('reply');
+        Route::post('/comment/{comment}/accept', 'accept')->name('accept');
+        Route::post('/comment/{comment}/delete', 'deleteRequest')->name('delete');
     });
 });
 Route::redirect('/sales', 'sales/dashboard');

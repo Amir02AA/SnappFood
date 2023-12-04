@@ -22,11 +22,11 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
-Route::get('/parties',[PartyController::class,'index'])->name('parties');
+Route::middleware('role:admin,sales')->get('/parties',[PartyController::class,'index'])->name('parties');
 
 Route::post('/login', [AuthController::class, 'loginSubmit'])->name('login.submit');
 Route::post('/register', [AuthController::class, 'registerStore'])->name('register.store');
-Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+Route::middleware('role:admin,sales')->post('/logout',[AuthController::class,'logout'])->name('logout');
 
 require_once 'admin/web.php';
 require_once 'salesman/web.php';

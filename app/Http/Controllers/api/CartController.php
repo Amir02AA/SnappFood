@@ -58,8 +58,10 @@ class CartController extends Controller
     {
         $food = Food::query()->find($request->validated('food_id'));
         $cart = Cart::relatedCart($food->restaurant_id)->first();
+
         if (!$cart)
             return response()->json(['massage' => 'you must add your item to a new cart'], 404);
+
         $cart->food()->updateExistingPivot($food->id, ['count' => $request->validated('count')]);
 
         if ((int)$request->validated('count') === 0)

@@ -10,16 +10,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum','role:customer'])->prefix('/v1')->group(function () {
     // Carts
-    Route::post('/carts/{cart}/pay',[CartController::class,'pay']);
-    Route::get('/carts',[CartController::class,'index']);
-    Route::get('/carts/{cart}',[CartController::class,'show']);
-    Route::post('/carts/add',[CartController::class,'store']);
-    Route::patch('/carts/add',[CartController::class,'update']);
+    Route::controller(CartController::class)->group(function (){
+        Route::post('/carts/{cart}/pay','pay');
+        Route::get('/carts','index');
+        Route::get('/carts/{cart}','show');
+        Route::post('/carts/add','store');
+        Route::patch('/carts/add','update');
+    });
 
-    //comment
-    Route::get('/comments',[CommentController::class,'index']);
-    Route::post('/comments',[CommentController::class,'store']);
-    //endcomment
+    //comments
+    Route::controller(CommentController::class)->group(function (){
+        Route::get('/comments','index');
+        Route::post('/comments','store');
+    });
 
     // Addresses
     Route::post('/addresses/{address}',[AddressController::class,'setCurrentAddress']);
@@ -29,11 +32,11 @@ Route::middleware(['auth:sanctum','role:customer'])->prefix('/v1')->group(functi
     Route::apiResource('restaurants', RestaurantController::class)->only(['index', 'show']);
     Route::get('restaurants/{restaurant}/food',[RestaurantController::class,'food']);
 
-    Route::post('/logout',[AuthController::class,'logout']);
     Route::patch('/user',UserController::class);
 });
 
 
+Route::middleware(['auth:sanctum','role:customer'])->post('/logout',[AuthController::class,'logout']);
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/register',[AuthController::class,'register']);
 
