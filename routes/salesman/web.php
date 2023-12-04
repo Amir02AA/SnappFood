@@ -6,6 +6,7 @@ use App\Http\Controllers\salesman\CommentController;
 use App\Http\Controllers\salesman\FoodController;
 use App\Http\Controllers\salesman\HomeController;
 use App\Http\Controllers\salesman\OrderController;
+use App\Http\Controllers\salesman\ScheduleController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->group(function () {
@@ -17,6 +18,10 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
         Route::get('/dashboard', 'dashboard')->name('dashboard');
         Route::get('/settings', 'settings')->name('settings');
         Route::post('/settings/{restaurant}','settingsStore')->name('settings.store');
+    });
+
+    Route::controller(ScheduleController::class)->name('schedule.')->group(function (){
+        Route::get('/schedule', 'schedule')->name('index');
     });
 
     Route::controller(PartyController::class)->name('party.')->group(function (){

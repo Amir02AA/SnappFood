@@ -70,4 +70,6 @@ class HomeController extends Controller
 
         return redirect()->route('sales.dashboard');
     }
+
+
 }
