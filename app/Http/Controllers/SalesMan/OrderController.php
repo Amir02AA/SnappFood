@@ -5,6 +5,7 @@ namespace App\Http\Controllers\salesman;
 use App\Classes\OrderStatus;
 use App\Classes\SalesHelper;
 use App\Events\CartStatusChanged;
+use App\Events\OrderCanceled;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SortArchiveRequest;
 use App\Models\Cart;
@@ -33,6 +34,7 @@ class OrderController extends Controller
 
     public function cancel(Order $order)
     {
+        OrderCanceled::dispatch($order);
         $order->delete();
         return redirect()->route('sales.dashboard');
     }
