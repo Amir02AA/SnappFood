@@ -4,8 +4,9 @@ namespace App\Listeners;
 
 use App\Events\CartPaid;
 use App\Models\Food;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ChangePartyCount
+class ChangePartyCount implements ShouldQueue
 {
     /**
      * Create the event listener.

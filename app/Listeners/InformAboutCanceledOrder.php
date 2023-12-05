@@ -5,7 +5,7 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class InformAboutCanceledOrder
+class InformAboutCanceledOrder implements ShouldQueue
 {
     /**
      * Create the event listener.
