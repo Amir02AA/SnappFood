@@ -54,6 +54,7 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                 <a href="{{route('sales.food.index')}}" class="text-white hover:text-indigo-500">Food</a>
                 <a href="{{route('sales.orders.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
                 <a href="{{route('sales.comment.index')}}" class="text-white hover:text-indigo-500">Comments</a>
+                <a href="{{route('sales.schedule.index')}}" class="text-white hover:text-indigo-500">Restaurant Schedule</a>
                 <p class="text-white hover:text-indigo-500">Restaurant : {{\Illuminate\Support\Facades\Auth::user()->restaurant->name}}</p>
 
 

@@ -22,8 +22,8 @@ class SetScheduleTimeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day' => ['required', 'string', 'in:saturday,sunday,monday,tuesday,wednesday,thursday,friday,not_friday,all'],
-            'start_time' => ['required', 'string'],
+            'day' => ['required', 'string', 'in:1,2,3,4,5,6,7,not_friday,all'],
+            'start_time' => ['required', 'string', 'date_format:H:i'],
             'end_time' => ['required', 'string']
         ];
     }

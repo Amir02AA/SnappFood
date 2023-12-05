@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,16 +15,17 @@ class Restaurant extends Model
     protected $fillable = [
         'name', 'phone', 'account', 'opens_at', 'closes_at', 'is_open', 'user_id', 'send_cost'
     ];
-
-//    public function isOpen()
-//    {
-//        return Attribute::make(
-//            get: fn($value , $attributes) => ($value && now()->between(
-//                Date::createFromTimeString($attributes['opens_at']),
-//                Date::createFromTimeString($attributes['closes_at']),
-//                ))
-//        );
-//    }
+    protected $appends = ['is_open'];
+    public function isOpen()
+    {
+        return Attribute::make(
+            get: fn() => $this->schedules()->where('day',now()->dayName)
+                ->where([
+                    ['start_time','<=',now()->toTimeString()],
+                    ['end_time','>',now()->toTimeString()],
+                ])->get()->isNotEmpty()
+        );
+    }
     public function tiers()
     {
         return $this->belongsToMany(RestaurantTier::class, 'restaurant_tier');

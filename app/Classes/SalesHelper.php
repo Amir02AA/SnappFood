@@ -40,4 +40,29 @@ class SalesHelper
         return $carts;
     }
 
+    public static function manageDayTimeUpdating(string $openTime , string $closeTime , string $days)
+    {
+        $query = Auth::user()->restaurant->schedules();
+        $query = match ($days){
+            'all' => $query,
+            'not_friday' => $query->where('day','!=','7'),
+            default => $query->where('day',$days)
+        };
+        $query->update([
+            'start_time' => $openTime,
+            'end_time' => $closeTime
+        ]);
+    }
+
+    public static function manageDayTimeClosing(string $day)
+    {
+        $query = Auth::user()->restaurant->schedules();
+        $query->where('day',$day)->update([
+            'start_time' => null,
+            'end_time' => null
+        ]);
+    }
+
+
+
 }

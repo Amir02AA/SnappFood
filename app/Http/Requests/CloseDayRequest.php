@@ -22,7 +22,7 @@ class CloseDayRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'day' => ['required','string','in:saturday,sunday,monday,tuesday,wednesday,thursday,friday,not_friday,all'],
+            'day' => ['required','numeric','between:1,7'],
         ];
     }
 }
