@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\OrderCanceled;
+use App\Notifications\OrderCanceledNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
@@ -22,6 +23,6 @@ class InformAboutCanceledOrder implements ShouldQueue
      */
     public function handle(OrderCanceled $event): void
     {
-//        Notification::send();
+        Notification::send($event->order->user,new OrderCanceledNotification($event->order));
     }
 }
