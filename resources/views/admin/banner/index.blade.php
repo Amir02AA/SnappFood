@@ -41,6 +41,7 @@
             </div>
             {{$banners->links()}}
         </section>
+        <x-paginate/>
     </main>
 
 @endsection

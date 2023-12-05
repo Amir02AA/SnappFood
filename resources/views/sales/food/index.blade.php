@@ -120,5 +120,6 @@
             </div>
         </section>
     </main>
+    <x-paginate/>
 
 @endsection

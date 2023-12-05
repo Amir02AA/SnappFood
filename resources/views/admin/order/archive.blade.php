@@ -85,5 +85,6 @@
             @error('to') {{$message}} @enderror
         </section>
     </main>
+    <x-paginate/>
 
 @endsection

@@ -27,9 +27,9 @@ Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->gro
     });
 
     Route::controller(PartyController::class)->name('party.')->group(function (){
-        Route::get('food/{food}/party', 'create')->name('party.create');
-        Route::post('food/{food}/party', 'store')->name('party.store');
-        Route::delete('food/{food}/party', 'destroy')->name('party.destroy');
+        Route::get('food/{food}/party', 'create')->name('create');
+        Route::post('food/{food}/party', 'store')->name('store');
+        Route::delete('food/{food}/party', 'destroy')->name('destroy');
     });
 
     Route::controller(OrderController::class)->name('orders.')->group(function (){

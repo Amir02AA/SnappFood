@@ -28,4 +28,6 @@
             {{$comments->links()}}
         </section>
     </main>
+    <x-paginate/>
+
 @endsection

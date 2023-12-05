@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Events\CartPaid;
 use App\Events\CartStatusChanged;
+use App\Events\OrderCanceled;
 use App\Listeners\ChangePartyCount;
+use App\Listeners\InformAboutCanceledOrder;
 use App\Listeners\SendCartPaidEmail;
 use App\Listeners\SendStatusEmail;
 use App\Models\Restaurant;
@@ -28,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
         CartPaid::class => [
             SendCartPaidEmail::class,
             ChangePartyCount::class
+        ],
+        OrderCanceled::class => [
+            InformAboutCanceledOrder::class
         ]
     ];
 
