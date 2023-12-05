@@ -16,10 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('phone')->unique();
             $table->string('account')->unique();
-            $table->time('opens_at')->default('09:00:00');
-            $table->time('closes_at')->default('21:00:00');
             $table->integer('send_cost')->nullable();
-            $table->boolean('is_open')->default(true);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
         });
     }
