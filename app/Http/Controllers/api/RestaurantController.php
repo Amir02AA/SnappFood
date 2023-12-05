@@ -7,9 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\api\GetRestaurantsRequest;
 use App\Http\Resources\restaurant\FoodResource;
 use App\Http\Resources\restaurant\RestaurantResource;
+use \App\Http\Resources\RestaurantResource as SingleRestaurantResource;
 use App\Models\Restaurant;
-use http\Env\Response;
-use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
@@ -28,7 +27,7 @@ class RestaurantController extends Controller
     public function show(Restaurant $restaurant)
     {
         return response()->json([
-            'restaurant' => new RestaurantResource($restaurant)
+            'restaurant' => new SingleRestaurantResource($restaurant),
         ]);
     }
 

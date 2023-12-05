@@ -13,19 +13,21 @@ class Restaurant extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'name', 'phone', 'account', 'opens_at', 'closes_at', 'is_open', 'user_id', 'send_cost'
+        'name', 'phone', 'account', 'user_id', 'send_cost'
     ];
     protected $appends = ['is_open'];
-    public function isOpen()
+
+    public function isOpen():Attribute
     {
         return Attribute::make(
-            get: fn() => $this->schedules()->where('day',now()->dayName)
+            get: fn() => $this->schedules()->where('day', (now()->dayOfWeek + 2))
                 ->where([
-                    ['start_time','<=',now()->toTimeString()],
-                    ['end_time','>',now()->toTimeString()],
+                    ['start_time', '<=', now()->toTimeString()],
+                    ['end_time', '>', now()->toTimeString()],
                 ])->get()->isNotEmpty()
         );
     }
+
     public function tiers()
     {
         return $this->belongsToMany(RestaurantTier::class, 'restaurant_tier');
