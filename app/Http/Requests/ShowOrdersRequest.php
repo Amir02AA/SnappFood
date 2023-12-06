@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class ShowOrdersRequest extends FormRequest
@@ -14,6 +15,7 @@ class ShowOrdersRequest extends FormRequest
     {
         return Gate::allows('visit-site');
     }
+
 
     /**
      * Get the validation rules that apply to the request.

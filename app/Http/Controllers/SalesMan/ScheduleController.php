@@ -11,14 +11,13 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Gate;
 
 class ScheduleController extends Controller
 {
     public function schedule()
     {
-        if (Auth::user()->restaurant === null) {
-            return redirect()->route('sales.profile');
-        }
+        Gate::authorize('visit-site');
         $days = Auth::user()->restaurant->schedules->sortBy(function ($schedule){
             return $schedule->day->value;
         });

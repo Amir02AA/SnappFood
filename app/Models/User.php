@@ -53,7 +53,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected function restaurant()
+    public function restaurant()
     {
         return $this->hasOne(Restaurant::class);
     }

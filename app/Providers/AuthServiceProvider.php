@@ -6,10 +6,12 @@ namespace App\Providers;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Comment;
+use App\Models\Food;
 use App\Models\User;
 use App\Policies\AddressPolicy;
 use App\Policies\CartPolicy;
 use App\Policies\CommentPolicy;
+use App\Policies\FoodPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -21,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
+        Food::class => FoodPolicy::class,
         Comment::class => CommentPolicy::class,
         Cart::class => CartPolicy::class,
         Address::class => AddressPolicy::class

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->group(function () {
 
     Route::resource('food', FoodController::class);
+
     Route::controller(HomeController::class)->group(function (){
         Route::get('/profile','profile')->name('profile');
         Route::post('/profile', 'profileStore')->name('profile.store');
