@@ -29,7 +29,7 @@ class AuthController extends Controller
             return back()->withErrors(['email' => 'invalid login']);
         }
         session()->regenerate();
-        $route = Auth::user()->hasRole('admin')  ? 'admin.panel' : 'sales.dashboard';
+        $route = Auth::user()->hasRole('admin')  ? 'admin.panel' : 'sales.profile';
         return redirect()->route($route);
     }
 

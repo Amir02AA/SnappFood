@@ -34,7 +34,7 @@ class OffCodeController extends Controller
         $validated = $request->validate([
             'percent' => ['bail', 'required', 'numeric', 'min:10', 'max:80']
         ]);
-        $validated['code'] = uniqid();
+        $validated['code'] = uniqid('', true);
         OffCode::create($validated);
 
         return redirect()->route('admin.off.index');

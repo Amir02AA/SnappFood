@@ -5,18 +5,20 @@ namespace App\Http\Controllers\salesman;
 use App\Classes\OrderStatus;
 use App\Classes\SalesHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShowOrdersRequest;
 use App\Http\Requests\StoreRestaurantProfileRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantTier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class HomeController extends Controller
 {
     public function profile()
     {
-        if (Auth::user()->restaurant !== null) {
-            return redirect()->route('sales.settings');
+        if (Gate::allows('visit-site')) {
+            return redirect()->route('sales.dashboard');
         }
         return view('sales.profile', [
             'user' => Auth::user(),
@@ -24,13 +26,8 @@ class HomeController extends Controller
         ]);
     }
 
-    public function dashboard(Request $request)
+    public function dashboard(ShowOrdersRequest $request)
     {
-        $request->validate(['status' => ['nullable','in:1,2,3']]);
-        if (Auth::user()->restaurant === null) {
-            return redirect()->route('sales.profile');
-        }
-
         return view('sales.dashboard', [
             'user' => Auth::user(),
             'orders' => SalesHelper::getSortedOrders($request->get('status'))
@@ -39,9 +36,7 @@ class HomeController extends Controller
 
     public function settings()
     {
-        if (Auth::user()->restaurant === null) {
-            return redirect()->route('sales.profile');
-        }
+        Gate::authorize('visit-site');
         return view('sales.settings', [
             'restaurant' => Auth::user()->restaurant,
             'tiers' => RestaurantTier::all()
