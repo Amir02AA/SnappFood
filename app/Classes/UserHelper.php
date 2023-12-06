@@ -31,7 +31,7 @@ class UserHelper
         return $restaurants->toQuery();
     }
 
-    public static function getNearRestaurantsQuery(null|Collection|Builder $restaurants, float $radios = 10): Builder|false
+    public static function getNearRestaurantsQuery(null|Collection|Builder $restaurants = null, float $radios = 10): Builder|false
     {
         if (!$restaurants) $restaurants = Restaurant::query();
         if ($restaurants instanceof Collection) $restaurants = $restaurants->toQuery();

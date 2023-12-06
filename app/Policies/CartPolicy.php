@@ -4,6 +4,8 @@ namespace App\Policies;
 
 use App\Classes\UserHelper;
 use App\Models\Cart;
+use App\Models\Food;
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -16,7 +18,10 @@ class CartPolicy
     {
         if (!$user->current_address)
             return Response::deny('You must select an address');
-        if (UserHelper::getNearRestaurantsQuery())
+        $nearRestaurantsFood = UserHelper::getNearRestaurantsQuery()->get()->map(function (Restaurant $restaurant){
+            return $restaurant->food;
+        })->flatten();
+        if ($nearRestaurantsFood->doesntContains($foodId))
             return Response::deny("You can't order From This Restaurant");
         return Response::allow();
     }

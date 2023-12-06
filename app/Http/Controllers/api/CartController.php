@@ -31,7 +31,7 @@ class CartController extends Controller
      */
     public function store(StoreCartRequest $request)
     {
-        $this->authorize('create', Cart::class);
+        $this->authorize('create', [Cart::class,$request->validated('food_id')]);
         $food = Food::query()->find($request->validated('food_id'));
         $cart = Cart::relatedCart($food->restaurant_id)->firstOrCreate([
             'user_id' => Auth::id(),
