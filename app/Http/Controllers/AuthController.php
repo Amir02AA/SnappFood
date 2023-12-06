@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\WebLoginRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,12 +21,9 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function loginSubmit(Request $request)
+    public function loginSubmit(WebLoginRequest $request)
     {
-        if (!Auth::attempt($request->validate([
-            'email' => ['bail', 'required', 'string', 'email'],
-            'password' => ['bail', 'required', 'string']
-        ]))) {
+        if (!Auth::attempt($request->validated())) {
             return back()->withErrors(['email' => 'invalid login']);
         }
         session()->regenerate();
