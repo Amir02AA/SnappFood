@@ -7,11 +7,13 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Comment;
 use App\Models\Food;
+use App\Models\Order;
 use App\Models\User;
 use App\Policies\AddressPolicy;
 use App\Policies\CartPolicy;
 use App\Policies\CommentPolicy;
 use App\Policies\FoodPolicy;
+use App\Policies\OrderPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,7 +28,8 @@ class AuthServiceProvider extends ServiceProvider
         Food::class => FoodPolicy::class,
         Comment::class => CommentPolicy::class,
         Cart::class => CartPolicy::class,
-        Address::class => AddressPolicy::class
+        Address::class => AddressPolicy::class,
+        Order::class => OrderPolicy::class
     ];
 
     /**
