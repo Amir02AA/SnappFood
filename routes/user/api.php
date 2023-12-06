@@ -4,18 +4,25 @@ use App\Http\Controllers\api\AddressController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CartController;
 use App\Http\Controllers\api\CommentController;
+use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\RestaurantController;
 use App\Http\Controllers\api\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum','role:customer'])->prefix('/v1')->group(function () {
     // Carts
-    Route::controller(CartController::class)->group(function (){
-        Route::post('/carts/{cart}/pay','pay');
-        Route::get('/carts','index');
-        Route::get('/carts/{cart}','show');
-        Route::post('/carts/add','store');
-        Route::patch('/carts/add','update');
+    Route::controller(CartController::class)->prefix('/carts')->group(function (){
+        Route::get('/','index');
+        Route::get('/{cart}','show');
+        Route::post('/add','store');
+        Route::patch('/add','update');
+        Route::post('/{cart}/pay','pay');
+    });
+
+    //Orders
+    Route::controller(OrderController::class)->prefix('/orders')->group(function (){
+        Route::get('/active','active');
+        Route::get('/archive','archive');
     });
 
     //comments
@@ -33,6 +40,7 @@ Route::middleware(['auth:sanctum','role:customer'])->prefix('/v1')->group(functi
     Route::get('restaurants/{restaurant}/food',[RestaurantController::class,'food']);
 
     Route::patch('/user',UserController::class);
+
 });
 
 

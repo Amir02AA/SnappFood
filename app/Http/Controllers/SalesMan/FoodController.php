@@ -46,7 +46,7 @@ class FoodController extends Controller
     public function store(StoreFoodRequest $request)
     {
         $validated = $request->validated();
-        $materialIds = SalesHelper::getMaterials($validated['materials']);
+        $materialIds = SalesHelper::getMaterialIds($validated['materials']);
         $validated['restaurant_id'] = Auth::user()->restaurant->id;
         Food::query()->create(array_filter($validated))->materials()->sync($materialIds);
         return redirect()->route('sales.food.index');
@@ -77,8 +77,7 @@ class FoodController extends Controller
     {
         $validated = $request->validated();
         $percent = $validated['percent'];
-
-        OffFood::query()->updateOrCreate(['id' => $food->off->id,], [
+        OffFood::query()->updateOrCreate(['id' => $food->off->id], [
             'percent' => $percent,
         ]);
         $food->update($validated);

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Date;
 
 class SalesHelper
 {
-    public static function getMaterials(array $materials)
+    public static function getMaterialIds(array $materials)
     {
         return array_map(function ($material) {
             return Material::query()->firstOrCreate(
@@ -22,11 +22,11 @@ class SalesHelper
 
     public static function getSortedOrders(?int $situation = null)
     {
-        $ordersQuery = Auth::user()->restaurant->orders();
-        $ordersQuery = ($situation) ? $ordersQuery->where('status', $situation)
-            : $ordersQuery->where('status', '!=', OrderStatus::Received);
+        $query = Auth::user()->restaurant->orders();
+        $query = ($situation) ? $query->where('status', $situation)
+            : $query->where('status', '!=', OrderStatus::Received);
 
-        return $ordersQuery->get();
+        return $query->get();
     }
 
     public static function getSortedOrdersByDate(?string $from, ?string $to, bool $isAdmin = false)
@@ -34,11 +34,11 @@ class SalesHelper
         $to = $to ?? now()->addDay()->toDateString();
         $from = $from ?? Date::create(2020)->toDateString();
         $query = ($isAdmin) ? Order::query() : Auth::user()->restaurant->orders();
-        $carts = $query
+        $orders = $query
             ->where('status', '=', OrderStatus::Received)
             ->where('paid_date', '>=', $from)
             ->where('paid_date', '<=', $to);
-        return $carts;
+        return $orders;
     }
 
     public static function manageDayTimeUpdating(string $openTime , string $closeTime , string $days)

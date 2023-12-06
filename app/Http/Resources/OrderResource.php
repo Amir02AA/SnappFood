@@ -21,7 +21,7 @@ class OrderResource extends JsonResource
             'total price' => $this->total_price,
             'total off' => $this->total_discount,
             'total price after off' => $this->total_price - $this->total_discount,
-            'paid_date' => $this->paid_date,
+            'paid at' => $this->paid_date,
             'status' => $this->status->name
         ];
     }
