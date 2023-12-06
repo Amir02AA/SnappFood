@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use App\Models\Food;
 use App\Models\Material;
 use App\Models\Order;
 use App\Models\Restaurant;
@@ -63,6 +64,12 @@ class SalesHelper
         ]);
     }
 
-
-
+    public static function foodInOrder(string $priceOrder = 'asc', int $tier = null)
+    {
+        $restaurantId = Auth::user()->restaurant->id;
+        $query = Auth::user()->restaurant->food();
+        return ($tier) ?
+            $query->where('food_tier_id' , $tier)->orderBy('price', $priceOrder)
+            :$query->orderBy('price',$priceOrder);
+    }
 }
