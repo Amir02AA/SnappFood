@@ -33,7 +33,7 @@ class UserHelper
 
     public static function getNearRestaurantsQuery(null|Collection|Builder $restaurants, float $radios = 10): Builder|false
     {
-        if (!$restaurants) return false;
+        if (!$restaurants) $restaurants = Restaurant::query();
         if ($restaurants instanceof Collection) $restaurants = $restaurants->toQuery();
 
         $userAddress = Auth::user()->current_address;

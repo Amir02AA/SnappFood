@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Classes\UserHelper;
 use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -11,11 +12,13 @@ class CartPolicy
     /**
      * Create a new policy instance.
      */
-    public function create(User $user)
+    public function create(User $user , int $foodId)
     {
-        return ($user->current_address) ?
-            Response::allow()
-            : Response::deny('You must select an address');
+        if (!$user->current_address)
+            return Response::deny('You must select an address');
+        if (UserHelper::getNearRestaurantsQuery())
+            return Response::deny("You can't order From This Restaurant");
+        return Response::allow();
     }
 
     public function pay(User $user, Cart $cart)
