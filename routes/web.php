@@ -1,8 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PartyController;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\salesman\PartyController;
 use Illuminate\Support\Facades\Route;
 
 /*

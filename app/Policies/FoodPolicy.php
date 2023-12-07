@@ -63,4 +63,18 @@ class FoodPolicy
     {
         return $user->restaurant->food->contains($food);
     }
+
+    public function createParty(User $user, Food $food)
+    {
+        if ($user->restaurant->food->contains($food)) return Response::deny('You Dont Own this food') ;
+        if ($food->party !== null) return redirect()->route('sales.food.index');
+        return true;
+    }
+
+    public function deleteParty(User $user, Food $food)
+    {
+        if ($user->restaurant->food->contains($food)) return Response::deny('You Dont Own this food') ;
+        if ($food->party !== null) return redirect()->route('sales.food.index');
+        return true;
+    }
 }

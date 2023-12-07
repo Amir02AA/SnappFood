@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\PartyController;
 use App\Http\Controllers\salesman\ChartController;
 use App\Http\Controllers\salesman\CommentController;
 use App\Http\Controllers\salesman\FoodController;
 use App\Http\Controllers\salesman\HomeController;
 use App\Http\Controllers\salesman\OrderController;
+use App\Http\Controllers\salesman\PartyController;
 use App\Http\Controllers\salesman\ScheduleController;
 use Illuminate\Support\Facades\Route;
 
