@@ -1,13 +1,14 @@
 @extends('layout.main')
 @php
-$banner = \App\Models\Banner::query()->inRandomOrder()->first();
+    $banner = \App\Models\Banner::query()->inRandomOrder()->first();
 @endphp
 @section('content')
     <main class="min-h-screen bg-gray-900 text-white">
         <aside id="default-sidebar"
                class="fixed top-0 right-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
                aria-label="Sidebar">
-            <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col gap-3 justify-between">
+            <div
+                class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 flex flex-col gap-3 justify-between">
                 <form method="get">
                     <ul class="space-y-3 font-medium">
                         <li>
@@ -54,8 +55,10 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                 <a href="{{route('sales.food.index')}}" class="text-white hover:text-indigo-500">Food</a>
                 <a href="{{route('sales.orders.archive')}}" class="text-white hover:text-indigo-500">Archive</a>
                 <a href="{{route('sales.comment.index')}}" class="text-white hover:text-indigo-500">Comments</a>
-                <a href="{{route('sales.schedule.index')}}" class="text-white hover:text-indigo-500">Restaurant Schedule</a>
-                <p class="text-white hover:text-indigo-500">Restaurant : {{\Illuminate\Support\Facades\Auth::user()->restaurant->name}}</p>
+                <a href="{{route('sales.schedule.index')}}" class="text-white hover:text-indigo-500">Restaurant
+                    Schedule</a>
+                <p class="text-white hover:text-indigo-500">Restaurant
+                    : {{\Illuminate\Support\Facades\Auth::user()->restaurant->name}}</p>
 
 
                 <form method="post" action="{{route('logout')}}">
@@ -73,7 +76,7 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                     <!-- Restaurant Category Card 1 -->
 
                     @foreach($orders as $order)
-                    <div class="w-1/2 bg-gray-800 rounded-lg p-4 flex items-center justify-between">
+                        <div class="w-1/2 bg-gray-800 rounded-lg p-4 flex items-center justify-between">
 
                             <div>
                                 <div class="text-lg font-semibold">Bought by: {{$order->user->name}}</div>
@@ -104,11 +107,14 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                                     </button>
                                 </form>
                             </div>
-                    </div>
+                        </div>
                     @endforeach
                 </div>
+                @if($orders->isNotEmpty())
+                    <x-paginate/>
+                    {{$orders->links()}}
+                @endif
             </section>
-            <x-paginate/>
         </section>
     </main>
 
