@@ -19,8 +19,9 @@ class OrderController extends Controller
 {
     public function nextState(Order $order)
     {
+        $this->authorize('change-status',$order);
         $order->nextStep();
-//        CartStatusChanged::dispatch($order);
+        CartStatusChanged::dispatch($order);
         return redirect()->route('sales.dashboard');
     }
 
@@ -38,6 +39,7 @@ class OrderController extends Controller
 
     public function cancel(Order $order)
     {
+        $this->authorize('delete',$order);
         OrderCanceled::dispatch($order);
         $order->delete();
         return redirect()->route('sales.dashboard');
@@ -45,8 +47,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        if ($order->restaurant->isNot(Auth::user()->restaurant)) return redirect()->route('sales.order.archive');
-
+        $this->authorize('view',$order);
         return view('sales.order.show',compact('order'));
     }
 }

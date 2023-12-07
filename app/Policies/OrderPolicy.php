@@ -15,4 +15,14 @@ class OrderPolicy
     {
         return $user->restaurant->orders->contains($order);
     }
+
+    public function delete(User $user, Order $order): bool
+    {
+        return $user->restaurant->orders->contains($order);
+    }
+
+    public function changeStatus(User $user, Order $order): bool
+    {
+        return $user->restaurant->orders->contains($order);
+    }
 }
