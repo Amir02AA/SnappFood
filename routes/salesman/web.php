@@ -9,14 +9,14 @@ use App\Http\Controllers\salesman\PartyController;
 use App\Http\Controllers\salesman\ScheduleController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'role:sales'])->name('sales.')->prefix('/sales')->group(function () {
+Route::middleware(['auth', 'role:sales','can:visit-site'])->name('sales.')->prefix('/sales')->group(function () {
 
     Route::resource('food', FoodController::class);
 
     Route::controller(HomeController::class)->group(function () {
-        Route::get('/profile', 'profile')->name('profile');
-        Route::post('/profile', 'profileStore')->name('profile.store');
-        Route::get('/dashboard', 'dashboard')->name('dashboard');
+        Route::get('/profile', 'profile')->name('profile')->withoutMiddleware('can:visit-site');
+        Route::post('/profile', 'profileStore')->name('profile.store')->withoutMiddleware('can:visit-site');
+        Route::get('/dashboard', 'dashboard')->name('dashboard')->withoutMiddleware('can:visit-site');;
         Route::get('/settings', 'settings')->name('settings');
         Route::post('/settings/{restaurant}', 'settingsStore')->name('settings.store');
     });

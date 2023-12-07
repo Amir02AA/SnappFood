@@ -29,7 +29,7 @@ class AddressController extends Controller
 
     public function setCurrentAddress(Address $address)
     {
-        $this->authorize('set-current',[Address::class , $address]);
+        $this->authorize('set-current',$address);
         Auth::user()->addresses()->update(['is_selected' => false]);
         $address->update(['is_selected' => true]);
         return response()->json(['massage' => 'selected', 'address_id' => $address->id]);

@@ -38,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('visit-site',function (User $user){
-           return $user->restaurant;
+           return $user->restaurant !== null;
         });
     }
 }

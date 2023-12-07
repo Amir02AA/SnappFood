@@ -10,6 +10,7 @@ use App\Http\Requests\FilterCommentsRequest;
 use App\Http\Requests\StoreReplyRequest;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use PhpParser\Node\Arg;
 
 class CommentController extends Controller
