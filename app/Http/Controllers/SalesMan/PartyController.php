@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\salesman;
 
+use App\Classes\PaginateHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
 use App\Models\Food;
 use App\Models\Party;
 use Illuminate\Http\Request;
 
 class PartyController extends Controller
 {
-    public function index()
+    public function index(PaginateRequest $request)
     {
-        $parties = Party::paginate(4);
+        $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
+        $parties = Party::paginate($paginate);
         return view('sales.party.index',compact('parties'));
     }
 

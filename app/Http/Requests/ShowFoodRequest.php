@@ -30,7 +30,8 @@ class ShowFoodRequest extends FormRequest
     {
         return [
             'price_filter' => ['required','in:asc,desc'],
-            'tier_filter' => ['nullable','exits:food,id']
+            'tier_filter' => ['nullable','exits:food,id'],
+            'paginate' => ['in:5,10,15,20']
         ];
     }
 

@@ -23,7 +23,9 @@ class SortArchiveRequest extends FormRequest
     {
         return [
             'from' => ['nullable','date','before:'.now()->toDateString()],
-            'to' => ['nullable','date','before_or_equal:'.now()->toDateString()]
+            'to' => ['nullable','date','before_or_equal:'.now()->toDateString()],
+            'paginate' => ['in:5,10,15,20']
+
         ];
     }
 }

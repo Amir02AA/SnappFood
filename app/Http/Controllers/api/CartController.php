@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Classes\PaginateHelper;
 use App\Classes\UserHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\PayRequest;
 use App\Http\Requests\api\StoreCartRequest;
 use App\Http\Requests\api\UpdateCartRequest;
+use App\Http\Requests\PaginateRequest;
 use App\Http\Resources\CartResource;
 use App\Http\Resources\OrderResource;
 use App\Models\Cart;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\salesman;
 
 use App\Classes\CommentHelper;
 use App\Classes\CommentsStatus;
+use App\Classes\PaginateHelper;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\FilterCommentsRequest;
@@ -17,12 +18,14 @@ class CommentController extends Controller
 {
     public function index(FilterCommentsRequest $request)
     {
+        $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
         $foods = Auth::user()->restaurant->food;
         $comments = Auth::user()->restaurant->comments();
         if ($request->validated('food_id')) {
             $this->authorize('view-filtered', [Comment::class, $request->validated('food_id')]);
             $comments = CommentHelper::getCommentsByFoodId($request->validated('food_id'));
         }
+        $comments = $comments->paginate($paginate);
         return view('sales.comments.index', compact('comments', 'foods'));
     }
 

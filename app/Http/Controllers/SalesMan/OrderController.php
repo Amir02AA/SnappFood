@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\salesman;
 
 use App\Classes\OrderStatus;
+use App\Classes\PaginateHelper;
 use App\Classes\SalesHelper;
 use App\Events\CartStatusChanged;
 use App\Events\OrderCanceled;
@@ -10,7 +11,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SortArchiveRequest;
 use App\Models\Cart;
 use App\Models\Order;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class OrderController extends Controller
 {
@@ -28,7 +31,8 @@ class OrderController extends Controller
                 $request->validated('to')
             );
         $totalIncome = $orders->get()->sum(function (Order $order) {return $order->total_price;});
-        $orders = $orders->paginate(5);
+        $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
+        $orders = $orders->paginate($paginate);
         return view('sales.order.archive', compact('orders', 'totalIncome'));
     }
 

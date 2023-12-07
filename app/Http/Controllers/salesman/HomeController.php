@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\salesman;
 
 use App\Classes\OrderStatus;
+use App\Classes\PaginateHelper;
 use App\Classes\SalesHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShowOrdersRequest;
@@ -28,9 +29,10 @@ class HomeController extends Controller
 
     public function dashboard(ShowOrdersRequest $request)
     {
+        $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
         return view('sales.dashboard', [
             'user' => Auth::user(),
-            'orders' => SalesHelper::getSortedOrders($request->get('status'))
+            'orders' => SalesHelper::getSortedOrders($request->get('status'))->paginate($paginate)
         ]);
     }
 

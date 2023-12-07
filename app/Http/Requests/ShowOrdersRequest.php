@@ -25,7 +25,8 @@ class ShowOrdersRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => ['nullable','in:1,2,3']
+            'status' => ['nullable','in:1,2,3'],
+            'paginate' => ['in:5,10,15,20']
         ];
     }
 }

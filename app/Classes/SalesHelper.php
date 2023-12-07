@@ -26,7 +26,7 @@ class SalesHelper
         $query = ($situation) ? $query->where('status', $situation)
             : $query->where('status', '!=', OrderStatus::Received);
 
-        return $query->get();
+        return $query;
     }
 
     public static function getSortedOrdersByDate(?string $from, ?string $to, bool $isAdmin = false)

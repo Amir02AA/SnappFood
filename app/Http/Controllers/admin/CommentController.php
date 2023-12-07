@@ -3,15 +3,18 @@
 namespace App\Http\Controllers\admin;
 
 use App\Classes\CommentsStatus;
+use App\Classes\PaginateHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function index()
+    public function index(PaginateRequest $request)
     {
-        $comments = Comment::query()->where('status',CommentsStatus::Delete)->paginate(5);
+        $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
+        $comments = Comment::query()->where('status',CommentsStatus::Delete)->paginate($paginate);
         return view('admin.comment.index',compact('comments'));
     }
 

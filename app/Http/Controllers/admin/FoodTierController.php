@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Classes\PaginateHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
 use App\Models\FoodTier;
 use Illuminate\Http\Request;
 
@@ -11,10 +13,11 @@ class FoodTierController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PaginateRequest $request)
     {
+        $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
         return view('admin.food.index', [
-            'food' => FoodTier::paginate(5)
+            'food' => FoodTier::paginate($paginate)
         ]);
     }
 

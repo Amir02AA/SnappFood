@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\salesman;
 
 use App\Classes\AdminHelper;
+use App\Classes\PaginateHelper;
 use App\Classes\SalesHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ShowFoodRequest;
@@ -25,10 +26,11 @@ class FoodController extends Controller
      */
     public function index(ShowFoodRequest $request)
     {
+        $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
         $foods = SalesHelper::foodInOrder(
             $request->validated('price_filter'),
             $request->validated('tier_filter')
-        )->paginate(5);
+        )->paginate($paginate);
 
         return view('sales.food.index',compact('foods'));
     }

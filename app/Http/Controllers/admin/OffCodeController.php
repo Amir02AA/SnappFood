@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Classes\PaginateHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
 use App\Models\OffCode;
 use Illuminate\Http\Request;
 
@@ -11,10 +13,11 @@ class OffCodeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PaginateRequest $request)
     {
+        $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
         return view('admin.off.index', [
-            'offs' => OffCode::paginate(5)
+            'offs' => OffCode::paginate($paginate)
         ]);
     }
 
