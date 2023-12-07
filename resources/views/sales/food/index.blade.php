@@ -117,9 +117,10 @@
                     </div>
                 @endforeach
                 {{$foods->links()}}
+                <x-paginate/>
+
             </div>
         </section>
     </main>
-    <x-paginate/>
 
 @endsection

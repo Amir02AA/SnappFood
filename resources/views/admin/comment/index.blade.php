@@ -26,8 +26,8 @@
                 @endforeach
             </div>
             {{$comments->links()}}
+            <x-paginate/>
         </section>
     </main>
-    <x-paginate/>
 
 @endsection

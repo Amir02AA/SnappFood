@@ -40,8 +40,8 @@
                 @endforeach
             </div>
             {{$banners->links()}}
+            <x-paginate/>
         </section>
-        <x-paginate/>
     </main>
 
 @endsection

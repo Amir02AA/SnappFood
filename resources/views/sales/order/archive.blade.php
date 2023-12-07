@@ -85,6 +85,8 @@
             <div class="text-red-600">
                 @error('from') {{$message}} @enderror
                 @error('to') {{$message}} @enderror
+                <x-paginate/>
+
             </div>
         </section>
     </main>

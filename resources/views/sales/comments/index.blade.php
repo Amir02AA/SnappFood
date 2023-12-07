@@ -55,7 +55,7 @@
                 @endforeach
             </div>
         </section>
+        <x-paginate/>
     </main>
-    <x-paginate/>
 
 @endsection

@@ -83,8 +83,9 @@
             @endif
             @error('from') {{$message}} @enderror
             @error('to') {{$message}} @enderror
+            <x-paginate/>
         </section>
     </main>
-    <x-paginate/>
+
 
 @endsection

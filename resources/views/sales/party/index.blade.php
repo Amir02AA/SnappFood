@@ -16,8 +16,9 @@
                 @endforeach
             {{$parties->links()}}
             </div>
+            <x-paginate/>
+
         </section>
     </main>
-    <x-paginate/>
 
 @endsection

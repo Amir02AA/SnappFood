@@ -1,6 +1,7 @@
 <div>
-    <select id="paginator" name="paginate" class="p-5">
-        <option value="5">select pagination</option>
+    <select id="paginator" name="paginate" class="p-5 text-blue-950 ">
+        <option value="">select pagination</option>
+        <option value="5">5</option>
         <option value="10">10</option>
         <option value="15">15</option>
         <option value="20">20</option>

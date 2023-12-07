@@ -108,8 +108,8 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                     @endforeach
                 </div>
             </section>
+            <x-paginate/>
         </section>
     </main>
-    <x-paginate/>
 
 @endsection

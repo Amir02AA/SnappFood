@@ -40,9 +40,10 @@
                     </div>
                 @endforeach
             {{$food->links()}}
+                    <x-paginate/>
             </div>
         </section>
     </main>
-    <x-paginate/>
+
 
 @endsection
