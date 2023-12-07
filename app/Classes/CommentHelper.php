@@ -9,7 +9,7 @@ class CommentHelper
 {
     public static function getCommentsByFoodId(int $foodId)
     {
-        $comments = Food::find($foodId)->orders()->has('comment')->get()->pluck('comment');
-        return (new Collection($comments))->toQuery();
+        $comments = Food::find($foodId)->orders()->has('comment')->get()->pluck('comment')->sortByDesc('created_at');
+        return new Collection($comments);
     }
 }

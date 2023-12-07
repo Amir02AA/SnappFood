@@ -14,7 +14,8 @@ class CommentController extends Controller
     public function index(PaginateRequest $request)
     {
         $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
-        $comments = Comment::query()->where('status',CommentsStatus::Delete)->paginate($paginate);
+        $comments = Comment::query()->where('status',CommentsStatus::Delete)
+            ->orderBy('created_at','desc')->paginate($paginate);
         return view('admin.comment.index',compact('comments'));
     }
 

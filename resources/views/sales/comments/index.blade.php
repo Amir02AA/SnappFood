@@ -55,7 +55,10 @@
                 @endforeach
             </div>
         </section>
-        <x-paginate/>
+        @if($comments->isNotEmpty())
+            {{$comments->links()}}
+            <x-paginate/>
+        @endif
     </main>
 
 @endsection

@@ -25,8 +25,10 @@
                     </div>
                 @endforeach
             </div>
-            {{$comments->links()}}
-            <x-paginate/>
+            @if($comments->isNotEmpty())
+                {{$comments->links()}}
+                <x-paginate/>
+            @endif
         </section>
     </main>
 

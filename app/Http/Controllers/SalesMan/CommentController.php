@@ -20,12 +20,14 @@ class CommentController extends Controller
     {
         $paginate = PaginateHelper::getPaginateNumber($request->get('paginate'));
         $foods = Auth::user()->restaurant->food;
-        $comments = Auth::user()->restaurant->comments();
+        $comments = Auth::user()->restaurant->comments()->orderBy('created_at', 'desc');
         if ($request->validated('food_id')) {
             $this->authorize('view-filtered', [Comment::class, $request->validated('food_id')]);
             $comments = CommentHelper::getCommentsByFoodId($request->validated('food_id'));
         }
-        $comments = $comments->paginate($paginate);
+
+
+        $comments = ($comments->isNotEmpty()) ? $comments->toQuery()->paginate($paginate) : $comments;
         return view('sales.comments.index', compact('comments', 'foods'));
     }
 
