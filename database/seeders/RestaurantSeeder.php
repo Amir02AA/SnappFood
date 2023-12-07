@@ -18,6 +18,7 @@ class RestaurantSeeder extends Seeder
             'phone' => '021222222',
             'account' => '225564488',
             'user_id' => 2,
+            'send_cost' => 10000
         ]);
         $restaurantSib->address()->create([
             'name' => 'sib360',
@@ -33,6 +34,8 @@ class RestaurantSeeder extends Seeder
             'phone' => '021222223',
             'account' => '225564487',
             'user_id' => 3,
+            'send_cost' => 20000
+
         ]);
         $restaurantShila->address()->create([
             'name' => 'Shila',

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->dateTime('paid_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->unsignedInteger('total_price');
             $table->unsignedInteger('total_discount')->default(0);
-            $table->unsignedInteger('send_cost');
+            $table->unsignedInteger('send_cost')->default(0);
             $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('address_id')->constrained()->cascadeOnDelete();

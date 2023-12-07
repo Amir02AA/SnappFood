@@ -20,6 +20,7 @@
                     <input type="time" id="start_time" name="start_time"
                            class="w-full p-2 border-4 border-gray-300 rounded-md"
                            required>
+                    @error('start_time') {{$message}} @enderror
                 </div>
 
                 <div class="mb-4">
@@ -27,6 +28,7 @@
                     <input type="time" id="end_time" name="end_time"
                            class="w-full p-2 border-4 border-gray-300 rounded-md"
                            required>
+                    @error('end_time') {{$message}} @enderror
                 </div>
 
                 <button type="submit"

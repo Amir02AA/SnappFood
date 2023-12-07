@@ -17,8 +17,8 @@ class RestaurantController extends Controller
         $this->authorize('viewAny',Restaurant::class);
         $validated = $request->validated();
         $restaurants = UserHelper::getSortedRestaurantsQuery(@$validated['is_open'], @$validated['type']);
-        $restaurants = UserHelper::getNearRestaurantsQuery($restaurants,30);
-        if (!$restaurants) return \response()->json(['massage' => 'not found'],404);
+        $restaurants = UserHelper::getNearRestaurantsQuery($restaurants,50);
+        if ($restaurants->get()->isEmpty()) return \response()->json(['massage' => 'not found'],404);
         return response()->json([
             'restaurants' => RestaurantResource::collection($restaurants->get())
         ]);

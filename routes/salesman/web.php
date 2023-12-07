@@ -37,7 +37,7 @@ Route::middleware(['auth', 'role:sales','can:visit-site'])->name('sales.')->pref
         ->middleware('can:view,order')->group(function () {
             Route::get('orders/{order}/next', 'nextState')->name('next');
             Route::delete('orders/{order}/cancel', 'cancel')->name('cancel');
-            Route::get('/orders/archive', 'archive')->name('archive');
+            Route::get('/orders/archive', 'archive')->name('archive')->withoutMiddleware('can:view,order');
             Route::get('/orders/{order}', 'show')->name('show');
         });
     Route::get('/orders/charts', [ChartController::class, 'index'])->name('orders.charts');

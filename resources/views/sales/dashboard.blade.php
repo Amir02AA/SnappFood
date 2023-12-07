@@ -83,7 +83,7 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                             </div>
                             <div class="flex flex-row items-center justify-between gap-2">
 
-                                <a href="{{route('sales.order.next',$order)}}"
+                                <a href="{{route('sales.orders.next',$order)}}"
                                    class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                                         <path fill="currentColor"
@@ -92,7 +92,7 @@ $banner = \App\Models\Banner::query()->inRandomOrder()->first();
                                               d="M16 30a14 14 0 1 1 14-14a14.016 14.016 0 0 1-14 14Zm0-26a12 12 0 1 0 12 12A12.014 12.014 0 0 0 16 4Z"/>
                                     </svg>
                                 </a>
-                                <form method="post" action="{{route('sales.order.cancel',$order)}}">
+                                <form method="post" action="{{route('sales.orders.cancel',$order)}}">
                                     @csrf @method('delete')
                                     <button type="submit"
                                             class="bg-transparent hover:bg-gray-700 focus:bg-gray-700 text-white hover:text-indigo-500 focus:text-indigo-500 p-2 rounded-full">

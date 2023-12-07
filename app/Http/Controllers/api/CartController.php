@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Classes\PaginateHelper;
 use App\Classes\UserHelper;
+use App\Events\CartPaid;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\PayRequest;
 use App\Http\Requests\api\StoreCartRequest;
@@ -83,7 +84,7 @@ class CartController extends Controller
         $cart->update(['off_code_id' => $offCode?->id,]);
         $order = UserHelper::createOrderForCart($cart);
         $cart->delete();
-//        CartPaid::dispatch($cart);
+        CartPaid::dispatch($cart);
         return response()->json([
             'massage' => 'thanks for your money',
             'data' => new OrderResource($order)

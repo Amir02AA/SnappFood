@@ -8,6 +8,7 @@ use App\Http\Requests\api\StoreAddressRequest;
 use App\Http\Requests\PaginateRequest;
 use App\Http\Resources\AddressResource;
 use App\Models\Address;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 

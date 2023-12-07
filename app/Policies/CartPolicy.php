@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Classes\UserHelper;
 use App\Models\Cart;
-use App\Models\Food;
 use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -14,15 +13,15 @@ class CartPolicy
     /**
      * Create a new policy instance.
      */
-    public function create(User $user , int $foodId)
+    public function create(User $user, int $foodId)
     {
         if (!$user->current_address)
             return Response::deny('You must select an address');
-        $nearRestaurantsFood = UserHelper::getNearRestaurantsQuery()->get()->map(function (Restaurant $restaurant){
+        $nearRestaurantsFood = UserHelper::getNearRestaurantsQuery()->get()->map(function (Restaurant $restaurant) {
             return $restaurant->food;
         })->flatten();
-        if ($nearRestaurantsFood->doesntContains($foodId))
-            return Response::deny("You can't order From This Restaurant");
+        if ($nearRestaurantsFood->doesntContain('id', value: $foodId))
+            return Response::deny("You can't order From This Restaurant (order from your near restaurants)");
         return Response::allow();
     }
 

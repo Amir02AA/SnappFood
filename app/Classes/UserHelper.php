@@ -35,7 +35,6 @@ class UserHelper
     {
         if (!$restaurants) $restaurants = Restaurant::query();
         if ($restaurants instanceof Collection) $restaurants = $restaurants->toQuery();
-
         $userAddress = Auth::user()->current_address;
         return $restaurants->has('address')->whereRelation('address', [
             ['lang', '<=', $userAddress?->lang + $radios],
