@@ -17,7 +17,9 @@ class CommentResource extends JsonResource
         return [
             'author' => $this->user->name,
             'food' => $this->order?->food->pluck('name'),
+            'score' => $this->score,
             'content' => $this->content,
+            'answer' => $this->when($this->replied,$this->replied?->content),
             'commented_at' => $this->created_at
         ];
     }
