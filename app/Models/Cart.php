@@ -70,7 +70,7 @@ class Cart extends Model
     public function totalFeeAfterOff(): Attribute
     {
         return Attribute::make(
-            get: fn() => ($this->total_fee - $this->total_off) * (1 - $this->off_code?->percent/100)
+            get: fn() => ($this->total_fee - $this->total_off) * (1 - $this->offCode?->percent/100)
         );
     }
 

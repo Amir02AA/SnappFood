@@ -81,13 +81,13 @@ class CartController extends Controller
     {
         $this->authorize('pay', [Cart::class, $cart]);
         $offCode = OffCode::query()->where('code', $request->get('code'))->first();
-        $cart->update(['off_code_id' => $offCode?->id,]);
+        $cart->update(['off_code_id' => $offCode?->id]);
         $order = UserHelper::createOrderForCart($cart);
         $cart->delete();
         CartPaid::dispatch($cart);
         return response()->json([
             'massage' => 'thanks for your money',
-            'data' => new OrderResource($order)
+            'order' => new OrderResource($order)
         ]);
     }
 }

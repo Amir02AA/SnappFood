@@ -19,7 +19,7 @@ class OrderResource extends JsonResource
             'restaurant' => $this->restaurant->name,
             'food' => FoodResource::collection($this->food),
             'total price' => $this->total_price,
-            'total off' => $this->total_discount,
+            'total discount' => $this->total_discount,
             'total price after off' => $this->total_price - $this->total_discount,
             'paid at' => $this->paid_date,
             'status' => $this->status->name

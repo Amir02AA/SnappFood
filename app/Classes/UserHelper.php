@@ -51,7 +51,7 @@ class UserHelper
             'restaurant_id' => $cart->restaurant_id,
             'address_id' => $cart->address_id,
             'total_price' => $cart->total_fee,
-            'total_discount' => $cart->total_off,
+            'total_discount' => $cart->total_fee - $cart->total_fee_after_off,
             'send_cost' => $cart->restaurant->send_cost
         ]);
         $cart->food->map(function (Food $food) use ($order) {
