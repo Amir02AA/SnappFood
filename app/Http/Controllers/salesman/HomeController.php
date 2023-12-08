@@ -50,9 +50,9 @@ class HomeController extends Controller
         $validated = $request->validated();
         $tiers = $validated['tiers'];
         $validated['user_id'] = Auth::user()->id;
-        $restaurant = Restaurant::create(array_filter($validated));
+        $restaurant = Restaurant::create($validated);
         $restaurant->tiers()->sync($tiers);
-        $restaurant->address()->create([$validated]);
+        $restaurant->address()->create($validated);
 
         return redirect()->route('sales.dashboard');
     }

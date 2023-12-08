@@ -30,8 +30,8 @@ class StoreRestaurantProfileRequest extends FormRequest
             'account' => ['bail','required','string',],
             'tiers' => ['required','array'],
             'send_cost' => ['nullable','numeric','between:5000,100000'],
-            'lang' => ['bail','required','decimal:2'],
-            'long' => ['bail','required','decimal:2'],
+            'lang' => ['bail','required','decimal:0,5'],
+            'long' => ['bail','required','decimal:0,5'],
         ];
     }
 }

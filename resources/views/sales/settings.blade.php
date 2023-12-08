@@ -47,15 +47,6 @@
                     @endforeach
                 </div>
                 @error('tiers') {{$message}} @enderror
-                <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
-                    <input value="{{$restaurant->opens_at}}" type="text" name="opens_at" placeholder="Opening Time"
-                           class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
-                </div>
-                @error('opens_at') {{$message}} @enderror
-                <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500">
-                    <input value="{{$restaurant->closes_at}}" type="text" name="closes_at" placeholder="Closing Time" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
-                </div>
-                @error('closes_at') {{$message}} @enderror
                 <div class="w-full border-b-2 text-lg duration-300 focus-within:border-indigo-500 flex">
                     <input value="{{$restaurant->send_cost}}" type="text" name="send_cost" placeholder="Sending cost" class="w-full border-none bg-transparent outline-none placeholder-italic focus:outline-none text-white">
                     <span>T</span>
